@@ -19,7 +19,7 @@ form(CreatePostForm::class);
 
 ?>
 
-<section x-data="{
+<section @save="close()" x-data="{
     open() {
         $refs.modal.showModal()
     },
@@ -54,7 +54,7 @@ form(CreatePostForm::class);
                 <x-primary-button>
                     {{__("Сохранить")}}
                 </x-primary-button>
-                <x-secondary-button type="button" @click="close()"> {{__("Отменить")}} </x-secondary-button>
+                <x-secondary-button type="button" @click="$refs.modal.close()"> {{__("Отменить")}} </x-secondary-button>
             </fieldset>
         </form>
     </dialog>
