@@ -4,7 +4,7 @@ use function Livewire\Volt\{state};
 use App\Models\Post;
 
 state([
-    'posts' => Post::all()
+    'posts' => Post::all()->reverse()
 ]);
 
 ?>

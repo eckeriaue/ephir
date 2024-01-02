@@ -1,9 +1,8 @@
 <?php
 
 
-use function Livewire\Volt\{state,form};
+use function Livewire\Volt\{ state, form };
 use App\Livewire\Forms\CreatePostForm;
-use App\Models\Post;
 
 
 state([
@@ -40,7 +39,7 @@ form(CreatePostForm::class);
         @click="close()"
         class="invisible opacity-0 transition-all open:visible open:opacity-100 rounded-md"
     >
-        <form name="createPostForm" wire:submit="save" @click.stop class="min-w-0 xl:min-w-96 px-5 py-4">
+        <form name="createPostForm" wire:submit="save" @submit.prevent="$dispatch('save')" @click.stop class="min-w-0 xl:min-w-96 px-5 py-4">
             <x-input-label for="create-post-title" :value="__('Заголовок')" />
             <x-text-input  wire:model="form.title" required id="create-post-title" name="title" />
             <x-input-label for="create-post-content" :value="__('Содержимое')" />

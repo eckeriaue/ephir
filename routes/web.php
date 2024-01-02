@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,8 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::view('/', 'home')->name('home');
+Route::view('/', 'home', ['posts' => Post::all()->reverse()])->name('home');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
