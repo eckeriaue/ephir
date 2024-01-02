@@ -8,9 +8,5 @@
 
 
     <section class="mx-auto mt-8 max-w-full xl:max-w-4xl">
-        <div>
-            <div>
-            </div>
-        </div>
     </section>
 </x-app-layout>

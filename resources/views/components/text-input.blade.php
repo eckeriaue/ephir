@@ -1,3 +1,3 @@
 @props(['disabled' => false])
 
-<input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'border-gray-300 focus:border-lime-500 focus:ring-lime-500 rounded-md shadow-sm']) !!}>
+<input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'py-2 px-3 rounded-md outline outline-2 outline-gray-300 focus:outline-lime-500 rounded-md shadow-sm']) !!}>
