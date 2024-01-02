@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::view('/', 'home', ['posts' => Post::all()->reverse()])->name('home');
+Volt::route('/', 'home')->name('home');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
