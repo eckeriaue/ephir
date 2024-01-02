@@ -25,10 +25,13 @@ mount($getPosts);
         @endauth
 
         
-        <section>
-            <div wire:loading> Загрузка постов... </div>
+        <div
+            wire:loading.class.remove="opacity-0 h-0 pt-0"
+            wire:loading.class="h-10 pt-4 opacity-100"
+            class="pt-0 h-0 delay-300 opacity-0 overflow-hidden transition-all font-medium"> Загрузка постов... </div>
+        <section class="mt-8">
             @foreach($posts as $post)
-            <article wire:key="{{ $post->id }}">
+            <article class="pt-4" wire:key="{{ $post->id }}">
                 {{$post}}
             </article>
             @endforeach
