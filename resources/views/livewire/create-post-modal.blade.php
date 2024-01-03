@@ -34,7 +34,7 @@ form(CreatePostForm::class);
     },
 }">
     <x-primary-button
-        class="w-full hidden lg:inline-block"
+        class="w-full hidden md:inline-block"
         @click="open()"
         type="button"
         >
@@ -42,7 +42,7 @@ form(CreatePostForm::class);
     </x-primary-button>
     <template x-teleport="body">
         <x-primary-button
-            class="fixed bottom-6 right-6 inline-block lg:hidden"
+            class="fixed bottom-6 right-6 inline-block md:hidden"
             type="button"
             @click="open()">
             +
