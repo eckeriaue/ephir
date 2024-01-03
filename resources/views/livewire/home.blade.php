@@ -35,6 +35,7 @@ mount($getPosts);
             @foreach($posts as $post)
             <livewire:post-card
                 :$post
+                class="pb-7"
                 wire:key="{{ $post->id }}" />
             @endforeach
         </section>

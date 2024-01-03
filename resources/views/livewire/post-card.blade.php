@@ -4,10 +4,10 @@
     state(['post']);
 ?>
 
-<article class="text-gray-700">
+<article class="text-gray-700 mb-7 bg-white rounded-md p-6">
 
-    <div class="flex justify-between items-center">
-        <h1> {{ $post->title }} </h1>
+    <div class="flex justify-between items-center pb-6">
+        <h1 class="font-medium text-xl"> {{ $post->title }} </h1>
         <span class="text-gray-400 text-xs">
             Создан:
             <time datetime="{{ $post->created_at }}"> {{ $post->created_at }} </time>
