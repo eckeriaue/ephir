@@ -35,7 +35,7 @@
         <span>
     </div>
 
-    <p class="min-h-64"> {{ $post->content }} </p>
+    <p> {{ $post->content }} </p>
 
     
     <footer class="text-gray-800 mt-8 flex items-center justify-between">

@@ -47,11 +47,10 @@ mount($getPosts);
                 wire:key="{{ $post->id }}" />
             @endforeach
 
-            @empty($posts)
-                <p> {{ __("Здесь пока ничего нет...") }} </p>
-            @endempty
         </section>
-
+        @empty($posts)
+            <p> {{ __("Здесь пока ничего нет...") }} </p>
+        @else
         <div class="pb-4">
             <x-primary-button
                 type="button"
@@ -69,5 +68,6 @@ mount($getPosts);
                 {{ __('Грузим ещё...') }}
             </div>
         </div>
+        @endempty
 
     </section>
