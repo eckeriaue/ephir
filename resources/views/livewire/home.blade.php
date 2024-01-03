@@ -21,13 +21,13 @@ mount($getPosts);
 
 ?>
 
-
     <section
-    x-data="{
-        offset: 0,
-        limit: 5,
-    }"
-    class="mx-auto mt-8 max-w-full xl:max-w-4xl px-4">
+        x-data="{
+            offset: 0,
+            limit: 5,
+        }"
+        class="mx-auto mt-8 max-w-full xl:max-w-4xl px-4"
+    >
         @auth
             <livewire:create-post-modal @save="getPosts" />
             <div
@@ -53,8 +53,6 @@ mount($getPosts);
         </section>
 
         <div class="pb-4">
-            {{Post::count()}}
-            {{count($posts)}}
             <x-primary-button
                 type="button"
                 class="w-full inline-block text-center justify-center"

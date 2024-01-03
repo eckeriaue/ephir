@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Post;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CreatePostForm extends Form
