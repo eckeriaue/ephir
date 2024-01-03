@@ -10,7 +10,7 @@
 
     $postLikesCount = computed(fn() => $this->post->likes->count());
 
-    $like = function() {
+    $toggleLike = function() {
         $userId = auth()->id();
         $like = Like::where('post_id', $this->post->id)
             ->where('user_id', $userId)
@@ -46,27 +46,32 @@
         </address>
 
 
-        @if($this->isLiked)
-        <x-danger-button
-            type="button"
-            wire:loading.attr="disabled"
-            class="disabled:opacity-40"
-            wire:click="like"
-        >
-            🤍
-            <span class="text-xs"> {{ $this->postLikesCount }} </span>
-        </x-danger-button>
-        @else
-        <x-secondary-button
-            type="button"
-            wire:loading.attr="disabled"
-            class="disabled:opacity-40"
-            wire:click="like"
-        >
-            ❤️
-            <span class="text-xs"> {{ $this->postLikesCount }} </span>
-        </x-secondary-button>
-        @endif
+        @auth
+            @if($this->isLiked)
+            <x-danger-button
+                type="button"
+                wire:loading.attr="disabled"
+                class="disabled:opacity-40"
+                wire:click="toggleLike"
+            >
+                🤍
+                <span class="text-xs"> {{ $this->postLikesCount }} </span>
+            </x-danger-button>
+            @else
+            <x-secondary-button
+                type="button"
+                wire:loading.attr="disabled"
+                class="disabled:opacity-40"
+                wire:click="toggleLike"
+            >
+                ❤️
+                <span class="text-xs"> {{ $this->postLikesCount }} </span>
+            </x-secondary-button>
+            @endif
+        @endauth
+        @guest
+            <span title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
+        @endguest
     </footer>
 
 </article>
