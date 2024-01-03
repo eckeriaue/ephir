@@ -26,7 +26,7 @@ mount($getPosts);
             offset: 0,
             limit: 5,
         }"
-        class="mx-auto mt-8 max-w-full xl:max-w-4xl px-4"
+        class="mx-auto mt-8 max-w-full md:max-w-2xl lg:max-w-4xl px-4"
     >
         @auth
             <livewire:create-post-modal @save="getPosts" />
