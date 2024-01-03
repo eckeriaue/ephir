@@ -8,6 +8,8 @@
         return $this->post->likes->contains('user_id', auth()->id());
     });
 
+    $postLikesCount = computed(fn() => $this->post->likes->count());
+
     $like = function() {
         $userId = auth()->id();
         $like = Like::where('post_id', $this->post->id)
@@ -23,7 +25,7 @@
     };
 ?>
 
-<article class="text-gray-700 mb-7 bg-white rounded-md p-6 shadow-md">
+<article id="post-{{$post->id}}" class="text-gray-700 mb-7 bg-white rounded-md p-6 shadow-md">
 
     <div class="flex justify-between items-center pb-6">
         <h1 class="font-medium text-xl"> {{ $post->title }} </h1>
@@ -35,25 +37,36 @@
 
     <p class="min-h-64"> {{ $post->content }} </p>
 
-    <address class="text-gray-500 text-xs mt-8 inline-block">
-        {{ __('Автор') }}
-        <a rel="author" href="#">{{ $post->user->name }}</a>
-    </address>
+    
+    <footer class="text-gray-800 mt-8 flex items-center justify-between">
 
-    <footer>
-        <button
+        <address class="text-gray-500 text-xs inline-block">
+            {{ __('Автор') }}
+            <a rel="author" href="#">{{ $post->user->name }}</a>
+        </address>
+
+
+        @if($this->isLiked)
+        <x-danger-button
             type="button"
             wire:loading.attr="disabled"
-            class="disabled:opacity-40 inline-flex items-center gap-x-2"
+            class="disabled:opacity-40"
             wire:click="like"
         >
-            @if($this->isLiked)
-            ❤️
-            @else
             🤍
-            @endif
-            <span class="text-xs"> {{ $post->likes->count() }} </span>
-        </button>
+            <span class="text-xs"> {{ $this->postLikesCount }} </span>
+        </x-danger-button>
+        @else
+        <x-secondary-button
+            type="button"
+            wire:loading.attr="disabled"
+            class="disabled:opacity-40"
+            wire:click="like"
+        >
+            ❤️
+            <span class="text-xs"> {{ $this->postLikesCount }} </span>
+        </x-secondary-button>
+        @endif
     </footer>
 
 </article>
