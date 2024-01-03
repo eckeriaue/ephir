@@ -1,3 +1,3 @@
-<span>
+<span  translate="no">
     ingbook
 </span>
