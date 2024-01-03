@@ -3,7 +3,7 @@ name: Deploy  to beget hosting
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -15,6 +15,6 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_DEV_USERNAME }}
-          password: ${{ secrets.FTP_DEV_PASSWORD }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           server-dir:  /public_html/
