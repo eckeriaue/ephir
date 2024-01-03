@@ -33,9 +33,9 @@ mount($getPosts);
 
         <section class="mt-8">
             @foreach($posts as $post)
-            <article class="pt-4" wire:key="{{ $post->id }}">
-                {{$post}}
-            </article>
+            <livewire:post-card
+                :$post
+                wire:key="{{ $post->id }}" />
             @endforeach
         </section>
 
