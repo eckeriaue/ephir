@@ -41,8 +41,14 @@
     <footer class="text-gray-800 mt-8 flex items-center justify-between">
 
         <address class="text-gray-500 text-xs inline-block">
-            {{ __('Автор') }}
-            <a rel="author" href="#">{{ $post->user->name }}</a>
+            {{ __('Автор') }}:
+            <i>
+                @if(auth()->id() === $post->user->id)
+                {{ __('Вы') }}
+                @else
+                <a rel="author" href="#">{{ $post->user->name }}</a>
+                @endif
+            </i>
         </address>
 
 
@@ -70,7 +76,7 @@
             @endif
         @endauth
         @guest
-            <span title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
+            <span class="text-xs" title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
         @endguest
     </footer>
 
