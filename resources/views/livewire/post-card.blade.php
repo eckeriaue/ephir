@@ -27,7 +27,7 @@
 
 <article id="post-{{$post->id}}" class="text-gray-700 mb-7 bg-white rounded-md p-6 shadow-md">
 
-    <div class="flex justify-between items-center pb-6">
+    <div class="flex justify-between lg:items-center pb-6 flex-col lg:flex-row">
         <h1 class="font-medium text-xl"> {{ $post->title }} </h1>
         <span class="text-gray-500 text-xs">
             {{ __('От') }}
