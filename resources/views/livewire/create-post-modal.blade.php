@@ -33,7 +33,22 @@ form(CreatePostForm::class);
         else this.open()
     },
 }">
-    <x-primary-button class="w-full" @click="open()" type="button"> Создать пост </x-primary-button>
+    <x-primary-button
+        class="w-full hidden lg:inline-block"
+        @click="open()"
+        type="button"
+        >
+        Создать пост
+    </x-primary-button>
+    <template x-teleport="body">
+        <x-primary-button
+            class="fixed bottom-6 right-6 inline-block lg:hidden"
+            type="button"
+            @click="open()">
+            +
+        </x-primary-button>
+    </template>
+    
     <dialog
         x-ref="modal"
         @click="close()"

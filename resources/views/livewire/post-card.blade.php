@@ -9,15 +9,15 @@
     <div class="flex justify-between items-center pb-6">
         <h1 class="font-medium text-xl"> {{ $post->title }} </h1>
         <span class="text-gray-500 text-xs">
-            Создан:
-            <time datetime="{{ $post->created_at }}"> {{ $post->created_at }} </time>
+            {{ __('От') }}
+            <time datetime="{{ $post->created_at }}"> {{ $post->created_at->format('d.m.Y в H:i') }} </time>
         <span>
     </div>
 
     <p class="min-h-64"> {{ $post->content }} </p>
 
     <address class="text-gray-500 text-xs mt-8 inline-block">
-        Автор
+        {{ __('Автор') }}
         <a rel="author" href="#">{{ $post->user->name }}</a>
     </address>
 

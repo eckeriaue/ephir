@@ -26,7 +26,7 @@ mount($getPosts);
                 wire:loading.class.remove="opacity-0 h-0 pt-0"
                 wire:loading.class="h-10 pt-4 opacity-100"
                 class="pt-0 h-0 delay-300 opacity-0 overflow-hidden transition-all font-medium">
-                Загрузка постов...
+                {{ __('Загрузка постов...') }}
             </div>
         @endauth
 
@@ -37,7 +37,10 @@ mount($getPosts);
                 :$post
                 class="pb-7"
                 wire:key="{{ $post->id }}" />
-            @endforeach
+                @endforeach
+                @empty($posts)
+                    <p> {{ __("Здесь пока ничего нет...") }} </p>
+                @endempty
         </section>
 
     </section>
