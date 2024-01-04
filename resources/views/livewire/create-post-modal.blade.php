@@ -64,22 +64,7 @@ form(CreatePostForm::class);
                     reader.readAsDataURL(file);
                     reader.onload = () => resolve(reader.result);
                     reader.onerror = reject;
-                }),
-                compress: img => {
-                    const canvas = document.createElement('canvas')
-                    const ctx = canvas.getContext('2d')
-                    const width = img.width
-                    const height = img.height
-                    canvas.width = width
-                    canvas.height = height
-                    ctx.drawImage(img, 0, 0, width, height)
-                    return canvas.toDataURL('image/webp')
-                    {{-- return new Promise(resolve => {
-                        canvas.toBlob(blob => {
-                            resolve(blob)
-                        }, 'image/webp')
-                    }).then(blob => URL.createObjectURL(blob)) --}}
-                }
+                })
             }"
             class="mt-4 max-w-full">
                 <x-input-label for="create-post-content" :value="__('Содержимое')" />
@@ -91,7 +76,6 @@ form(CreatePostForm::class);
                     @change="async function(event) {
                         const image = new Image()
                         image.src = await toBase64(event.target.files[0])
-                        image.src = await compress(image)
                         $refs.p.appendChild(document.createElement('br'))
                         $refs.p.appendChild(image)
                         event.target.value = null
