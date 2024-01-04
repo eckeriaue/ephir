@@ -113,10 +113,10 @@
                 </x-secondary-button>
                 @endif
             @endauth
+            @guest
+                <span class="text-xs" title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
+            @endguest
             </fieldset>
-        @guest
-            <span class="text-xs" title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
-        @endguest
     </footer>
     <div x-show="isOpenComment" 
         x-transition:enter="transition ease-out duration-300"
