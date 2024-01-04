@@ -44,7 +44,7 @@ mount($getPosts);
             <livewire:post-card
                 :$post
                 class="pb-7"
-                wire:key="{{ $post->id }}" />
+                wire:key="post_id-{{ $post->id }}" />
             @endforeach
 
         </section>

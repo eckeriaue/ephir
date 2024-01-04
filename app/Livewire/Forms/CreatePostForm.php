@@ -17,7 +17,7 @@ class CreatePostForm extends Form
     public function save() {
         Post::create([
             'title' => trim($this->title),
-            'content' => trim(htmlspecialchars(trim($this->content), ENT_QUOTES)),
+            'content' => trim($this->content),
             'user_id' => auth()->user()->id
         ]);
         $this->reset();

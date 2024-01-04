@@ -44,11 +44,9 @@
                 class="whitespace-pre-wrap break-all"
                 x-ref="p"
                 x-init="() => {
-                    canReadMore = $refs.p.offsetHeight > 440
+                    canReadMore = $refs.p.offsetHeight > 440 
                 }"
-            >
-                {{ $post->content }}
-            </p>
+            >{!! $post->content !!}</p>
         </div>
         <button
             class="text-center w-full text-xs font-medium uppercase"
