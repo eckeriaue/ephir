@@ -19,10 +19,10 @@ $save = function() {
                 <address class="text-gray-500 text-xs inline-block">
                     {{ __('Автор') }}:
                     <i>
-                        @if(auth()->id() === $post->user->id)
+                        @if(auth()->id() === $comment->user->id)
                         {{ __('Вы') }}
                         @else
-                        <a rel="author" href="#">{{ $post->user->name }}</a>
+                        <a rel="author" href="#">{{ $comment->user->name }}</a>
                         @endif
                     </i>
                 </address>
@@ -36,6 +36,8 @@ $save = function() {
         @endforeach
     </ol>
     @endif
+
+    @auth
     <form
         wire:submit="save"
         wire:loading.attr="inert"
@@ -45,8 +47,10 @@ $save = function() {
         <x-text-input
             wire:model="form.content"
             wire:loading.attr="disabled"
+            name="content"
             class="grow inline-block rounded-t-none rounded-r-none"
             placeholder="{{__('Напишите комментарий')}}"></x-text-input>
         <x-secondary-button type="submit" class="outline-2 rounded-l-none inline-block aspect-square rounded-t-none">📨</x-secondary-button> 
     </form>
+    @endauth
 </section>
