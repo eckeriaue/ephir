@@ -87,7 +87,7 @@ form(CreatePostForm::class);
                     role="textbox"
                     contenteditable="true"
                     @input="$wire.form.content = $event.target.innerHTML"
-                    class="py-2 px-3 rounded-md outline outline-2 max-w-full md:max-w-[517px] outline-gray-300 focus:outline-lime-500 min-h-16"
+                    class="py-2 px-3 mt-2 rounded-md outline outline-2 max-w-full md:max-w-[517px] outline-gray-300 focus:outline-lime-500 min-h-16"
                 ></p>
             </fieldset>
 
