@@ -29,7 +29,9 @@
     x-data="{
         isOpenComment: false,
         openComments() {
-
+            this.isOpenComment = true
+            const input = $refs.comment.querySelector('input[name=content]')
+            input.focus()
         }
     }"
     id="post-{{$post->id}}"
@@ -82,39 +84,49 @@
         </address>
 
 
-        @auth
             <fieldset class="flex items-center gap-x-2">
-            <x-secondary-button type="button">
+            <x-secondary-button  @click="openComments" type="button">
                 💬
                 {{$post->comments->count()}}
             </x-secondary-button>
-            @if($this->isLiked)
-            <x-danger-button
-                type="button"
-                wire:loading.attr="disabled"
-                class="disabled:opacity-40"
-                wire:click="toggleLike"
-            >
-                🤍
-                <span class="text-xs"> {{ $this->postLikesCount }} </span>
-            </x-danger-button>
-            @else
-            <x-secondary-button
-                type="button"
-                wire:loading.attr="disabled"
-                class="disabled:opacity-40"
-                wire:click="toggleLike"
-            >
-                ❤️
-                <span class="text-xs"> {{ $this->postLikesCount }} </span>
-            </x-secondary-button>
-            @endif
+            
+            @auth
+                @if($this->isLiked)
+                <x-danger-button
+                    type="button"
+                    wire:loading.attr="disabled"
+                    class="disabled:opacity-40"
+                    wire:click="toggleLike"
+                >
+                    🤍
+                    <span class="text-xs"> {{ $this->postLikesCount }} </span>
+                </x-danger-button>
+                @else
+                <x-secondary-button
+                    type="button"
+                    wire:loading.attr="disabled"
+                    class="disabled:opacity-40"
+                    wire:click="toggleLike"
+                >
+                    ❤️
+                    <span class="text-xs"> {{ $this->postLikesCount }} </span>
+                </x-secondary-button>
+                @endif
+            @endauth
             </fieldset>
-        @endauth
         @guest
             <span class="text-xs" title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
         @endguest
     </footer>
-    <livewire:comments  :$post />
-
+    <div x-show="isOpenComment" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        x-ref="comment"
+    >
+        <livewire:comments :$post />
+    </div>
 </article>

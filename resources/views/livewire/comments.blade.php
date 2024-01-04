@@ -10,7 +10,7 @@ $save = function() {
 ?>
 
 
-<section class="-mb-6 -mx-6 mt-6 ">
+<section class="-mb-6 -mx-6 mt-6">
     <h2 class="text-xs font-medium px-6 pb-2 uppercase"> Комментарии </h2> 
     @if($post?->comments)
     <ol class="px-6 space-y-4">
@@ -36,6 +36,8 @@ $save = function() {
         @endforeach
     </ol>
     @endif
+
+    @auth
     <form
         wire:submit="save"
         wire:loading.attr="inert"
@@ -45,8 +47,10 @@ $save = function() {
         <x-text-input
             wire:model="form.content"
             wire:loading.attr="disabled"
+            name="content"
             class="grow inline-block rounded-t-none rounded-r-none"
             placeholder="{{__('Напишите комментарий')}}"></x-text-input>
         <x-secondary-button type="submit" class="outline-2 rounded-l-none inline-block aspect-square rounded-t-none">📨</x-secondary-button> 
     </form>
+    @endauth
 </section>
