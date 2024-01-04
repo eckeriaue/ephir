@@ -54,17 +54,43 @@ form(CreatePostForm::class);
         @click="close()"
         class="invisible opacity-0 transition-all open:visible open:opacity-100 rounded-md"
     >
-        <form name="createPostForm" wire:submit="save" @submit.prevent="$dispatch('save')" @click.stop class="min-w-0 xl:min-w-96 px-5 py-4">
+        <form name="createPostForm" wire:submit="save" @submit.prevent="$dispatch('save')" @click.stop class="max-w-full md:w-[560px] min-w-0 xl:min-w-96 px-5 py-4">
             <x-input-label for="create-post-title" :value="__('Заголовок')" />
             <x-text-input  wire:model="form.title" required id="create-post-title" name="title" />
-            <x-input-label for="create-post-content" :value="__('Содержимое')" />
-            <textarea
-                wire:model="form.content"
-                required
-                class="py-2 px-3 rounded-md outline outline-2 h-fit outline-gray-300 focus:outline-lime-500 resize-none w-full shadow-sm"
-                title="Контент вашей статьи"
-                name="content"
-                id="create-post-content"></textarea>
+
+            <fieldset x-data="{
+                toBase64: file => new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                })
+            }"
+            class="mt-4 max-w-full">
+                <x-input-label for="create-post-content" :value="__('Содержимое')" />
+                <x-secondary-button @click="$refs.fileInput.click()" type="button">📸</x-secondary-button>
+                <input
+                    type="file"
+                    x-ref="fileInput"
+                    hidden
+                    @change="async function(event) {
+                        const image = new Image()
+                        image.src = await toBase64(event.target.files[0])
+                        $refs.p.appendChild(document.createElement('br'))
+                        $refs.p.appendChild(image)
+                        event.target.value = null
+                    }"
+                />
+                <p
+                    x-ref="p"
+                    aria-multiline="true"
+                    role="textbox"
+                    contenteditable="true"
+                    @input="$wire.form.content = $event.target.innerHTML"
+                    class="py-2 px-3 rounded-md outline outline-2 max-w-full md:max-w-[517px] outline-gray-300 focus:outline-lime-500 min-h-16"
+                ></p>
+            </fieldset>
+
             <fieldset class="inline-flex mt-8 items-center gap-x-2">
                 <x-primary-button>
                     {{__("Сохранить")}}

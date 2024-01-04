@@ -25,7 +25,7 @@
     };
 ?>
 
-<article id="post-{{$post->id}}" class="text-gray-700 mb-7 bg-white rounded-md p-6 shadow-md">
+<article id="post-{{$post->id}}" class="text-gray-700 mb-7 bg-white rounded-md p-6 transition-shadow hover:shadow">
 
     <div class="flex justify-between lg:items-center pb-6 flex-col lg:flex-row">
         <h1 class="font-medium text-xl"> {{ $post->title }} </h1>
@@ -35,7 +35,28 @@
         <span>
     </div>
 
-    <p> {{ $post->content }} </p>
+    <div x-data="{ open: false, canReadMore: false }">
+        <div
+            :class="{'overflow-y-hidden': !open}"
+            :style="{maxHeight: `${open ? $refs.p.offsetHeight : 440}px`}"
+        >
+            <p
+                class="whitespace-pre-wrap break-all"
+                x-ref="p"
+                x-init="() => {
+                    canReadMore = $refs.p.offsetHeight > 440 
+                }"
+            >{!! $post->content !!}</p>
+        </div>
+        <button
+            class="text-center w-full text-xs font-medium uppercase"
+            type="button"
+            x-show="!open && canReadMore"
+            @click="open = true"
+        >
+            Читать далее
+        </button>
+    </div>
 
     
     <footer class="text-gray-800 mt-8 flex items-center justify-between">
