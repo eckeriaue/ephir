@@ -58,9 +58,40 @@ form(CreatePostForm::class);
             <x-input-label for="create-post-title" :value="__('Заголовок')" />
             <x-text-input  wire:model="form.title" required id="create-post-title" name="title" />
 
-            <fieldset class="mt-4 max-w-full">
+            <fieldset x-data="{
+                toBase64: file => new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                }),
+                compress: img => {
+                    const canvas = document.createElement('canvas')
+                    const ctx = canvas.getContext('2d')
+                    const width = img.width
+                    const height = img.height
+                    ctx.drawImage(img, 0, 0, width, height)
+                    return canvas.toDataURL('image/webp')
+                }
+            }"
+            class="mt-4 max-w-full">
                 <x-input-label for="create-post-content" :value="__('Содержимое')" />
+                <x-secondary-button @click="$refs.fileInput.click()" type="button">📸</x-secondary-button>
+                <input
+                    type="file"
+                    x-ref="fileInput"
+                    hidden
+                    @change="async function(event) {
+                        const image = new Image()
+                        image.src = await toBase64(event.target.files[0])
+                        {{-- image.src = compress(image) --}}
+                        $refs.p.appendChild(document.createElement('br'))
+                        $refs.p.appendChild(image)
+                        event.target.value = null
+                    }"
+                />
                 <p
+                    x-ref="p"
                     aria-multiline="true"
                     role="textbox"
                     contenteditable="true"
