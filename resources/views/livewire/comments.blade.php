@@ -19,10 +19,10 @@ $save = function() {
                 <address class="text-gray-500 text-xs inline-block">
                     {{ __('Автор') }}:
                     <i>
-                        @if(auth()->id() === $post->user->id)
+                        @if(auth()->id() === $comment->user->id)
                         {{ __('Вы') }}
                         @else
-                        <a rel="author" href="#">{{ $post->user->name }}</a>
+                        <a rel="author" href="#">{{ $comment->user->name }}</a>
                         @endif
                     </i>
                 </address>
