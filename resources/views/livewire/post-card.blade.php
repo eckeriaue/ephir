@@ -25,7 +25,16 @@
     };
 ?>
 
-<article id="post-{{$post->id}}" class="text-gray-700 mb-7 bg-white rounded-md p-6 transition-shadow hover:shadow">
+<article
+    x-data="{
+        isOpenComment: false,
+        openComments() {
+
+        }
+    }"
+    id="post-{{$post->id}}"
+    class="text-gray-700 mb-7 bg-white rounded-md p-6 transition-shadow hover:shadow"
+>
 
     <div class="flex justify-between lg:items-center pb-6 flex-col lg:flex-row">
         <h1 class="font-medium text-xl"> {{ $post->title }} </h1>
@@ -74,6 +83,11 @@
 
 
         @auth
+            <fieldset class="flex items-center gap-x-2">
+            <x-secondary-button type="button">
+                💬
+                {{$post->comments->count()}}
+            </x-secondary-button>
             @if($this->isLiked)
             <x-danger-button
                 type="button"
@@ -95,10 +109,12 @@
                 <span class="text-xs"> {{ $this->postLikesCount }} </span>
             </x-secondary-button>
             @endif
+            </fieldset>
         @endauth
         @guest
             <span class="text-xs" title="Авторизуйтесь, чтобы поставить лайк"> ❤️ {{ $this->postLikesCount }} </span>    
         @endguest
     </footer>
+    <livewire:comments  :$post />
 
 </article>

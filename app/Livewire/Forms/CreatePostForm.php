@@ -14,7 +14,8 @@ class CreatePostForm extends Form
     #[Validate('required|min:3')]
     public string $content = '';
 
-    public function save() {
+    public function save()
+    {
         Post::create([
             'title' => trim($this->title),
             'content' => trim($this->content),
