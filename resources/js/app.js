@@ -11,7 +11,7 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            component: () => import('@/Pages/Home.vue'),
+            component: () => import('@/Pages/Posts.vue'),
         },
         {
             path: '/profile-edit',
