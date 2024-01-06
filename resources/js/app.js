@@ -1,6 +1,5 @@
 import './bootstrap'
 import '../css/app.css'
-import 'material-icons/iconfont/material-icons.css';
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'

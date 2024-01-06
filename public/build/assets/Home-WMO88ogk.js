@@ -1,0 +1,1 @@
+import{_ as t}from"./AuthenticatedLayout-q3ntuWmU.js";import{o as a,f as r,a as e,u as o,F as m,Z as s}from"./app-mHVNTB4p.js";import"./ApplicationLogo-0r9EMRgT.js";import"./_plugin-vue_export-helper-x3n3nnut.js";const u={__name:"Home",setup(n){return(_,c)=>(a(),r(m,null,[e(o(s),{title:"Главная"}),e(t)],64))}};export{u as default};
