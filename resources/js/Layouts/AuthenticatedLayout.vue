@@ -5,7 +5,6 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -20,11 +19,11 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('home')">
+                                <a :href="'/'">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
-                                </Link>
+                                </a>
                             </div>
 
                             <!-- Navigation Links -->
@@ -43,7 +42,7 @@ const showingNavigationDropdown = ref(false);
                                                 type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {{ $page.props?.auth?.user?.name || 'Гость' }}
+                                                <!-- {{ $page.props?.auth?.user?.name || 'Гость' }} -->
 
                                                 <svg
                                                     class="ms-2 -me-0.5 h-4 w-4"
@@ -62,19 +61,14 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <template v-if="$page.props.auth.user">
-                                            <DropdownLink :href="route('profile.edit')"> Мой профиль </DropdownLink>
-                                            <DropdownLink :href="route('logout')" method="post" as="button">
+                                            <DropdownLink :href="('/profile-edit')"> Мой профиль </DropdownLink>
+                                            <DropdownLink :href="('/logout')" method="post" as="button">
                                                 Выйти из системы
                                             </DropdownLink>
-                                        </template>
-                                        <template v-else>
-                                            <DropdownLink :href="route('login')"> Войти </DropdownLink>
-                                            <DropdownLink :href="route('register')"  as="button">
+                                            <DropdownLink :href="('/login')"> Войти </DropdownLink>
+                                            <DropdownLink :href="('/register')"  as="button">
                                                 Регистарция
                                             </DropdownLink>
-
-                                        </template>
                                     </template>
                                 </Dropdown>
                             </div>
@@ -119,23 +113,23 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
+                        <a :href="'/'" >
                             Home
-                        </ResponsiveNavLink>
+                        </a>
                     </div>
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
                             <div class="font-medium text-base text-gray-800">
-                                {{ $page.props?.auth?.user?.name || 'Гость' }}
+                                <!-- {{ $page.props?.auth?.user?.name || 'Гость' }} -->
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props?.auth?.user?.email }}</div>
+                            <!-- <div class="font-medium text-sm text-gray-500">{{ $page.props?.auth?.user?.email }}</div> -->
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Мой профиль </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                            <ResponsiveNavLink :href="('/profile-edit')"> Мой профиль </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="('/logout')" method="post" as="button">
                                 Выйти из системы
                             </ResponsiveNavLink>
                         </div>

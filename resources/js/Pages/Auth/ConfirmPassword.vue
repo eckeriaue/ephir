@@ -4,17 +4,16 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { reactive } from 'vue'
 
-const form = useForm({
+const form = reactive({
     password: '',
-});
+    processing: false,
+})
 
-const submit = () => {
-    form.post(route('password.confirm'), {
-        onFinish: () => form.reset(),
-    });
-};
+function submit() {
+
+}
 </script>
 
 <template>
@@ -37,7 +36,6 @@ const submit = () => {
                     autocomplete="current-password"
                     autofocus
                 />
-                <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="flex justify-end mt-4">

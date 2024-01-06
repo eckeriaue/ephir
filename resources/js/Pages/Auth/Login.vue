@@ -5,7 +5,6 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
     canResetPassword: {
@@ -16,16 +15,14 @@ defineProps({
     },
 });
 
-const form = useForm({
+const form = ({
     email: '',
     password: '',
     remember: false,
+    processing: false,
 });
 
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
 };
 </script>
 
@@ -52,7 +49,6 @@ const submit = () => {
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
@@ -68,7 +64,6 @@ const submit = () => {
                     autocomplete="current-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="block mt-4">
