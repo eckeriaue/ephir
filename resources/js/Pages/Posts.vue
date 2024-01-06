@@ -18,7 +18,6 @@
   <section class="space-y-4 max-w-4xl mx-auto break-words" v-else>
     <article v-for="post in posts" :key="post.id">
       {{ post.title }}
-      <p class="text-gray-700 mt-2"> {{ post.content }} </p>
     </article>
   </section>
 </template>

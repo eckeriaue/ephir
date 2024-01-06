@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+dd($request);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -44,6 +44,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return response()->json([
+            'status' => true,
+            'message' => 'User Logged In Successfully',
+            'token' => $user->createToken("API TOKEN")->plainTextToken
+        ], 200);
     }
 }

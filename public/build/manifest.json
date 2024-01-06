@@ -1,6 +1,6 @@
 {
   "resources/js/Pages/Posts.vue": {
-    "file": "assets/Posts-EWWyhOVS.js",
+    "file": "assets/Posts-GLjUllVc.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -14,7 +14,7 @@
     "dynamicImports": [
       "resources/js/Pages/Posts.vue"
     ],
-    "file": "assets/app-mzkCfjK_.js",
+    "file": "assets/app-dJHDAP42.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
