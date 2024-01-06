@@ -1,17 +1,16 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { client } from '@/lib';
+import { ref } from 'vue'
   const posts = ref()
 
   const loading = ref(true)
 
-  fetch('/api/v1/posts')
-    .finally(() => {
-      loading.value = false
-    })
-    .then(res => res.json())
+  client.get('/api/v1/posts')
     .then(res => {
       posts.value = res
     })
+    .finally(() => loading.value = false)
+
 </script>
 <template>
   <p v-if="loading"> Загрузка... </p>

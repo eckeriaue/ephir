@@ -17,6 +17,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    static public function checkAvailabilityByEmail(string $email): bool
+    {
+        return User::query()->where('email', '=', $email)->first() !== null;
+    }
+
     protected $fillable = [
         'name',
         'email',

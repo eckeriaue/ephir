@@ -19,15 +19,19 @@ const router = createRouter({
         },
         {
             path: '/register',
-            component: () => import('@/Pages/Home.vue'),
+            component: () => import('@/Pages/Auth/Register.vue'),
         },
         {
             path: '/login',
-            component: () => import('@/Pages/Home.vue'),
+            component: () => import('@/Pages/Auth/Login.vue'),
         },
         {
             path: '/logout',
-            component: () => import('@/Pages/Home.vue'),
+            component: () => null,
+            redirect(to) {
+                cookieStore.delete('authToken').then(location.reload)
+                return '/'
+            }
         },
     ]
 })

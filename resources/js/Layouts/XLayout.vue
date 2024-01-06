@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, unref, computed } from 'vue'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import Dropdown from '@/Components/Dropdown.vue'
@@ -9,16 +9,16 @@ import { client } from '@/lib'
 const showingNavigationDropdown = ref(false)
 const username = ref('Гость')
 const userId = ref(NaN)
+const loading = ref(true)
 
 const userIsAuth = computed(() => {
     return !isNaN(unref(userId))
 })
 
-client.get('/api/v1/get-by-self').then(({name, id}) => {
-    console.info(id)
-    if (name) username.value = name
-})
-
+client.get('/api/v1/get-by-self').then((payload) => {
+    if (payload?.name) username.value = payload.name
+    if (payload?.id) userId.value = payload.id
+}).finally(() => loading.value = false)
 </script>
 
 <template>
@@ -47,7 +47,8 @@ client.get('/api/v1/get-by-self').then(({name, id}) => {
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
+                                <p v-if="loading"> Загрузка... </p>
+                                <Dropdown v-else align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
@@ -73,9 +74,9 @@ client.get('/api/v1/get-by-self').then(({name, id}) => {
                                     </template>
 
                                     <template #content>
-                                            <template v-if="userIsAuth">
-                                                <DropdownLink :href="('/profile-edit')"> Мой профиль </DropdownLink>
-                                                <DropdownLink :href="('/logout')" method="post" as="button">
+                                        <template v-if="userIsAuth">
+                                                <DropdownLink href="/profile-edit"> Мой профиль </DropdownLink>
+                                                <DropdownLink href="/logout" method="post" as="button">
                                                     Выйти из системы
                                                 </DropdownLink>
                                             </template>

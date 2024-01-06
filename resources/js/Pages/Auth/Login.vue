@@ -1,10 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import { client } from '@/lib';
+import { useRouter } from 'vue-router';
 
 defineProps({
     canResetPassword: {
@@ -15,6 +17,7 @@ defineProps({
     },
 });
 
+const router = useRouter()
 const form = ({
     email: '',
     password: '',
@@ -22,13 +25,20 @@ const form = ({
     processing: false,
 });
 
-const submit = () => {
-};
+async function submit() {
+    const {email, password} = form
+    
+    try {
+        await client.auth({email, password})
+        router.push('/')
+    }
+    catch(e) {
+        console.error(e)
+    }
+}
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Вход" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
@@ -74,18 +84,17 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link
+                <!-- <router-link
                     v-if="canResetPassword"
-                    :href="route('password.request')"
+                    to=""
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
                 >
                     Забыли пароль?
-                </Link>
+                </router-link> -->
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Войти
                 </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
 </template>
