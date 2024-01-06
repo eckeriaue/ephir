@@ -46,17 +46,11 @@
         <span>
     </div>
 
-    <div x-data="{ open: false, canReadMore: false }">
+    <div>
         <div
-            :class="{'overflow-y-hidden': !open}"
-            :style="{maxHeight: `${open ? $refs.p.offsetHeight : 440}px`}"
         >
             <p
                 class="whitespace-pre-wrap break-all"
-                x-ref="p"
-                x-init="() => {
-                    canReadMore = $refs.p.offsetHeight > 440 
-                }"
             >{!! $post->content !!}</p>
         </div>
         <button
