@@ -1,9 +1,20 @@
 {
+  "resources/js/Pages/Posts.vue": {
+    "file": "assets/Posts-EWWyhOVS.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Posts.vue"
+  },
   "resources/js/app.js": {
     "css": [
-      "assets/app-Tkwf7ie0.css"
+      "assets/app-F7KBCpnm.css"
     ],
-    "file": "assets/app-egJqrhZ6.js",
+    "dynamicImports": [
+      "resources/js/Pages/Posts.vue"
+    ],
+    "file": "assets/app-mzkCfjK_.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
