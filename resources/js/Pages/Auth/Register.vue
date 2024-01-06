@@ -1,9 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import { createGuestRequest, login$ } from '@/lib';
+import { useRouter } from 'vue-router';
 
 const form = ({
     name: '',
@@ -12,9 +14,20 @@ const form = ({
     password_confirmation: '',
 });
 
-const submit = () => {
+const router = useRouter()
 
-};
+async function submit() {
+    const request = await createGuestRequest('/api/v1/register', {
+        method: 'POST',
+        body: form
+    })
+
+    return fetch(request)
+    .then(res => res.json())
+    .then(() => router.push('/login'))
+    .finally(() => login$.next(null))
+}
+
 </script>
 
 <template>

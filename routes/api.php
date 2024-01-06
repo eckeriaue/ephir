@@ -32,9 +32,6 @@ Route::prefix('v1')->group(function () {
 
         Route::controller(UserController::class)->group(function () {
             Route::get('/get-by-self', 'self');
-            Route::get('/logout', function() {
-                return redirect(route('app'));
-            });
             Route::post('/logout', 'logout');
         });
 

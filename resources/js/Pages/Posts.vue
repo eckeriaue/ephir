@@ -1,15 +1,19 @@
 <script setup lang="ts">
-  import { client } from '@/lib';
-import { ref } from 'vue'
-  const posts = ref()
+  import { ref } from 'vue'
+  import { createGuestRequest } from '@/lib'
+import { onMounted } from 'vue';
 
+  
+  const posts = ref()
   const loading = ref(true)
 
-  client.get('/api/v1/posts')
-    .then(res => {
-      posts.value = res
-    })
+  onMounted(async () => {
+    fetch(await createGuestRequest(`/api/v1/posts`))
+    .then(res => res.json())
+    .then(res => posts.value = res)
     .finally(() => loading.value = false)
+  })
+
 
 </script>
 <template>

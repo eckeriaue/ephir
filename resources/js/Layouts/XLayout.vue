@@ -4,7 +4,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
-import { client } from '@/lib'
+import { login$, logout$, createRequest } from '@/lib'
 
 const showingNavigationDropdown = ref(false)
 const username = ref('Гость')
@@ -15,10 +15,20 @@ const userIsAuth = computed(() => {
     return !isNaN(unref(userId))
 })
 
-client.get('/api/v1/get-by-self').then((payload) => {
-    if (payload?.name) username.value = payload.name
-    if (payload?.id) userId.value = payload.id
-}).finally(() => loading.value = false)
+const getBySelf = async () => fetch(await createRequest(`/api/v1/get-by-self`))
+.then(res => res.ok && res.json())
+.then(res => {
+    if (res?.name) username.value = res.name
+    if (res?.id) userId.value = res.id
+})
+.finally(() => loading.value = false)
+
+
+getBySelf()
+
+login$.subscribe(() => getBySelf())
+logout$.subscribe(() => getBySelf())
+
 </script>
 
 <template>

@@ -13,6 +13,6 @@ class UserController extends Controller
 
     public function logout()
     {
-        return auth()->logout();
+        return auth()->user()->tokens()->delete();
     }
 }

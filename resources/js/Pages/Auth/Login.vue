@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { client } from '@/lib';
+import { AUTH_TOKEN_SIGNATURE, login$ } from '@/lib';
+import { Subject, switchMap } from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
+import { onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 defineProps({
@@ -25,17 +26,29 @@ const form = ({
     processing: false,
 });
 
-async function submit() {
-    const {email, password} = form
-    
-    try {
-        await client.auth({email, password})
-        router.push('/')
-    }
-    catch(e) {
-        console.error(e)
-    }
-}
+const form$ = new Subject()
+
+const formLoginSubscriber =  form$.pipe(
+    switchMap(({email, password}) => fromFetch('/api/v1/login', {
+        selector: res => res.json(),
+        method: 'POST',
+        body: JSON.stringify({email, password}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })),
+    switchMap(async res => {
+        await globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, res.token)
+        await router.push('/')
+        return of(res)
+    })
+).subscribe(login$)
+
+onUnmounted(() => {
+    form$.complete()
+    formLoginSubscriber.unsubscribe()
+})
+
 </script>
 
 <template>
@@ -44,7 +57,7 @@ async function submit() {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="form$.next(form)">
             <div>
                 <InputLabel for="email" value="Email" />
 

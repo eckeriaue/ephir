@@ -4,6 +4,7 @@ import '../css/app.css'
 import { createApp, h } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Pages/Home.vue'
+import { logout$ } from './lib'
 
 
 const router = createRouter({
@@ -29,7 +30,7 @@ const router = createRouter({
             path: '/logout',
             component: () => null,
             redirect(to) {
-                cookieStore.delete('authToken').then(location.reload)
+                logout$.next()
                 return '/'
             }
         },
