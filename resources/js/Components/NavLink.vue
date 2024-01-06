@@ -19,7 +19,7 @@ const classes = computed(() =>
 </script>
 
 <template>
-    <a :href="href" :class="classes">
+    <router-link :to="href" :class="classes">
         <slot />
-    </a>
+    </router-link>
 </template>
