@@ -25,6 +25,7 @@ class Endpoint {
   private jsonFlag: boolean
   private tokenResponse: Promise<string>
   private url: URL
+  private errorMessage: string = ''
 
   constructor(baseUrl: string = location.origin) {
     this.url = new URL(baseUrl)
@@ -61,8 +62,8 @@ class Endpoint {
     return this
   }
 
-  public query(field: string, value: string): this {
-    this.url.searchParams.set(field, value)
+  public query(field: string, value: string | number): this {
+    this.url.searchParams.set(field, value.toString())
     return this
   }
 
@@ -70,6 +71,11 @@ class Endpoint {
     Object.entries(qs).forEach(([key, value]) => {
       this.query(key, value)
     })
+    return this
+  }
+
+  public message(msg: string): this {
+    this.errorMessage = msg
     return this
   }
 
@@ -91,8 +97,9 @@ class Endpoint {
       return response as Promise<T>
     }
 
-    catch(e) {
-      console.error(`[Endpoint]: error on request: ${this.url}`, e.message)
+    catch (cause) {
+      console.error(`[Endpoint]: error on request: ${this.url}`)
+      throw new Error(this.errorMessage, { cause })
     }
   }
 }

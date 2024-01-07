@@ -1,58 +1,58 @@
 {
-  "_ApplicationLogo-u3iozJt7.js": {
-    "file": "assets/ApplicationLogo-u3iozJt7.js",
+  "_ApplicationLogo-qTR7qO7M.js": {
+    "file": "assets/ApplicationLogo-qTR7qO7M.js",
     "imports": [
       "__plugin-vue_export-helper-x3n3nnut.js",
       "resources/js/app.ts"
     ]
   },
-  "_InputLabel-odPwA9hb.js": {
-    "file": "assets/InputLabel-odPwA9hb.js",
+  "_InputLabel-dAOwWe2N.js": {
+    "file": "assets/InputLabel-dAOwWe2N.js",
     "imports": [
       "__plugin-vue_export-helper-x3n3nnut.js",
       "resources/js/app.ts"
     ]
   },
-  "_Posts-JWGe2kfi.js": {
+  "_Posts-itYolLqT.js": {
     "dynamicImports": [
       "resources/js/Components/SinglePost.vue"
     ],
-    "file": "assets/Posts-JWGe2kfi.js",
+    "file": "assets/Posts-itYolLqT.js",
     "imports": [
       "resources/js/app.ts",
-      "_InputLabel-odPwA9hb.js",
-      "_auth-_i2ffA1P.js"
+      "_InputLabel-dAOwWe2N.js",
+      "_auth-FOOteaxD.js"
     ],
     "isDynamicEntry": true
   },
   "__plugin-vue_export-helper-x3n3nnut.js": {
     "file": "assets/_plugin-vue_export-helper-x3n3nnut.js"
   },
-  "_auth-_i2ffA1P.js": {
-    "file": "assets/auth-_i2ffA1P.js",
+  "_auth-FOOteaxD.js": {
+    "file": "assets/auth-FOOteaxD.js",
     "imports": [
       "resources/js/app.ts"
     ]
   },
   "resources/js/Components/SinglePost.vue": {
     "css": [
-      "assets/SinglePost-zwqzxYOS.css"
+      "assets/SinglePost-BdywWEUt.css"
     ],
-    "file": "assets/SinglePost-JeZWREqh.js",
+    "file": "assets/SinglePost-KG7jtTGk.js",
     "imports": [
       "resources/js/app.ts",
-      "_Posts-JWGe2kfi.js",
-      "_InputLabel-odPwA9hb.js",
-      "__plugin-vue_export-helper-x3n3nnut.js",
-      "_auth-_i2ffA1P.js"
+      "_Posts-itYolLqT.js",
+      "_InputLabel-dAOwWe2N.js",
+      "_auth-FOOteaxD.js",
+      "__plugin-vue_export-helper-x3n3nnut.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/SinglePost.vue"
   },
   "resources/js/Layouts/GuestLayout.vue": {
-    "file": "assets/GuestLayout-HQz9n7i4.js",
+    "file": "assets/GuestLayout-Uy6GWgEP.js",
     "imports": [
-      "_ApplicationLogo-u3iozJt7.js",
+      "_ApplicationLogo-qTR7qO7M.js",
       "resources/js/app.ts",
       "__plugin-vue_export-helper-x3n3nnut.js"
     ],
@@ -60,11 +60,11 @@
     "src": "resources/js/Layouts/GuestLayout.vue"
   },
   "resources/js/Layouts/XLayout.vue": {
-    "file": "assets/XLayout-t8C7R5Ci.js",
+    "file": "assets/XLayout-_wPS_nlk.js",
     "imports": [
-      "_ApplicationLogo-u3iozJt7.js",
+      "_ApplicationLogo-qTR7qO7M.js",
       "resources/js/app.ts",
-      "_auth-_i2ffA1P.js",
+      "_auth-FOOteaxD.js",
       "__plugin-vue_export-helper-x3n3nnut.js"
     ],
     "isDynamicEntry": true,
@@ -74,29 +74,29 @@
     "css": [
       "assets/Login-odE1b14q.css"
     ],
-    "file": "assets/Login-svnWM5M8.js",
+    "file": "assets/Login-usANySIM.js",
     "imports": [
       "resources/js/app.ts",
       "__plugin-vue_export-helper-x3n3nnut.js",
-      "_InputLabel-odPwA9hb.js",
-      "_auth-_i2ffA1P.js"
+      "_InputLabel-dAOwWe2N.js",
+      "_auth-FOOteaxD.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Login.vue"
   },
   "resources/js/Pages/Auth/Register.vue": {
-    "file": "assets/Register-b9dG7FqQ.js",
+    "file": "assets/Register-K_XijW2F.js",
     "imports": [
       "resources/js/app.ts",
-      "_InputLabel-odPwA9hb.js",
-      "_auth-_i2ffA1P.js",
+      "_InputLabel-dAOwWe2N.js",
+      "_auth-FOOteaxD.js",
       "__plugin-vue_export-helper-x3n3nnut.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Register.vue"
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-6WWsFqO0.js",
+    "file": "assets/Home-9q3DIz6V.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -110,12 +110,12 @@
     "dynamicImports": [
       "resources/js/Layouts/XLayout.vue",
       "resources/js/Layouts/GuestLayout.vue",
-      "_Posts-JWGe2kfi.js",
+      "_Posts-itYolLqT.js",
       "resources/js/Pages/Home.vue",
       "resources/js/Pages/Auth/Register.vue",
       "resources/js/Pages/Auth/Login.vue"
     ],
-    "file": "assets/app-wOSmkzKC.js",
+    "file": "assets/app-BqXTj1wH.js",
     "isEntry": true,
     "src": "resources/js/app.ts"
   }
