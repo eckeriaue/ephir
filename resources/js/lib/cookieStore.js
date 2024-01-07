@@ -2,10 +2,7 @@ const decode = decodeURIComponent;
 const pairSplitRegExp = /; */;
 
 // Try decoding a string using a decoding function.
-function tryDecode(
-  str: string,
-  decode: ((encodedURIComponent: string) => string) | boolean
-): string {
+function tryDecode(str,decode) {
   try {
     return typeof decode === 'boolean' ? decodeURIComponent(str) : decode(str);
   } catch (e) {
@@ -14,53 +11,12 @@ function tryDecode(
 }
 
 
-interface Cookie {
-  domain?: string;
-  expires?: number;
-  name: string;
-  path?: string;
-  secure?: boolean;
-  sameSite?: CookieSameSite;
-  value: string;
-}
 
-interface CookieStoreDeleteOptions {
-  name: string;
-  domain?: string;
-  path?: string;
-}
-
-interface CookieStoreGetOptions {
-  name?: string;
-  url?: string;
-}
-
-interface ParseOptions {
-  decode?: boolean;
-}
-
-enum CookieSameSite {
-  strict = 'strict',
-  lax = 'lax',
-  none = 'none',
-}
-
-interface CookieListItem {
-  name?: string;
-  value?: string;
-  domain: string | null;
-  path?: string;
-  expires: Date | number | null;
-  secure?: boolean;
-  sameSite?: CookieSameSite;
-}
-
-type CookieList = CookieListItem[];
-
-interface CookieChangeEventInit extends EventInit {
-  changed: CookieList;
-  deleted: CookieList;
-}
+const CookieSameSite = Object.freeze({
+  strict: 'strict',
+  lax: 'lax',
+  none: 'none',
+})
 
 /**
  * Parse a cookie header.
@@ -68,7 +24,7 @@ interface CookieChangeEventInit extends EventInit {
  * Parse the given cookie header string into an object
  * The object has the various cookies as keys(names) => values
  */
-function parse(str: string, options: ParseOptions = {}): Cookie[] {
+function parse(str, options = {}) {
   if (typeof str !== 'string') {
     throw new TypeError('argument str must be a string');
   }
@@ -110,12 +66,12 @@ function parse(str: string, options: ParseOptions = {}): Cookie[] {
 }
 
 class CookieChangeEvent extends Event {
-  changed: CookieList;
-  deleted: CookieList;
+  changed;
+  deleted;
 
   constructor(
-    type: string,
-    eventInitDict: CookieChangeEventInit = { changed: [], deleted: [] }
+    type,
+    eventInitDict = { changed: [], deleted: [] }
   ) {
     super(type, eventInitDict);
     this.changed = eventInitDict.changed || [];
@@ -124,9 +80,9 @@ class CookieChangeEvent extends Event {
 }
 
 class CookieStore extends EventTarget {
-  onchange?: (event: CookieChangeEvent) => void;
+  onchange;
 
-  get [Symbol.toStringTag](): 'CookieStore' {
+  get [Symbol.toStringTag]() {
     return 'CookieStore';
   }
 
@@ -135,9 +91,7 @@ class CookieStore extends EventTarget {
     throw new TypeError('Illegal Constructor');
   }
 
-  async get(
-    init?: CookieStoreGetOptions['name'] | CookieStoreGetOptions
-  ): Promise<Cookie | undefined> {
+  async get(init) {
     if (init == null) {
       throw new TypeError('CookieStoreGetOptions must not be empty');
     } else if (init instanceof Object && !Object.keys(init).length) {
@@ -146,11 +100,8 @@ class CookieStore extends EventTarget {
     return (await this.getAll(init))[0];
   }
 
-  async set(
-    init: CookieListItem | string,
-    possibleValue?: string
-  ): Promise<void> {
-    const item: CookieListItem = {
+  async set(init, possibleValue) {
+    const item = {
       name: '',
       value: '',
       path: '/',
@@ -160,9 +111,9 @@ class CookieStore extends EventTarget {
       domain: null,
     };
     if (typeof init === 'string') {
-      item.name = init as string;
+      item.name = init;
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      item.value = possibleValue!;
+      item.value = possibleValue;
     } else {
       Object.assign(item, init);
 
@@ -206,7 +157,7 @@ class CookieStore extends EventTarget {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    let cookieString = `${item.name}=${encodeURIComponent(item.value!)}`;
+    let cookieString = `${item.name}=${encodeURIComponent(item.value)}`;
 
     if (item.domain) {
       cookieString += '; Domain=' + item.domain;
@@ -258,17 +209,15 @@ class CookieStore extends EventTarget {
     }
   }
 
-  async getAll(
-    init?: CookieStoreGetOptions['name'] | CookieStoreGetOptions
-  ): Promise<Cookie[]> {
+  async getAll(init) {
     const cookies = parse(document.cookie);
     if (init == null || Object.keys(init).length === 0) {
       return cookies;
     }
-    let name: string | undefined;
+    let name;
     let url;
     if (typeof init === 'string') {
-      name = init as string;
+      name = init;
     } else {
       name = init.name;
       url = init.url;
@@ -286,10 +235,8 @@ class CookieStore extends EventTarget {
     return cookies.filter((cookie) => cookie.name === name);
   }
 
-  async delete(
-    init: CookieStoreDeleteOptions['name'] | CookieStoreDeleteOptions
-  ): Promise<void> {
-    const item: CookieListItem = {
+  async delete(init) {
+    const item= {
       name: '',
       value: '',
       path: '/',
@@ -299,7 +246,7 @@ class CookieStore extends EventTarget {
       domain: null,
     };
     if (typeof init === 'string') {
-      item.name = init as string;
+      item.name = init;
     } else {
       Object.assign(item, init);
     }
@@ -310,20 +257,10 @@ class CookieStore extends EventTarget {
   }
 }
 
-interface CookieStoreGetOptions {
-  name?: string;
-  url?: string;
-}
 
-const workerSubscriptions = new WeakMap<
-  CookieStoreManager,
-  CookieStoreGetOptions[]
->();
+const workerSubscriptions = new WeakMap();
 
-const registrations = new WeakMap<
-  CookieStoreManager,
-  ServiceWorkerRegistration
->();
+const registrations = new WeakMap();
 
 class CookieStoreManager {
   get [Symbol.toStringTag]() {
@@ -334,7 +271,7 @@ class CookieStoreManager {
     throw new TypeError('Illegal Constructor');
   }
 
-  async subscribe(subscriptions: CookieStoreGetOptions[]): Promise<void> {
+  async subscribe(subscriptions) {
     const currentSubcriptions = workerSubscriptions.get(this) || [];
     const worker = registrations.get(this);
     if (!worker) throw new TypeError('Illegal invocation');
@@ -352,14 +289,14 @@ class CookieStoreManager {
     workerSubscriptions.set(this, currentSubcriptions);
   }
 
-  async getSubscriptions(): Promise<CookieStoreGetOptions[]> {
+  async getSubscriptions() {
     return (workerSubscriptions.get(this) || []).map(({ name, url }) => ({
       name,
       url,
     }));
   }
 
-  async unsubscribe(subscriptions: CookieStoreGetOptions[]): Promise<void> {
+  async unsubscribe(subscriptions) {
     let currentSubcriptions = workerSubscriptions.get(this) || [];
 
     const worker = registrations.get(this);
@@ -394,8 +331,10 @@ if (!('cookies' in ServiceWorkerRegistration.prototype)) {
 }
 
 
-const cookieStore = Object.create(CookieStore.prototype) as CookieStore;
+const cookieStore = Object.create(CookieStore.prototype);
 if (!Reflect.has(globalThis, 'cookieStore')) {
+  // @ts-ignore
+  globalThis.ServiceWorkerRegistration = ServiceWorkerRegistration
   // @ts-ignore
   globalThis.cookieStore = cookieStore
   // @ts-ignore
