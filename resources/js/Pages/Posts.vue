@@ -21,7 +21,10 @@ async function getPosts(offset = 0, limit = 10) {
   loading.value = true
   return fetch(await createGuestRequest(`/api/v1/posts`))
     .then(res => res.json())
-    .then(res => posts.value = res)
+    .then(res => {
+      console.info(res)
+      return posts.value = res
+    })
     .finally(() => loading.value = false)
 }
 

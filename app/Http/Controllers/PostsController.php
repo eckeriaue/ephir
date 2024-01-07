@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -17,11 +19,12 @@ class PostsController extends Controller
         $offset = (int)$request->query('offset', 0);
         $limit = (int)$request->query('limit',10);
         $posts = Post::query()
-            ->orderBy('created_at','desc')
+            ->withCount('likes')
+            ->with('comments')
             ->where('is_published', '>', 0)
             ->offset($offset)
             ->limit($limit)
-            ->get(['id','title','content','created_at']);
+            ->get();
         return $posts;
     }
 
