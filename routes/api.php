@@ -21,26 +21,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
-    Route::controller(RegisterController::class)->group(function () {
-        Route::post('/register', 'register')->name('register');
-        Route::post('/login', 'login')->name('login');
-        Route::post('/logout', 'logout')->name('logout');
+    Route::middleware('guest')->group(function () {
+        Route::controller(RegisterController::class)->group(function () {
+            Route::post('/register', 'register')->name('register');
+            Route::post('/login', 'login')->name('login');
+            Route::post('/logout', 'logout')->name('logout');
+        });
+    
+        Route::get('/posts', PostsController::class)->name('posts');
+        Route::get('/posts/{postId}/comments', [PostsController::class, 'comments'])->name('comments');
     });
-
-    Route::get('/posts', PostsController::class)->name('posts');
-
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('/posts')
             ->controller(PostsController::class)
             ->group(function () {
                 Route::post('/create', 'create')->name('posts');
-                Route::get('/{postId}/comments', 'comments')->name('comments');
                 Route::post('/{postId}/comments/create', 'addComment')->name('comment.create');
                 Route::post('/{postId}/like', 'like')->name('like');
         });
 
-        Route::controller(UserController::class)->group(function () {
+        Route::prefix('/user')->controller(UserController::class)->group(function () {
             Route::get('/get-by-self', 'self');
         });
 

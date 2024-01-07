@@ -38,9 +38,9 @@ class RegisterController extends Controller
         }
     }
 
-    
     public function logout()
     {
-        return auth()->user()->tokens()->delete();
+        Auth::logout();
+        return response()->json(['status'=> 200,'message'=> 'Вы вышли из системы']);
     }
 }

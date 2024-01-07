@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { createRequest } from '@/lib'
   import SecondaryButton from './SecondaryButton.vue'
   import { ref, unref, computed } from 'vue'
   import PostComments from './PostComments.vue'
@@ -42,13 +41,13 @@
 
   async function like() {
     disableLikeButton.value = true
-    await fetch(await createRequest(`/api/v1/posts/${props.id}/like`, {
-      method: 'POST'
-    })).then(res => res.json())
-    .then((res) => {
-      likes.value = res.likes
-      myLike.value = res.my_like
-    }).finally(() => disableLikeButton.value = false)
+    // await fetch(await createRequest(`/api/v1/posts/${props.id}/like`, {
+    //   method: 'POST'
+    // })).then(res => res.json())
+    // .then((res) => {
+    //   likes.value = res.likes
+    //   myLike.value = res.my_like
+    // }).finally(() => disableLikeButton.value = false)
   }
 
   const createdAt = computed(() => {

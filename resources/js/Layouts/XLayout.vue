@@ -3,47 +3,39 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
-import { isLogin, createRequest, login$, logout$, checkIsLogin } from '@/lib'
-import { computed, onUnmounted, ref, unref } from 'vue'
+import { endpoint, isLogin, logout } from '@/lib'
+import { onMounted, ref, unref, watch } from 'vue'
 
 const showingNavigationDropdown = ref(false)
 const username = ref('Гость')
 const userId = ref(NaN)
 const loading = ref(true)
 
-const userIsAuth = computed(() => {
-    return !isNaN(unref(userId))
-})
 
-const getBySelf = async () => {
+function getSelf(): Promise<{name: string, id: number}> {
     loading.value = true
-    await checkIsLogin()
+    let response
     if (!unref(isLogin)) {
-        return (
-            username.value = 'Гость',
-            userId.value = NaN,
-            loading.value = false
-        )
+        response = Promise.resolve({name: 'Гость', id: NaN})
     }
-    return fetch(await createRequest(`/api/v1/get-by-self`))
-        .then(res => res.ok && res.json())
-        .then(res => {
-            if (res?.name) username.value = res.name
-            if (res?.id) userId.value = res.id
-        })
-        .finally(() => loading.value = false)
+    else {
+        response = endpoint('/user/get-by-self')
+            .get()
+            .auth()
+            .json()
+            .dispatch()
+    }
+    return response.finally(() => loading.value = false)
 }
 
-
-getBySelf()
-
-const subs1 = login$.subscribe(() => getBySelf())
-const subs2 = logout$.subscribe(() => getBySelf())
-
-onUnmounted(() => {
-    subs1.unsubscribe()
-    subs2.unsubscribe()
+watch(() => unref(isLogin), async () => {
+    const self = await getSelf()
+    username.value = self.name
+    userId.value = self.id
 })
+
+onMounted(getSelf)
+
 
 </script>
 
@@ -100,15 +92,17 @@ onUnmounted(() => {
                                     </template>
 
                                     <template #content>
-                                        <template v-if="userIsAuth">
+                                        <template v-if="isLogin">
                                                 <DropdownLink href="/profile-edit"> Мой профиль </DropdownLink>
-                                                <DropdownLink href="/logout" method="post" as="button">
+                                                <button
+                                                @click="logout().then(({end}) => end())"
+                                                class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" type="button">
                                                     Выйти из системы
-                                                </DropdownLink>
+                                                </button>
                                             </template>
                                             <template v-else>
-                                                <DropdownLink :href="('/login')"> Войти </DropdownLink>
-                                                <DropdownLink :href="('/register')"  as="button">
+                                                <DropdownLink href="/login"> Войти </DropdownLink>
+                                                <DropdownLink href="/register"  as="button">
                                                     Регистарция
                                                 </DropdownLink>
                                             </template>

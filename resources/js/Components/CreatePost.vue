@@ -5,7 +5,6 @@ import PrimaryButton from './PrimaryButton.vue'
 import SecondaryButton from './SecondaryButton.vue'
 import TextInput from '@/Components/TextInput.vue'
 import InputLabel from './InputLabel.vue'
-import { createRequest } from '@/lib'
 
 
 const title = ref('')
@@ -22,16 +21,7 @@ const canSave = computed(() => {
 async function createPost(event) {
   const submitType = event.submitter.value
   if (submitType === 'save') {
-    fetch(await createRequest('/api/v1/posts/create', {
-      method: 'POST',
-      body: {
-        title: unref(title),
-        content: unref(content)
-      }
-    })).then(res => res.json()).then(res => {
-      console.info(res)
-      emit('create', res)
-    })
+
   }
   title.value = ''
   content.value = ''

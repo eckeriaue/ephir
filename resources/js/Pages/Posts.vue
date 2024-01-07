@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
-import { isLogin, createGuestRequest, login$, logout$ } from '@/lib'
-import CreatePost from '@/Components/CreatePost.vue'
-
+import CreatePost from '@/Components/CreatePost.vue';
+import { endpoint, isLogin } from '@/lib';
+import { defineAsyncComponent, onMounted, ref } from 'vue';
 
 defineProps<{
   modelValue?: object
@@ -19,8 +18,12 @@ const loading = ref(true)
 
 async function getPosts(offset = 0, limit = 10) {
   loading.value = true
-  return fetch(await createGuestRequest(`/api/v1/posts`))
-    .then(res => res.json())
+  return endpoint('/posts')
+    .get()
+    .json()
+    .query('offset', offset.toString())
+    .query('limit', limit.toString())
+    .dispatch()
     .then(res => {
       return posts.value = res
     })
@@ -29,18 +32,11 @@ async function getPosts(offset = 0, limit = 10) {
 
 onMounted(getPosts)
 
-const loginSub = login$.subscribe(() => getPosts())
-const logoutSub = logout$.subscribe(() => getPosts())
-
-onUnmounted(() => {
-  loginSub.unsubscribe()
-  logoutSub.unsubscribe()
-})
 
 </script>
 <template>
   <section>
-    <create-post @create="posts.unshift($event)" v-if="isLogin" class="w-full my-4" />
+    <create-post v-if="isLogin" @create="posts.unshift($event)" class="w-full my-4" />
     <p v-if="loading"> Загрузка... </p>
     <section v-else-if="posts?.length">
       <single-post v-for="post in posts" :key="post.id" v-bind="post" />

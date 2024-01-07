@@ -1,10 +1,9 @@
-import './bootstrap'
 import '../css/app.css'
+import './bootstrap'
 
-import { createApp, h } from 'vue'
+import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Pages/Home.vue'
-import { logout$ } from './lib'
 
 
 const router = createRouter({
@@ -26,20 +25,7 @@ const router = createRouter({
             path: '/login',
             component: () => import('@/Pages/Auth/Login.vue'),
         },
-        {
-            path: '/logout',
-            component: () => null,
-            redirect(to) {
-                logout$.next()
-                return '/'
-            }
-        },
     ]
 })
 
-void async function() {
-    if (!globalThis.cookieStore) {
-        await import('@/lib/cookieStore')
-    }
-    createApp(Home).use(router).mount(`#app`)
-}()
+createApp(Home).use(router).mount(`#app`)
