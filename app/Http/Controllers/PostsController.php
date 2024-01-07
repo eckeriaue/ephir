@@ -22,6 +22,7 @@ class PostsController extends Controller
                 return $query->select('id', 'name');
             })
             ->withCount('likes')
+            ->with('myLike')
             ->with('comments')
             ->where('is_published', '>', 0)
             ->offset($offset)
@@ -41,21 +42,35 @@ class PostsController extends Controller
         if (empty($title) || empty($content)) {
             throw new BadRequestException('title or content is empty');
         }
-        $post = Post::query()->create([
+        return Post::query()->create([
             'title' => $title,
             'content' => $content,
             'user_id' => auth()->id()
-        ]);
-        return $post->toJson();
+        ])
+            ->with('user')
+            ->first();
     }
 
     public function like(Request $request, int $postId)
     {
+        if (Like::query()->where([
+            'user_id' => auth()->id(),
+            'post_id' => $postId
+        ])->exists()) {
+            Like::query()->delete();
+            return response()->json([
+                'likes' => Like::query()->count(),
+                'my_like' => null,
+            ]);
+        }
         $likesCount = Like::query()->create([
             'post_id' => $postId,
             'user_id' => auth()->id(),
         ])->count();
-        return json_encode(['likes' => $likesCount]);
+        return response()->json([
+            'likes' => $likesCount,
+            'my_like' => Like::query()->where('user_id', auth()->id())->first()
+        ]);
     }
     /**
      * Store a newly created resource in storage.

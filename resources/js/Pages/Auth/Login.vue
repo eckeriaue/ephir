@@ -39,7 +39,6 @@ const formLoginSubscriber =  form$.pipe(
     })),
     switchMap(async res => {
         await router.push('/')
-        console.info(res)
         login$.next(res.token)
         return of(res.token)
     }),

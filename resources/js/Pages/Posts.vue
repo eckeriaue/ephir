@@ -43,8 +43,11 @@ onUnmounted(() => {
   <section>
     <create-post @create="posts.unshift($event)" v-if="isLogin" class="w-full my-4" />
     <p v-if="loading"> Загрузка... </p>
-    <section v-else>
+    <section v-else-if="posts?.length">
       <single-post v-for="post in posts" :key="post.id" v-bind="post" />
+    </section>
+    <section v-else class="flex items-center justify-center">
+      <p classs="text-xs text-gray-500"> Здесь пока ничего нет... </p>
     </section>
   </section>
 </template>
