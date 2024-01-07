@@ -2,7 +2,7 @@
 import SecondaryButton from './SecondaryButton.vue'
 import { ref, unref, computed } from 'vue'
 import PostComments from './PostComments.vue'
-import { endpoint } from '@/lib'
+import { endpoint, isLogin } from '@/lib'
 
 
 const props = withDefaults(defineProps<{
@@ -83,7 +83,7 @@ const createdAtTime = new Date(props.created_at).toISOString()
 
       <fieldset class="flex items-center gap-x-2">
         <secondary-button @click="showComments = !showComments"> 💬 {{ commentCount }}</secondary-button>
-        <button type="button" :disabled="disableLikeButton" :class="{
+        <button v-if="isLogin" type="button" :disabled="disableLikeButton" :class="{
           'bg-red-600 border-transparent  text-white   hover:bg-red-500 active:bg-red-700  focus:ring-2 focus:ring-red-500': isLiked,
           'bg-white border-gray-300 text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-lime-500': !isLiked,
         }"
@@ -92,6 +92,7 @@ const createdAtTime = new Date(props.created_at).toISOString()
           {{ isLiked ? '🤍' : '❤️' }}
           {{ likes }}
         </button>
+        <span v-else title="Авторизуйтесь, чтобы поставить лайк" class="text-xs text-gray-600"> ❤️ {{ likes }} </span>
       </fieldset>
     </footer>
 
