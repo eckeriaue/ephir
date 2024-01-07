@@ -17,7 +17,7 @@ logout$.pipe(
 
 export const isLogin = ref(false)
 export async function checkIsLogin() {
-  const res = (await cookieStore.get(AUTH_TOKEN_SIGNATURE))
+  const res = (await globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE))
   return isLogin.value = Boolean(res)
 }
 checkIsLogin()
