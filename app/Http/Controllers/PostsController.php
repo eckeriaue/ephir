@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 
 class PostsController extends Controller
@@ -19,11 +18,15 @@ class PostsController extends Controller
         $offset = (int)$request->query('offset', 0);
         $limit = (int)$request->query('limit',10);
         $posts = Post::query()
+            ->with('user', function($query) {
+                return $query->select('id', 'name');
+            })
             ->withCount('likes')
             ->with('comments')
             ->where('is_published', '>', 0)
             ->offset($offset)
             ->limit($limit)
+            ->orderBy('created_at', 'desc')
             ->get();
         return $posts;
     }
@@ -35,6 +38,9 @@ class PostsController extends Controller
     {
         $title = $request->input('title');
         $content = $request->input('content');
+        if (empty($title) || empty($content)) {
+            throw new BadRequestException('title or content is empty');
+        }
         $post = Post::query()->create([
             'title' => $title,
             'content' => $content,
@@ -43,6 +49,14 @@ class PostsController extends Controller
         return $post->toJson();
     }
 
+    public function like(Request $request, int $postId)
+    {
+        $likesCount = Like::query()->create([
+            'post_id' => $postId,
+            'user_id' => auth()->id(),
+        ])->count();
+        return json_encode(['likes' => $likesCount]);
+    }
     /**
      * Store a newly created resource in storage.
      */

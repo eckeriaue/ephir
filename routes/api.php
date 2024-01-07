@@ -31,8 +31,11 @@ Route::prefix('v1')->group(function () {
 
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::prefix('/posts')->controller(PostsController::class)->group(function () {
+        Route::prefix('/posts')
+            ->controller(PostsController::class)
+            ->group(function () {
             Route::post('/create', 'create')->name('posts');
+            Route::post('/{postId}/like', 'like')->name('like');
         });
 
         Route::controller(UserController::class)->group(function () {
