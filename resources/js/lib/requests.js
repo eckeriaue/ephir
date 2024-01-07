@@ -6,24 +6,34 @@ export const AUTH_TOKEN_SIGNATURE = 'authToken'
 export const logout$ = new Subject()
 export const login$ = new Subject()
 
+function getToken() {
+  return globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE)
+}
+function setToken(payload) {
+  return globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, payload)
+}
+function deleteToken() {
+  return globalThis?.cookieStore.delete(AUTH_TOKEN_SIGNATURE)
+}
+
 
 login$.pipe(
-  switchMap(res => globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, res))
+  switchMap(res => setToken(res))
 ).subscribe(checkIsLogin)
 logout$.pipe(
-  switchMap(() => globalThis?.cookieStore.delete(AUTH_TOKEN_SIGNATURE))
+  switchMap(() => deleteToken())
 ).subscribe(checkIsLogin)
 
 
 export const isLogin = ref(false)
 export async function checkIsLogin() {
-  const res = (await globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE))
+  const res = await getToken()
   return isLogin.value = Boolean(res)
 }
 checkIsLogin()
 
 export async function createRequest(url, options = {}) {
-  const { value } = (await globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE)) || {}
+  const { value } = await getToken()
   const { method = 'GET', body } = options
 
   const requestOptions = {
