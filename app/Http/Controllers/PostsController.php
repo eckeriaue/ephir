@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -23,7 +24,7 @@ class PostsController extends Controller
             })
             ->withCount('likes')
             ->with('myLike')
-            ->with('comments')
+            ->withCount('comments')
             ->where('is_published', '>', 0)
             ->offset($offset)
             ->limit($limit)
@@ -42,15 +43,34 @@ class PostsController extends Controller
         if (empty($title) || empty($content)) {
             throw new BadRequestException('title or content is empty');
         }
-        return Post::query()->create([
+        $post = Post::query()->create([
             'title' => $title,
             'content' => $content,
             'user_id' => auth()->id()
-        ])
-            ->with('user')
-            ->first();
+        ]);
+        return Post::query()->with('user')->firstWhere('id', $post->id);
     }
 
+    public function comments(Request $request, int $postId)
+    {
+        $offset = (int)$request->input('offset', 0);
+        $limit = (int)$request->input('limit',10);
+        return Comment::query()
+            ->offset($offset)
+            ->limit($limit)
+            ->with('user')
+            ->where('post_id', $postId)
+            ->get();
+    }
+
+    public function addComment(Request $request, int $postId)
+    {
+        return Comment::query()->create([
+            'content'=> $request->input('comment'),
+            'post_id' => $postId,
+            'user_id' => auth()->id()
+        ]);
+    }
     public function like(Request $request, int $postId)
     {
         if (Like::query()->where([

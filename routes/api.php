@@ -34,8 +34,10 @@ Route::prefix('v1')->group(function () {
         Route::prefix('/posts')
             ->controller(PostsController::class)
             ->group(function () {
-            Route::post('/create', 'create')->name('posts');
-            Route::post('/{postId}/like', 'like')->name('like');
+                Route::post('/create', 'create')->name('posts');
+                Route::get('/{postId}/comments', 'comments')->name('comments');
+                Route::post('/{postId}/comments/create', 'addComment')->name('comment.create');
+                Route::post('/{postId}/like', 'like')->name('like');
         });
 
         Route::controller(UserController::class)->group(function () {

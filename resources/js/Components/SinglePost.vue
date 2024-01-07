@@ -1,7 +1,8 @@
 <script setup lang="ts">
-  import { createRequest } from '@/lib';
+  import { createRequest } from '@/lib'
   import SecondaryButton from './SecondaryButton.vue'
   import { ref, unref, computed } from 'vue'
+  import PostComments from './PostComments.vue'
 
   const props = withDefaults(defineProps<{
     id?: number
@@ -11,7 +12,7 @@
     user?: Partial<{
       name: string
     }>
-    comments?: Partial<{content: string}>[]
+    comments_count?: number
     content?: string
     created_at?: string
   }>(), {
@@ -29,9 +30,11 @@
   })
 
   const disableLikeButton = ref(false)
+  const showComments = ref(false)
 
   const likes = ref(props.likes_count)
   const myLike = ref(props.my_like)
+  const commentCount = ref(props.comments_count)
 
   const isLiked = computed<boolean>(() => {
     return unref(myLike) && 'id' in unref(myLike)
@@ -57,7 +60,7 @@
 </script>
 
 <template>
-  <article class="text-gray-700 mb-7 bg-white rounded-md p-6 border-b-2 border-gray-200">
+  <article :data-id="$props.id" class="text-gray-700 mb-7 bg-white rounded-xl p-6 border-b-2 border-gray-200">
     <header class="flex justify-between lg:items-center pb-6 flex-col lg:flex-row">
       <h1 class="font-medium text-xl">
         {{ title }}
@@ -67,7 +70,7 @@
       </time>
     </header>
 
-    <p class="break-words" v-if=content v-html="content" />
+    <p class="break-words mb-8" v-if=content v-html="content" />
 
     <footer class="flex justify-between">
       <address
@@ -77,7 +80,7 @@
       </address>
 
       <fieldset class="flex items-center gap-x-2">
-        <secondary-button>💬 {{ props.comments?.length }}</secondary-button>
+        <secondary-button @click="showComments = !showComments"> 💬 {{ commentCount }}</secondary-button>
         <button
           type="button"
           :disabled="disableLikeButton"
@@ -93,5 +96,26 @@
         </button>
       </fieldset>
     </footer>
+
+    <transition>
+      <post-comments @create="commentCount +=1" v-if="showComments" :post-id="$props.id" class="transition-all duration-500 overflow-hidden mt-6 -mx-6 -mb-6" />
+    </transition>
+
   </article>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  display: grid; /* 1 */
+  grid-template-rows: 1fr; /* 5 */
+}
+
+.v-enter-from,
+.v-leave-to {
+  display: grid; /* 1 */
+  grid-template-rows: 0fr; /* 2 */
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+</style>

@@ -29,6 +29,7 @@ async function createPost(event) {
         content: unref(content)
       }
     })).then(res => res.json()).then(res => {
+      console.info(res)
       emit('create', res)
     })
   }
