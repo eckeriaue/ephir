@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
-        "lib": [],
+        "lib": ["ESNext", "DOM", ],
         "paths": {
             "@/*": ["resources/js/*"],
         }
