@@ -37,4 +37,10 @@ class RegisterController extends Controller
             dd([]);
         }
     }
+
+    
+    public function logout()
+    {
+        return auth()->user()->tokens()->delete();
+    }
 }

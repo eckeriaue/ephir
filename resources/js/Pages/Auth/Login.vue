@@ -4,7 +4,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { AUTH_TOKEN_SIGNATURE, login$ } from '@/lib';
-import { Subject, switchMap } from 'rxjs';
+import { Subject, catchError, switchMap, tap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -38,11 +38,12 @@ const formLoginSubscriber =  form$.pipe(
         }
     })),
     switchMap(async res => {
-        await globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, res.token)
         await router.push('/')
-        return of(res)
-    })
-).subscribe(login$)
+        console.info(res)
+        login$.next(res.token)
+        return of(res.token)
+    }),
+).subscribe()
 
 onUnmounted(() => {
     form$.complete()

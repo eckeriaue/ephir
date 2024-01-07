@@ -28,9 +28,16 @@ class PostsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $title = $request->input('title');
+        $content = $request->input('content');
+        $post = Post::query()->create([
+            'title' => $title,
+            'content' => $content,
+            'user_id' => auth()->id()
+        ]);
+        return $post->toJson();
     }
 
     /**

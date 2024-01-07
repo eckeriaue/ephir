@@ -24,8 +24,9 @@ async function submit() {
 
     return fetch(request)
     .then(res => res.json())
-    .then(() => router.push('/login'))
-    .finally(() => login$.next(null))
+    .then(async (res) => {
+        await router.push('/login')
+    })
 }
 
 </script>

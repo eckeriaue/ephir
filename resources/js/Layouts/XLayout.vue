@@ -1,10 +1,10 @@
-<script setup>
-import { ref, unref, computed } from 'vue'
+<script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
-import { login$, logout$, createRequest } from '@/lib'
+import { isLogin, createRequest, login$, logout$, checkIsLogin } from '@/lib'
+import { computed, onUnmounted, ref, unref } from 'vue'
 
 const showingNavigationDropdown = ref(false)
 const username = ref('Гость')
@@ -15,26 +15,42 @@ const userIsAuth = computed(() => {
     return !isNaN(unref(userId))
 })
 
-const getBySelf = async () => fetch(await createRequest(`/api/v1/get-by-self`))
-.then(res => res.ok && res.json())
-.then(res => {
-    if (res?.name) username.value = res.name
-    if (res?.id) userId.value = res.id
-})
-.finally(() => loading.value = false)
+const getBySelf = async () => {
+    loading.value = true
+    await checkIsLogin()
+    if (!unref(isLogin)) {
+        return (
+            username.value = 'Гость',
+            userId.value = NaN,
+            loading.value = false
+        )
+    }
+    return fetch(await createRequest(`/api/v1/get-by-self`))
+        .then(res => res.ok && res.json())
+        .then(res => {
+            if (res?.name) username.value = res.name
+            if (res?.id) userId.value = res.id
+        })
+        .finally(() => loading.value = false)
+}
 
 
 getBySelf()
 
-login$.subscribe(() => getBySelf())
-logout$.subscribe(() => getBySelf())
+const subs1 = login$.subscribe(() => getBySelf())
+const subs2 = logout$.subscribe(() => getBySelf())
+
+onUnmounted(() => {
+    subs1.unsubscribe()
+    subs2.unsubscribe()
+})
 
 </script>
 
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-white border-b-2 sticky top-0 border-gray-200">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -164,9 +180,9 @@ logout$.subscribe(() => getBySelf())
                 </div>
             </nav>
 
-
+            
             <!-- Page Content -->
-            <main>
+            <main  class="mx-auto mt-8 max-w-full md:max-w-2xl lg:max-w-4xl px-4">
                 <slot />
             </main>
         </div>

@@ -1,19 +1,30 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { unref, watch, onMounted, computed, ref } from 'vue'
 
-defineProps<{
-    modelValue: string
+const props = defineProps<{
+    modelValue?: string
+    name?: string
+    placeholder?: string
 }>();
 
-defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
 
 const input = ref(null);
 
+const model = ref('')
+
+const modelValue = computed({
+    get: () => props.modelValue || unref(model),
+    set: v => {
+        emit('update:modelValue', model.value = v)
+    }
+})
 onMounted(() => {
     if (input.value.hasAttribute('autofocus')) {
         input.value.focus();
     }
 });
+
 
 defineExpose({ focus: () => input.value.focus() });
 // todo: tw classes for dark theme
@@ -36,6 +47,8 @@ defineExpose({ focus: () => input.value.focus() });
             text-[rgb(44,62,80)]
             focus:bg-[rgb(240,243,244)] bg-[rgb(241,244,245)]
             "
+        :name="name"
+        :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         ref="input"

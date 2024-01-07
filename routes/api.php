@@ -22,17 +22,21 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
 
     Route::controller(RegisterController::class)->group(function () {
-        Route::post('/register', 'register');
-        Route::post('/login', 'login');
+        Route::post('/register', 'register')->name('register');
+        Route::post('/login', 'login')->name('login');
+        Route::post('/logout', 'logout')->name('logout');
     });
 
     Route::get('/posts', PostsController::class)->name('posts');
 
+
     Route::middleware('auth:sanctum')->group(function () {
+        Route::prefix('/posts')->controller(PostsController::class)->group(function () {
+            Route::post('/create', 'create')->name('posts');
+        });
 
         Route::controller(UserController::class)->group(function () {
             Route::get('/get-by-self', 'self');
-            Route::post('/logout', 'logout');
         });
 
         Route::get('/user', function (Request $request) {

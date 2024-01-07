@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -11,8 +11,8 @@ class UserController extends Controller
         return auth()->user();
     }
 
-    public function logout()
+    public function getById($id): User
     {
-        return auth()->user()->tokens()->delete();
+        return User::query()->findOrFail(intval($id))->first();
     }
 }

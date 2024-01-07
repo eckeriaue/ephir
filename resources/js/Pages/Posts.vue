@@ -1,26 +1,47 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { createGuestRequest } from '@/lib'
-import { onMounted } from 'vue';
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
+import { isLogin, createGuestRequest, login$, logout$ } from '@/lib'
+import CreatePost from '@/Components/CreatePost.vue'
 
-  
-  const posts = ref()
-  const loading = ref(true)
 
-  onMounted(async () => {
-    fetch(await createGuestRequest(`/api/v1/posts`))
+defineProps<{
+  modelValue?: object
+}>()
+
+const emit = defineEmits<{
+  'update:modelValue': [object]
+}>()
+
+const SinglePost = defineAsyncComponent(() => import('@/Components/SinglePost.vue'))
+
+const posts = ref()
+const loading = ref(true)
+
+async function getPosts(offset = 0, limit = 10) {
+  loading.value = true
+  return fetch(await createGuestRequest(`/api/v1/posts`))
     .then(res => res.json())
     .then(res => posts.value = res)
     .finally(() => loading.value = false)
-  })
+}
 
+onMounted(getPosts)
+
+const loginSub = login$.subscribe(() => getPosts())
+const logoutSub = logout$.subscribe(() => getPosts())
+
+onUnmounted(() => {
+  loginSub.unsubscribe()
+  logoutSub.unsubscribe()
+})
 
 </script>
 <template>
-  <p v-if="loading"> Загрузка... </p>
-  <section class="space-y-4 max-w-4xl mx-auto break-words" v-else>
-    <article v-for="post in posts" :key="post.id">
-      {{ post.title }}
-    </article>
+  <section>
+    <create-post @create="posts.unshift($event)" v-if="isLogin" class="w-full my-4" />
+    <p v-if="loading"> Загрузка... </p>
+    <section v-else>
+      <single-post v-for="post in posts" :key="post.id" v-bind="post" />
+    </section>
   </section>
 </template>
