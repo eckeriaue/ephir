@@ -7,13 +7,16 @@ export const logout$ = new Subject()
 export const login$ = new Subject()
 
 function getToken() {
-  return globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE)
+  // return globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE)
+  return localStorage.getItem(AUTH_TOKEN_SIGNATURE)
 }
 function setToken(payload) {
-  return globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, payload)
+  // return globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, payload)
+  return localStorage.setItem(AUTH_TOKEN_SIGNATURE, payload)
 }
 function deleteToken() {
-  return globalThis?.cookieStore.delete(AUTH_TOKEN_SIGNATURE)
+  // return globalThis?.cookieStore.delete(AUTH_TOKEN_SIGNATURE)
+  return localStorage.setItem(AUTH_TOKEN_SIGNATURE, '')
 }
 
 
