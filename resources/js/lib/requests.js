@@ -8,10 +8,10 @@ export const login$ = new Subject()
 
 
 login$.pipe(
-  switchMap(res => cookieStore.set(AUTH_TOKEN_SIGNATURE, res))
+  switchMap(res => globalThis?.cookieStore.set(AUTH_TOKEN_SIGNATURE, res))
 ).subscribe(checkIsLogin)
 logout$.pipe(
-  switchMap(() => cookieStore.delete(AUTH_TOKEN_SIGNATURE))
+  switchMap(() => globalThis?.cookieStore.delete(AUTH_TOKEN_SIGNATURE))
 ).subscribe(checkIsLogin)
 
 
@@ -23,7 +23,7 @@ export async function checkIsLogin() {
 checkIsLogin()
 
 export async function createRequest(url, options = {}) {
-  const { value } = (await cookieStore.get(AUTH_TOKEN_SIGNATURE)) || {}
+  const { value } = (await globalThis?.cookieStore.get(AUTH_TOKEN_SIGNATURE)) || {}
   const { method = 'GET', body } = options
 
   const requestOptions = {
