@@ -37,9 +37,4 @@ const router = createRouter({
     ]
 })
 
-void async function() {
-    if (!globalThis.cookieStore) {
-        await import('@/lib/cookieStore')
-    }
-    createApp(Home).use(router).mount(`#app`)
-}()
+createApp(Home).use(router).mount(`#app`)
