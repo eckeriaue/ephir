@@ -1,1 +1,0 @@
-export { default as XDialog } from './XDialog.vue'
