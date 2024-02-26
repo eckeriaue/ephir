@@ -37,6 +37,7 @@ mount($getPosts);
 
 
         <section class="mt-8">
+
             @foreach($posts as $post)
             <livewire:post-card
                 :$post
