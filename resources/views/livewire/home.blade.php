@@ -5,16 +5,12 @@ use function Livewire\Volt\{ on,state, mount, computed };
 use App\Models\Post;
 
 state([
-    'posts' => [],
+    'posts',
 ]);
 
 
 $getPosts = function(int $offset = 0, int $limit = 5) {
-    foreach (Post::orderBy('id', 'desc')->offset($offset)->limit($limit)->get() as $post) {
-        $this->posts[] = $post;
-    };
-    // todo:
-    // return Post::count() >= count($this->posts);
+    $this->posts = Post::orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
 };
 
 on(['create-post' => $getPosts]);
