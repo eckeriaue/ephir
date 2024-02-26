@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Post;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,14 +10,11 @@ use Livewire\Volt\Volt;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
-Volt::route('/', 'home')->name('home');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+Route::view('{any?}', 'app')->name('app');
 
 require __DIR__.'/auth.php';
