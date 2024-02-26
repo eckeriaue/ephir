@@ -5,7 +5,6 @@
 /public/storage
 /storage/*.key
 /vendor
-/.vite
 .env
 .env.backup
 .env.production
