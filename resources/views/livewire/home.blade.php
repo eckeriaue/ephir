@@ -1,7 +1,7 @@
 <?php
 
 
-use function Livewire\Volt\{ state, mount, computed };
+use function Livewire\Volt\{ on,state, mount, computed };
 use App\Models\Post;
 
 state([
@@ -17,6 +17,8 @@ $getPosts = function(int $offset = 0, int $limit = 5) {
     // return Post::count() >= count($this->posts);
 };
 
+on(['create-post' => $getPosts]);
+
 mount($getPosts);
 
 ?>
@@ -26,10 +28,9 @@ mount($getPosts);
             offset: 0,
             limit: 5,
         }"
-        class="mx-auto mt-8 max-w-full md:max-w-2xl lg:max-w-4xl px-4"
+        class="mx-auto mt-8 max-w-full md:max-w-[656px] px-4"
     >
         @auth
-            <livewire:create-post-modal @save="getPosts" />
             <div
                 wire:loading.class.remove="opacity-0 h-0 pt-0"
                 wire:loading.class="h-10 pt-4 opacity-100"
