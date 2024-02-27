@@ -8,6 +8,7 @@
     focus:border-indigo-500 dark:focus:border-indigo-600
     tex-xs
     placeholder:tex-xs
+    outline-offset-0
     focus:ring-indigo-500 dark:focus:ring-indigo-600
     rounded-md shadow-sm
     ']) !!}

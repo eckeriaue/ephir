@@ -29,9 +29,7 @@
     x-data="{
         isOpenComment: false,
         openComments() {
-            this.isOpenComment = true
-            const input = $refs.comment.querySelector('input[name=content]')
-            input.focus()
+            this.isOpenComment = !this.isOpenComment
         }
     }"
     id="post-{{$post->id}}"
@@ -112,14 +110,13 @@
             @endguest
             </fieldset>
     </footer>
-    <div x-show="isOpenComment" 
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 scale-90"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
+    <div
         x-ref="comment"
+        class="grid overflow-hidden duration-500 transition-all"
+        :class="{
+            'grid-rows-[1fr]': isOpenComment,
+            'grid-rows-[0fr]': !isOpenComment,
+        }"
     >
         <livewire:comments :$post />
     </div>

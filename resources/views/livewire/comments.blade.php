@@ -10,7 +10,7 @@ $save = function() {
 ?>
 
 
-<section class="-mb-6 -mx-6 mt-6 ">
+<section class="mt-6 min-h-[0px]">
     <h2 class="text-xs font-medium px-6 pb-2 uppercase"> Комментарии </h2> 
     @if($post?->comments)
     <ol class="px-6 space-y-4">
@@ -42,15 +42,15 @@ $save = function() {
         wire:submit="save"
         wire:loading.attr="inert"
         wire:loading.attr="disabled"
-        class="w-full flex h-min mt-6"
+        class="w-full flex gap-x-2 h-min mt-6 p-2"
     >
         <x-text-input
             wire:model="form.content"
             wire:loading.attr="disabled"
             name="content"
-            class="grow inline-block rounded-t-none rounded-r-none"
+            class="grow inline-block"
             placeholder="{{__('Напишите комментарий')}}"></x-text-input>
-        <x-secondary-button type="submit" class="outline-2 h-8 w-[51px] rounded-l-none inline-block aspect-square rounded-t-none">📨</x-secondary-button> 
+        <x-secondary-button type="submit" class="outline-2 h-8 w-[51px] inline-block">📨</x-secondary-button> 
     </form>
     @endauth
     @guest
