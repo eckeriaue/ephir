@@ -50,7 +50,10 @@ $save = function() {
             name="content"
             class="grow inline-block rounded-t-none rounded-r-none"
             placeholder="{{__('Напишите комментарий')}}"></x-text-input>
-        <x-secondary-button type="submit" class="outline-2 rounded-l-none inline-block aspect-square rounded-t-none">📨</x-secondary-button> 
+        <x-secondary-button type="submit" class="outline-2 h-8 w-[51px] rounded-l-none inline-block aspect-square rounded-t-none">📨</x-secondary-button> 
     </form>
     @endauth
+    @guest
+        <div class="mt-6"></div>   
+    @endguest
 </section>
