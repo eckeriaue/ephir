@@ -5,6 +5,8 @@
  */
 
 import axios from 'axios';
+import { defineCustomElement } from '@ephir/wc/dist/components/mark-editor'
+defineCustomElement();
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

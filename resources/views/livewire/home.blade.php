@@ -24,7 +24,7 @@ mount($getPosts);
             offset: 0,
             limit: 5,
         }"
-        class="mx-auto mt-8 max-w-full md:max-w-[656px] px-4"
+        class="mx-auto max-w-full md:max-w-[656px] px-4"
     >
         @auth
             <div
