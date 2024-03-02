@@ -9,6 +9,7 @@
     });
 
     $postLikesCount = computed(fn() => $this->post->likes->count());
+    $postCommentsCount = computed(fn() => $this->post->comments->count());
 
     $toggleLike = function() {
         $userId = auth()->id();
@@ -78,7 +79,7 @@
             <fieldset class="flex items-center gap-x-2">
             <x-secondary-button  @click="openComments" type="button">
                 💬
-                {{$post->comments->count()}}
+                <span> {{ $this->postCommentsCount }} </span>
             </x-secondary-button>
             
             @auth

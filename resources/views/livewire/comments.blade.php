@@ -50,7 +50,10 @@ $save = function() {
             name="content"
             class="grow inline-block"
             placeholder="{{__('Напишите комментарий')}}"></x-text-input>
-        <x-secondary-button type="submit" class="outline-2 h-8 w-[51px] inline-block">📨</x-secondary-button> 
+        <x-secondary-button
+            type="submit"
+            x-bind:disabled="$wire.form.content === ''"
+            class="outline-2 h-8 w-[51px] inline-block">📨</x-secondary-button> 
     </form>
     @endauth
     @guest
