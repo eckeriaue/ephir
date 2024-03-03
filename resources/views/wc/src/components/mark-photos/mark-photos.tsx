@@ -1,26 +1,48 @@
-import { Component, Method, State, h, } from "@stencil/core"
+import { Component, Method, State, forceUpdate, h } from "@stencil/core"
 
 
 @Component({
   tag: 'mark-photos',
-  shadow: true
+  shadow: true,
+  styles: /*css*/`
+    .slider {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .slide {
+      max-height: 320px;
+    }
+    img {
+      max-height:100%;
+    }
+  `
 })
 export class MarkPhotos {
 
   @State() images: Map<string, File> = new Map()
 
   @Method()
+  getImages() {
+    return Promise.resolve(this.images)
+  }
+
+  @Method()
   async load(file: File) {
     const url = URL.createObjectURL(file)
     this.images.set(url, file)
+    forceUpdate(this)
   }
 
   render() {
     return (
-      <div>
+      <div class="slider">
         {
           [...this.images.keys()].map(src => {
-            return <img src={src} />
+            return (
+              <div class="slide">
+                <img src={src} />
+              </div>
+            )
           })
         }
       </div>

@@ -1,0 +1,2 @@
+import{p as r,b as a}from"./p-7f4894db.js";export{s as setNonce}from"./p-7f4894db.js";import{g as o}from"./p-e1255160.js";const t=()=>{const a=import.meta.url;const o={};if(a!==""){o.resourcesUrl=new URL(".",a).href}return r(o)};t().then((async r=>{await o();return a([["p-39af3885",[[1,"mark-creator"],[1,"mark-editor"],[1,"mark-photos",{images:[32],getImages:[64],load:[64]}]]]],r)}));
+//# sourceMappingURL=wc-ephir.esm.js.map

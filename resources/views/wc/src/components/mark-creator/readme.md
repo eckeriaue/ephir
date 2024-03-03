@@ -1,4 +1,4 @@
-# my-component
+# mark-creator
 
 
 
@@ -7,15 +7,17 @@
 
 ## Dependencies
 
-### Used by
+### Depends on
 
- - [mark-creator](../mark-creator)
+- [mark-editor](../mark-editor)
+- [mark-photos](../mark-photos)
 
 ### Graph
 ```mermaid
 graph TD;
   mark-creator --> mark-editor
-  style mark-editor fill:#f9f,stroke:#333,stroke-width:4px
+  mark-creator --> mark-photos
+  style mark-creator fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

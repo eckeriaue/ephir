@@ -1,0 +1,14 @@
+{
+  "entries": [
+    "components/mark-creator/mark-creator.js",
+    "components/mark-editor/mark-editor.js",
+    "components/mark-photos/mark-photos.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "4.12.4",
+    "typescriptVersion": "5.3.3"
+  },
+  "collections": [],
+  "bundles": []
+}

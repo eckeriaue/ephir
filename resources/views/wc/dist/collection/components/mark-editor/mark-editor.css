@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+p {
+  margin: 0;
+}
+
+.content {
+  outline: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 24px;
+}
