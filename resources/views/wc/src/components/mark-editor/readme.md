@@ -5,6 +5,13 @@
 <!-- Auto Generated Below -->
 
 
+## Events
+
+| Event       | Description | Type                      |
+| ----------- | ----------- | ------------------------- |
+| `markInput` |             | `CustomEvent<InputEvent>` |
+
+
 ## Dependencies
 
 ### Used by

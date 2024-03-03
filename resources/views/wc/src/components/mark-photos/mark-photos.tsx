@@ -11,6 +11,7 @@ import { Component, Method, State, forceUpdate, h } from "@stencil/core"
     }
     .slide {
       max-height: 320px;
+      max-width: fit-content;
     }
     img {
       max-height:100%;

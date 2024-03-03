@@ -5,8 +5,19 @@
  */
 
 import axios from 'axios';
-import { defineCustomElement } from '@ephir/wc/dist/components/mark-editor'
-defineCustomElement();
+
+function inilazitor(importPromise) {
+  return importPromise.then(module => module.defineCustomElement)
+}
+
+Promise.all([
+  inilazitor(import('@ephir/wc/dist/components/mark-creator')),
+  inilazitor(import('@ephir/wc/dist/components/mark-editor')),
+  inilazitor(import('@ephir/wc/dist/components/mark-photos')),
+]).then(bundle => {
+  bundle.forEach(registry => registry())
+})
+
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

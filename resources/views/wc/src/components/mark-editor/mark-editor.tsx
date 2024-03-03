@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, Event, h, type EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'mark-editor',
@@ -7,9 +7,11 @@ import { Component, h } from '@stencil/core';
 })
 export class MarkEditor {
 
+  @Event() markContentUpdate: EventEmitter<string>
+
   render() {
     return (
-      <p class="content" contenteditable="plaintext-only">
+      <p class="content" onInput={e => this.markContentUpdate.emit(e.target['innerHTML'])} contenteditable="plaintext-only">
       </p>
     );
   }

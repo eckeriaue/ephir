@@ -13,9 +13,14 @@ class CreatePostForm extends Form
     public string $title = '';
     #[Validate('required|min:3')]
     public string $content = '';
+    
+    #[Validate(['photos.*' => 'image|max:1024'])]
+    public $photos = [];
+
 
     public function save()
     {
+        dd($this->photos);
         Post::create([
             'title' => trim($this->title),
             'content' => trim($this->content),
