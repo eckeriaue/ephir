@@ -6,32 +6,59 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MarkCreator {
+    }
     interface MarkEditor {
+    }
+    interface MarkPhotos {
+        "load": (file: File) => Promise<void>;
     }
 }
 declare global {
+    interface HTMLMarkCreatorElement extends Components.MarkCreator, HTMLStencilElement {
+    }
+    var HTMLMarkCreatorElement: {
+        prototype: HTMLMarkCreatorElement;
+        new (): HTMLMarkCreatorElement;
+    };
     interface HTMLMarkEditorElement extends Components.MarkEditor, HTMLStencilElement {
     }
     var HTMLMarkEditorElement: {
         prototype: HTMLMarkEditorElement;
         new (): HTMLMarkEditorElement;
     };
+    interface HTMLMarkPhotosElement extends Components.MarkPhotos, HTMLStencilElement {
+    }
+    var HTMLMarkPhotosElement: {
+        prototype: HTMLMarkPhotosElement;
+        new (): HTMLMarkPhotosElement;
+    };
     interface HTMLElementTagNameMap {
+        "mark-creator": HTMLMarkCreatorElement;
         "mark-editor": HTMLMarkEditorElement;
+        "mark-photos": HTMLMarkPhotosElement;
     }
 }
 declare namespace LocalJSX {
+    interface MarkCreator {
+    }
     interface MarkEditor {
     }
+    interface MarkPhotos {
+    }
     interface IntrinsicElements {
+        "mark-creator": MarkCreator;
         "mark-editor": MarkEditor;
+        "mark-photos": MarkPhotos;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "mark-creator": LocalJSX.MarkCreator & JSXBase.HTMLAttributes<HTMLMarkCreatorElement>;
             "mark-editor": LocalJSX.MarkEditor & JSXBase.HTMLAttributes<HTMLMarkEditorElement>;
+            "mark-photos": LocalJSX.MarkPhotos & JSXBase.HTMLAttributes<HTMLMarkPhotosElement>;
         }
     }
 }
