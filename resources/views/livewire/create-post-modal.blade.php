@@ -37,9 +37,9 @@ form(CreatePostForm::class);
     <x-secondary-button
     @click="open()"
     type="button"
-    class="group">
+    class="group mr-2">
         <span>🪶</span>
-        <span class="w-0 duration-300 whitespace-nowrap overflow-hidden group-hover:w-[102px] transition-all"> создать пост </span>
+        <span class="w-0 duration-300 whitespace-nowrap overflow-hidden group-hover:w-28 transition-all"> создать пост </span>
     </x-secondary-button>
 
     <dialog

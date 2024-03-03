@@ -24,7 +24,7 @@ mount($getPosts);
             offset: 0,
             limit: 5,
         }"
-        class="mx-auto mt-8 max-w-full md:max-w-[656px] px-4"
+        class="mx-auto max-w-full md:max-w-[656px] px-4"
     >
         @auth
             <div
@@ -53,7 +53,7 @@ mount($getPosts);
                 type="button"
                 class="w-full inline-block text-center justify-center"
                 wire:loading.attr="disabled"
-                wire:click="getPosts(offset += 5, limit += 5)"
+                wire:click="getPosts(offset, limit += 5)"
             >
                 Загрузить ещё
             </x-primary-button>

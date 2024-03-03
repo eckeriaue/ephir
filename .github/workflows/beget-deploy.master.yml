@@ -1,4 +1,4 @@
-name: Deploy  to beget hosting
+name: Deploy to beget hosting
 
 on:
   push:
