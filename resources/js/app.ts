@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
 
-import { createApp, h, DefineComponent } from 'vue';
+import { createApp, h, DefineComponent, defineAsyncComponent } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
@@ -15,6 +15,9 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .component('kit-input', defineAsyncComponent(() => import('@/Components/ui/input/Input.vue')))
+            .component('kit-button', defineAsyncComponent(() => import('@/Components/ui/button/Button.vue')))
+            .component('kit-label', defineAsyncComponent(() => import('@/Components/ui/label/Label.vue')))
             .mount(el);
     },
     progress: {
