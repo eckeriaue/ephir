@@ -8,6 +8,12 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+declare global {
+    export type KitDropdownMenuTrigger = typeof import('@/Components/ui/dropdown-menu/DropdownMenuTrigger.vue')
+    export type KitDropdownMenuContent = typeof import('@/Components/ui/dropdown-menu/DropdownMenuContent.vue')
+    export type KitButton = typeof import('@/Components/ui/button/Button.vue')
+}
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
@@ -18,6 +24,36 @@ createInertiaApp({
             .component('kit-input', defineAsyncComponent(() => import('@/Components/ui/input/Input.vue')))
             .component('kit-button', defineAsyncComponent(() => import('@/Components/ui/button/Button.vue')))
             .component('kit-label', defineAsyncComponent(() => import('@/Components/ui/label/Label.vue')))
+
+            .component('kit-command', defineAsyncComponent(() => import('@/Components/ui/command/Command.vue')))
+            .component('kit-command-list', defineAsyncComponent(() => import('@/Components/ui/command/CommandList.vue')))
+            .component('kit-command-dialog', defineAsyncComponent(() => import('@/Components/ui/command/CommandDialog.vue')))
+            .component('kit-command-empty', defineAsyncComponent(() => import('@/Components/ui/command/CommandEmpty.vue')))
+            .component('kit-command-group', defineAsyncComponent(() => import('@/Components/ui/command/CommandGroup.vue')))
+            .component('kit-command-input', defineAsyncComponent(() => import('@/Components/ui/command/CommandInput.vue')))
+            .component('kit-command-item', defineAsyncComponent(() => import('@/Components/ui/command/CommandItem.vue')))
+            .component('kit-command-separator', defineAsyncComponent(() => import('@/Components/ui/command/CommandSeparator.vue')))
+            .component('kit-command-shortcut', defineAsyncComponent(() => import('@/Components/ui/command/CommandShortcut.vue')))
+
+            .component('kit-popover', defineAsyncComponent(() => import('@/Components/ui/popover/Popover.vue')))
+            .component('kit-popover-content', defineAsyncComponent(() => import('@/Components/ui/popover/PopoverContent.vue')))
+            .component('kit-popover-trigger', defineAsyncComponent(() => import('@/Components/ui/popover/PopoverTrigger.vue')))
+
+            .component('kit-dropdown-menu', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenu.vue')))
+            .component('kit-dropdown-checkbox-item', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue')))
+            .component('kit-dropdown-content', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuContent.vue')))
+            .component('kit-dropdown-group', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuGroup.vue')))
+            .component('kit-dropdown-menu-item', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuItem.vue')))
+            .component('kit-dropdown-label', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuLabel.vue')))
+            .component('kit-dropdown-radio-group', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuRadioGroup.vue')))
+            .component('kit-dropdown-radio-item', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuRadioItem.vue')))
+            .component('kit-dropdown-separator', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuSeparator.vue')))
+            .component('kit-dropdown-shortcut', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuShortcut.vue')))
+            .component('kit-dropdown-sub', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuSub.vue')))
+            .component('kit-dropdown-sub-content', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuSubContent.vue')))
+            .component('kit-dropdown-sub-trigger', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuSubTrigger.vue')))
+            .component('kit-dropdown-trigger', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuTrigger.vue')))
+
             .mount(el);
     },
     progress: {
