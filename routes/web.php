@@ -18,11 +18,13 @@ Route::prefix('api')->group(function() {
     })->name('posts.create');
 });
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    $offset = $request->query('offset', 0);
+    $limit = $request->query('limit', 10);
     return Inertia::render('Posts', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'posts' => Post::offset(0)->limit(10)->get(),
+        'posts' => Post::orderBy('id', 'desc')->offset($offset)->limit($limit)->get(),
     ]);
 })->name('posts');
 
