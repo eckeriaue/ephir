@@ -4,19 +4,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Post;
+
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Posts', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'posts' => Post::all(),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
-
-Route::get('/posts', function () {
-    return Inertia::render('Posts');
-})->middleware(['auth', 'verified'])->name('posts');
+})->name('posts');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
