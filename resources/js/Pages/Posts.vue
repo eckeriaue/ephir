@@ -11,8 +11,8 @@ import { Head } from '@inertiajs/vue3';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <section v-if="'posts' in $page && typeof $page.posts === 'object'">
-                        <article v-for="post in $page.posts">
+                    <section v-if="$page.props.posts">
+                        <article v-for="post in $page.props.posts">
                             {{ post }}
                         </article>
                     </section>

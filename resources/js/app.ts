@@ -9,9 +9,10 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 declare global {
-    export type KitDropdownMenuTrigger = typeof import('@/Components/ui/dropdown-menu/DropdownMenuTrigger.vue')
-    export type KitDropdownMenuContent = typeof import('@/Components/ui/dropdown-menu/DropdownMenuContent.vue')
-    export type KitButton = typeof import('@/Components/ui/button/Button.vue')
+    export type KitDropdownMenuTrigger = typeof import('@/Components/ui/dropdown-menu/DropdownMenuTrigger.vue').default
+    export type KitDropdownMenuContent = typeof import('@/Components/ui/dropdown-menu/DropdownMenuContent.vue').default
+    export type KitButton = typeof import('@/Components/ui/button/Button.vue').default
+    export type KitDialog = typeof import('@/Components/ui/dialog/Dialog.vue').default
 }
 
 createInertiaApp({
@@ -53,6 +54,18 @@ createInertiaApp({
             .component('kit-dropdown-sub-content', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuSubContent.vue')))
             .component('kit-dropdown-sub-trigger', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuSubTrigger.vue')))
             .component('kit-dropdown-trigger', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuTrigger.vue')))
+            
+            .component('kit-dialog', defineAsyncComponent(() => import('@/Components/ui/dialog/Dialog.vue')))
+            .component('kit-dialog-close', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogClose.vue')))
+            .component('kit-dialog-content', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogContent.vue')))
+            .component('kit-dialog-description', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogDescription.vue')))
+            .component('kit-dialog-footer', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogFooter.vue')))
+            .component('kit-dialog-header', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogHeader.vue')))
+            .component('kit-dialog-scroll-content', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogScrollContent.vue')))
+            .component('kit-dialog-title', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogTitle.vue')))
+            .component('kit-dialog-trigger', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogTrigger.vue')))
+
+            .component('kit-textarea', defineAsyncComponent(() => import('@/Components/ui/textarea/Textarea.vue')))
 
             .mount(el);
     },

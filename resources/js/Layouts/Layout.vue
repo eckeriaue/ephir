@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const showingNavigationDropdown = ref(false);
+
+const createPostForm = useForm({
+    title: '',
+    content: '',
+})
+
+const modalCreatePostIsOpen = ref(false);
+
 </script>
 
 <template>
@@ -34,6 +42,29 @@ const showingNavigationDropdown = ref(false);
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
+                                <kit-dialog v-model:open="modalCreatePostIsOpen">
+                                    <kit-dialog-trigger as-child>
+                                        <kit-button>
+                                            🪶
+                                        </kit-button>
+                                    </kit-dialog-trigger>
+                                    <kit-dialog-content>
+                                        <kit-dialog-title> Создать пост </kit-dialog-title>
+                                        <kit-dialog-description>Здесь вы можете написать о чем вы думаете </kit-dialog-description>
+                                        <form @submit.prevent="createPostForm.post(route('posts.create')), modalCreatePostIsOpen = false">
+                                            <kit-label for="postName"> Название </kit-label>
+                                            <kit-input v-model="createPostForm.title" id="postName" class="mt-2" />
+                                            <div class="mt-4">
+                                                <kit-label for="postContent"> Содержимое </kit-label>
+                                                <kit-textarea class="mt-2" id="postContent" v-model="createPostForm.content"></kit-textarea>
+                                            </div>
+                                            <div class="gap-x-2 flex justify-end mt-4">
+                                                <kit-button type="button" @click="modalCreatePostIsOpen = false, createPostForm.title = '', createPostForm.content = ''" variant="secondary">Отменить</kit-button>
+                                                <kit-button type="submit" :disabled="createPostForm.processing">Сохранить</kit-button>
+                                            </div>
+                                        </form>
+                                    </kit-dialog-content>
+                                </kit-dialog>
                                 <kit-dropdown-menu>
                                     <kit-dropdown-trigger>
                                             <kit-button variant="ghost" type="button" class="font-medium text-base text-gray-800">
