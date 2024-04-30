@@ -21,7 +21,16 @@ const { format } = new Intl.DateTimeFormat('ru-RU', {
 })
 
 const contentParagraph = ref<HTMLParagraphElement>()
-const details = ref({})
+const details = ref<Partial< {
+  "id": number
+  "title": string
+  "content": string
+  "user_id": number
+  "is_published": boolean
+  "deleted_at": null | string
+  "created_at": string
+  "updated_at": string
+}>>({})
 const comments = ref()
 const commentIsLoad = ref(false)
 const commentsIsVisible = ref(false)
