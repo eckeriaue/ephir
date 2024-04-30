@@ -21,7 +21,9 @@ Route::prefix('api')->group(function() {
       $photos = $request->files->get('photos');
       if(isset($photos)) {
         foreach ($photos as $photo) {
-          dd($photo);
+          $filename = 'post_image.'.time().'.png';
+          Storage::disk('local')->put($filename, $photo);
+          asset("storage/$filename");
         }
       };
       $post = new Post;
