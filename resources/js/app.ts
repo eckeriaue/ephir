@@ -68,6 +68,8 @@ createInertiaApp({
 
             .component('kit-textarea', defineAsyncComponent(() => import('@/Components/ui/textarea/Textarea.vue')))
 
+            .component('kit-checkbox', defineAsyncComponent(() => import('@/Components/ui/checkbox/Checkbox.vue')))
+
             .component('kit-pagination-ellipsis', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationEllipsis.vue')))
             .component('kit-pagination-first', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationFirst.vue')))
             .component('kit-pagination-last', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationLast.vue')))

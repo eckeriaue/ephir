@@ -10,6 +10,9 @@ const createPostForm = useForm({
     content: '',
 })
 
+const logoutForm = useForm({});
+
+
 const modalCreatePostIsOpen = ref(false);
 
 </script>
@@ -67,19 +70,32 @@ const modalCreatePostIsOpen = ref(false);
                                 </kit-dialog>
                                 <kit-dropdown-menu>
                                     <kit-dropdown-trigger>
-                                            <kit-button variant="ghost" type="button" class="font-medium text-base text-gray-800">
-                                                {{ $page.props.auth.user.name }}
+                                            <kit-button v-if="$page.props.auth.user" variant="ghost" type="button" class="font-medium text-base text-gray-800">
+                                                    {{ $page.props.auth.user?.name }}
+                                            </kit-button>
+                                            <kit-button v-else variant="ghost" type="button" class="font-medium text-base text-gray-800">
+                                                Гость
                                             </kit-button>
                                     </kit-dropdown-trigger>
                                     <kit-dropdown-content align="end" class="w-56">
-                                        <kit-command class="mt-3 space-y-1">
+                                        <kit-command v-if="$page.props.auth.user" class="mt-3 space-y-1">
                                             <kit-dropdown-menu-item :as="Link" :href="route('profile.edit')">
                                                 👤
                                                 Профиль
                                             </kit-dropdown-menu-item>
-                                            <kit-dropdown-menu-item :as="Link" :href="route('logout')">
+                                            <kit-dropdown-menu-item :as="Link" :href="logoutForm.post(route('logout'))">
                                                 🔓
                                                 Выйти
+                                            </kit-dropdown-menu-item>
+                                        </kit-command>
+                                        <kit-command v-else>
+                                            <kit-dropdown-menu-item :as="Link" :href="route('login')">
+                                                🔑
+                                                Войти
+                                            </kit-dropdown-menu-item>
+                                            <kit-dropdown-menu-item :as="Link" :href="logoutForm.post(route('register'))">
+                                                🪪
+                                                Регистрация
                                             </kit-dropdown-menu-item>
                                         </kit-command>
                                     </kit-dropdown-content>
@@ -137,9 +153,9 @@ const modalCreatePostIsOpen = ref(false);
                             <kit-dropdown-trigger as-child>
                                 <div class="px-4">
                                     <div class="font-medium text-base text-gray-800">
-                                        {{ $page.props.auth.user.name }}
+                                        {{ $page.props.auth.user?.name }}
                                     </div>
-                                    <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                                    <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user?.email }}</div>
                                 </div>
                             </kit-dropdown-trigger>
                             <kit-dropdown-content class="w-56">
