@@ -13,6 +13,8 @@ import {
     PaginationRoot
 } from 'radix-vue'
 import { computed, unref } from 'vue'
+import PostCard from '@/Components/PostCard.vue'
+
 
 interface Post {
     id: number
@@ -43,7 +45,6 @@ const { format } = new Intl.DateTimeFormat('ru-RU', {
 const query = computed<URLSearchParams>(() => new URLSearchParams(page.url))
 const offset = computed(() => Number(unref(query).get('offset')) || 0)
 
-console.info(page.props.posts)
 
 </script>
 
@@ -56,31 +57,13 @@ console.info(page.props.posts)
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="">
                     <section v-if="$page.props.posts" class="container max-w-[768px]">
-                        <article
-                            class="text-gray-700 rounded-md p-6 transition-shadow hover:shadow bg-white mb-4 overflow-hidden shadow-sm sm:rounded-lg"
+                        <post-card
                             v-for="{ id, title, content, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"
-                            :id="`post_id_${id}`"
-                        >
-                            <div class="pb-6 flex items-start justify-between">
-                                <h1 v-text="title" class="max-w-[70%] break-words font-medium text-xl" />
-                                <time :value="created_at" class="text-gray-500 text-xs">{{ format(new Date(created_at)) }}</time>
-                            </div>
-                            <p class="break-words whitespace-pre-wrap break-all">{{ content }}</p>
-
-                            <footer class="text-gray-800 mt-8 flex items-center justify-between">
-                                <address class="text-xs">
-                                    Автор: <i>{{ user.name }}</i>
-                                </address>
-
-                                <kit-button variant="secondary" type="button">
-                                    💬
-                                    <span>{{ comments_count }}</span>
-                                </kit-button>
-
-                            </footer>
-
-                        </article>
+                            :="{title, content, comments_count}"
+                            :created_at="format(new Date(created_at))"
+                            :author="user.name"
+                        />
 
                         <footer class="mt-12 flex items-center justify-center pb-5">
                             <PaginationRoot :total="Number($page.props.totalPosts)" :sibling-count="1" show-edges :default-page="offset > 0 ? offset / 10 : 1">
