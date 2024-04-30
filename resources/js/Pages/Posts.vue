@@ -58,12 +58,15 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                 <div class="">
                     <section v-if="$page.props.posts" class="container max-w-[768px]">
                         <post-card
-                            v-for="{ id, title, content, comments_count, created_at, user } in <Post[]>$page.props.posts"
+                            v-for="{ id, title, content, user_id, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"
-                            :="{title, content, comments_count}"
+                            :id="id"
+                            :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
-                            :author="user.name"
-                        />
+                            :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"
+                        > 
+                        {{ content }}
+                        </post-card>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">
                             <PaginationRoot :total="Number($page.props.totalPosts)" :sibling-count="1" show-edges :default-page="offset > 0 ? offset / 10 : 1">
