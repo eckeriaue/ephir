@@ -45,7 +45,7 @@ const modalCreatePostIsOpen = ref(false);
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
-                                <kit-dialog v-model:open="modalCreatePostIsOpen">
+                                <kit-dialog v-if="$page.props.auth?.user" v-model:open="modalCreatePostIsOpen">
                                     <kit-dialog-trigger as-child>
                                         <kit-button>
                                             🪶
