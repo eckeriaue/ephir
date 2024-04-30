@@ -18,6 +18,12 @@ Route::prefix('api')->group(function() {
 
   Route::middleware('auth:sanctum')->post('/posts/create', function (Request $request) {
       $input = $request->input();
+      $photos = $request->files->get('photos');
+      if(isset($photos)) {
+        foreach ($photos as $photo) {
+          dd($photo);
+        }
+      };
       $post = new Post;
       $post->title = $input['title'];
       $post->content = $input['content'];

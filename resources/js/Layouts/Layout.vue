@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link, useForm } from '@inertiajs/vue3';
-import { computed, unref, ref } from 'vue';
+import { computed, unref, ref, watchEffect } from 'vue';
 
 const showingNavigationDropdown = ref(false);
 
@@ -11,11 +11,11 @@ const createPostForm = useForm({
     photos: [] as File[]
 })
 
+const imgs = ref<string[]>([])
+
 const logoutForm = useForm({})
 
-const imgs = computed(() => {
-    return unref(createPostForm.photos).map(file => URL.createObjectURL(file))
-})
+
 
 const modalCreatePostIsOpen = ref(false);
 
@@ -26,7 +26,8 @@ function addPhoto(event: Event) {
         target instanceof HTMLInputElement &&
         target.files && 0 in target.files
     ) {
-        createPostForm.photos.push(target.files[0]);
+        createPostForm.photos.push(target.files[0])
+        imgs.value.push(URL.createObjectURL(target.files[0]))
     }
 }
 
