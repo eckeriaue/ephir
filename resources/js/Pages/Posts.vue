@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Layout from '@/Layouts/Layout.vue'
+import { Icon } from '@iconify/vue'
 import { Head, Link, usePage } from '@inertiajs/vue3'
 import {
     PaginationEllipsis,
@@ -11,14 +12,27 @@ import {
     PaginationPrev,
     PaginationRoot
 } from 'radix-vue'
-import { Icon } from '@iconify/vue'
-import { computed, unref } from 'vue';
+import { computed, unref } from 'vue'
+
+interface Post {
+    id: number
+    title: string
+    content: string
+    user_id: number
+    is_published: boolean
+    deleted_at?: string
+    created_at: string
+    updated_at: string
+}
 
 const page = usePage()
+const { format } = new Intl.DateTimeFormat('ru-RU', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+})
 
 const query = computed<URLSearchParams>(() => new URLSearchParams(page.url))
 const offset = computed(() => Number(unref(query).get('offset')) || 0)
-
 
 </script>
 
@@ -29,10 +43,19 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <section v-if="$page.props.posts">
-                        <article v-for="post in $page.props.posts">
-                            {{ post }}
+                <div class="">
+                    <section v-if="$page.props.posts" class="container max-w-[768px]">
+                        <article
+                            class="text-gray-700 rounded-md p-6 transition-shadow hover:shadow bg-white mb-4 overflow-hidden shadow-sm sm:rounded-lg"
+                            v-for="{ id, title, content, created_at } in <Post[]>$page.props.posts"
+                            :key="id"
+                            :id="`post_id_${id}`"
+                        >
+                            <div class="pb-6 flex items-start justify-between">
+                                <h1 v-text="title" class="max-w-[70%] break-words font-medium text-xl" />
+                                <time :value="created_at" class="text-gray-500 text-xs">{{ format(new Date(created_at)) }}</time>
+                            </div>
+                            <p class="break-words">{{ content }}</p>
                         </article>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">
@@ -59,7 +82,7 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                                     {{ page.value }}
                                     </PaginationListItem>
                                     <PaginationEllipsis v-else :key="page.type" :index="index" class="w-9 h-9 flex items-center justify-center">
-                                    &#8230;
+                                    &#8230
                                     </PaginationEllipsis>
                                 </template>
                                 <PaginationNext class="w-9 h-9  flex items-center justify-center  ml-4 disabled:opacity-50  focus-within:outline focus-within:outline-1 focus-within:outline-offset-1 rounded">

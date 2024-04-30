@@ -17,6 +17,13 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function shortContent() {
+        if(strlen($this->content) > 2000) {
+            return mb_strimwidth($this->content, 0, 2000) . '...';
+        }
+        return $this->content;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

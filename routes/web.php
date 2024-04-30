@@ -26,7 +26,13 @@ Route::get('/', function (Request $request) {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'totalPosts' => Post::count(),
-        'posts' => Post::orderBy('id', 'desc')->offset($offset)->limit($limit)->get(),
+        'posts' => Post::orderBy('id', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get()->map(function(Post $post) {
+                $post->content = $post->shortContent();
+                return $post;
+            }),
     ]);
 })->name('posts');
 
