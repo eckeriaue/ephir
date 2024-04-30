@@ -83,7 +83,7 @@ const modalCreatePostIsOpen = ref(false);
                                                 👤
                                                 Профиль
                                             </kit-dropdown-menu-item>
-                                            <kit-dropdown-menu-item :as="Link" :href="logoutForm.post(route('logout'))">
+                                            <kit-dropdown-menu-item @click="logoutForm.post(route('logout'))">
                                                 🔓
                                                 Выйти
                                             </kit-dropdown-menu-item>
