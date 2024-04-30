@@ -1,19 +1,34 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { computed, unref, ref } from 'vue';
 
 const showingNavigationDropdown = ref(false);
 
 const createPostForm = useForm({
     title: '',
     content: '',
+    photos: [] as File[]
 })
 
-const logoutForm = useForm({});
+const logoutForm = useForm({})
 
+const imgs = computed(() => {
+    return unref(createPostForm.photos).map(file => URL.createObjectURL(file))
+})
 
 const modalCreatePostIsOpen = ref(false);
+
+function addPhoto(event: Event) {
+    const target = event.target;
+    if(
+        target &&
+        target instanceof HTMLInputElement &&
+        target.files && 0 in target.files
+    ) {
+        createPostForm.photos.push(target.files[0]);
+    }
+}
 
 </script>
 
@@ -51,19 +66,43 @@ const modalCreatePostIsOpen = ref(false);
                                             🪶
                                         </kit-button>
                                     </kit-dialog-trigger>
-                                    <kit-dialog-content>
+                                    <kit-dialog-content class="overflow-y-scroll max-h-[calc(100dvh_-_64px)]">
                                         <kit-dialog-title> Создать пост </kit-dialog-title>
                                         <kit-dialog-description>Здесь вы можете написать о чем вы думаете </kit-dialog-description>
-                                        <form @submit.prevent="createPostForm.post(route('posts.create')), modalCreatePostIsOpen = false">
+                                        <form
+                                            class="min-w-fit"
+                                            @submit.prevent="createPostForm.post(route('posts.create')), modalCreatePostIsOpen = false"
+                                        >
                                             <kit-label for="postName"> Название </kit-label>
                                             <kit-input v-model="createPostForm.title" id="postName" class="mt-2" />
-                                            <div class="mt-4">
+                                            <div class="mt-4 max-w-full">
                                                 <kit-label for="postContent"> Содержимое </kit-label>
                                                 <kit-textarea class="mt-2" id="postContent" v-model="createPostForm.content"></kit-textarea>
+                                                <kit-label for="picture" class="mt-2 inline-block"> Добавить фото </kit-label>
+                                                <kit-input id="picture" @change="addPhoto" type="file" />
+                                            
+                                                <div class="w-full" v-if="imgs.length > 0">
+                                                    <div class="w-[calc(100%_-_200px)] mx-auto h-64">
+                                                        <kit-carousel>
+                                                            <kit-carousel-previous />
+                                                            <kit-carousel-content>
+                                                            <kit-carousel-item v-for="src in imgs" :key="src">
+                                                                <div
+                                                                    :style="{ backgroundImage: `url('${src}')` }"
+                                                                    class="bg-cover bg-center h-64 w-full"
+                                                                    :alt="src"
+                                                                />
+                                                            </kit-carousel-item>
+                                                            </kit-carousel-content>
+                                                            <kit-carousel-next />
+                                                        </kit-carousel>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="gap-x-2 flex justify-end mt-4">
                                                 <kit-button type="button" @click="modalCreatePostIsOpen = false, createPostForm.title = '', createPostForm.content = ''" variant="secondary">Отменить</kit-button>
-                                                <kit-button type="submit" :disabled="createPostForm.processing">Сохранить</kit-button>
+                                                <kit-button type="submit" :disabled="createPostForm.title.length < 1 || createPostForm.content.length < 1 || createPostForm.processing">Сохранить</kit-button>
                                             </div>
                                         </form>
                                     </kit-dialog-content>

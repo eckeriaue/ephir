@@ -14,6 +14,8 @@ declare global {
     export type KitButton = typeof import('@/Components/ui/button/Button.vue').default
     export type KitDialog = typeof import('@/Components/ui/dialog/Dialog.vue').default
     export type KitPaginationEllipsis = typeof import('@/Components/ui/pagination/PaginationEllipsis.vue').default
+    export type KitCarousel = typeof import('@/Components/ui/carousel/Carousel.vue').default
+    export type KitCarouselContent = typeof import('@/Components/ui/carousel/CarouselContent.vue').default
 }
 
 createInertiaApp({
@@ -69,6 +71,13 @@ createInertiaApp({
             .component('kit-textarea', defineAsyncComponent(() => import('@/Components/ui/textarea/Textarea.vue')))
 
             .component('kit-checkbox', defineAsyncComponent(() => import('@/Components/ui/checkbox/Checkbox.vue')))
+            
+            .component('kit-carousel', defineAsyncComponent(() => import('@/Components/ui/carousel/Carousel.vue')))
+            .component('kit-carousel-content', defineAsyncComponent(() => import('@/Components/ui/carousel/CarouselContent.vue')))
+            .component('kit-carousel-item', defineAsyncComponent(() => import('@/Components/ui/carousel/CarouselItem.vue')))
+            .component('kit-carousel-next', defineAsyncComponent(() => import('@/Components/ui/carousel/CarouselNext.vue')))
+            .component('kit-carousel-previous', defineAsyncComponent(() => import('@/Components/ui/carousel/CarouselPrevious.vue')))
+
 
             .component('kit-pagination-ellipsis', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationEllipsis.vue')))
             .component('kit-pagination-first', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationFirst.vue')))
