@@ -13,6 +13,7 @@ declare global {
     export type KitDropdownMenuContent = typeof import('@/Components/ui/dropdown-menu/DropdownMenuContent.vue').default
     export type KitButton = typeof import('@/Components/ui/button/Button.vue').default
     export type KitDialog = typeof import('@/Components/ui/dialog/Dialog.vue').default
+    export type KitPaginationEllipsis = typeof import('@/Components/ui/pagination/PaginationEllipsis.vue').default
 }
 
 createInertiaApp({
@@ -66,6 +67,12 @@ createInertiaApp({
             .component('kit-dialog-trigger', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogTrigger.vue')))
 
             .component('kit-textarea', defineAsyncComponent(() => import('@/Components/ui/textarea/Textarea.vue')))
+
+            .component('kit-pagination-ellipsis', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationEllipsis.vue')))
+            .component('kit-pagination-first', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationFirst.vue')))
+            .component('kit-pagination-last', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationLast.vue')))
+            .component('kit-pagination-next', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationNext.vue')))
+            .component('kit-pagination-prev', defineAsyncComponent(() => import('@/Components/ui/pagination/PaginationPrev.vue')))
 
             .mount(el);
     },
