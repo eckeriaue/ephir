@@ -12,6 +12,7 @@ const props = defineProps<{
 
 
 const comments = ref()
+const commentIsLoad = ref(false)
 const commentsIsVisible = ref(false)
 
 const addCommentForm = useForm({
@@ -20,7 +21,18 @@ const addCommentForm = useForm({
 })
 
 async function getComments() {
-  comments.value = await fetch(route('comments.get-by-post-id', props.id)).then(r => r.json())
+  try {
+    commentIsLoad.value = true
+    comments.value = await fetch(route('comments.get-by-post-id', props.id)).then(r => r.json())
+  }
+  
+  catch(cause) {
+    throw new Error('При получении комментариев произошла ошибка', { cause })
+  }
+
+  finally {
+    commentIsLoad.value = false
+  }
 }
 
 </script>
@@ -43,9 +55,14 @@ async function getComments() {
           Автор: <i>{{ props.author }}</i>
       </address>
   
-      <kit-button variant="outline" @click="commentsIsVisible = !commentsIsVisible, getComments()" type="button">
-          💬
-          <span>{{ comments_count }}</span>
+      <kit-button
+        :disabled="commentIsLoad"
+        variant="outline"
+        @click="commentsIsVisible ? commentsIsVisible = false : (commentsIsVisible = true, getComments())"
+        type="button"
+      >
+        💬
+        <span>{{ comments_count }}</span>
       </kit-button>
     </div>
 
