@@ -59,13 +59,21 @@ createInertiaApp({
             .component('kit-dropdown-trigger', defineAsyncComponent(() => import('@/Components/ui/dropdown-menu/DropdownMenuTrigger.vue')))
             
             .component('kit-dialog', defineAsyncComponent(() => import('@/Components/ui/dialog/Dialog.vue')))
+            // @ts-ignore
             .component('kit-dialog-close', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogClose.vue')))
+            // @ts-ignore
             .component('kit-dialog-content', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogContent.vue')))
+            // @ts-ignore
             .component('kit-dialog-description', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogDescription.vue')))
+            // @ts-ignore
             .component('kit-dialog-footer', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogFooter.vue')))
+            // @ts-ignore
             .component('kit-dialog-header', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogHeader.vue')))
+            // @ts-ignore
             .component('kit-dialog-scroll-content', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogScrollContent.vue')))
+            // @ts-ignore
             .component('kit-dialog-title', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogTitle.vue')))
+            // @ts-ignore
             .component('kit-dialog-trigger', defineAsyncComponent(() => import('@/Components/ui/dialog/DialogTrigger.vue')))
 
             .component('kit-textarea', defineAsyncComponent(() => import('@/Components/ui/textarea/Textarea.vue')))

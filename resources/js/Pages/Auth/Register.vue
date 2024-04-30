@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     name: '',
@@ -21,7 +19,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <div>
         <Head title="Register" />
 
         <form @submit.prevent="submit">
@@ -99,5 +97,5 @@ const submit = () => {
                 </kit-button>
             </div>
         </form>
-    </GuestLayout>
+    </div>
 </template>

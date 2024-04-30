@@ -1,0 +1,1 @@
+import{c as o}from"./utils-C-5SdYIA.js";import{d as t,o as n,c as r,m as c,n as l,u as p}from"./app-ABtojf_H.js";const d=t({__name:"DropdownMenuShortcut",props:{class:{}},setup(s){const a=s;return(e,m)=>(n(),r("span",{class:l(p(o)("ml-auto text-xs tracking-widest opacity-60",a.class))},[c(e.$slots,"default")],2))}});export{d as default};
