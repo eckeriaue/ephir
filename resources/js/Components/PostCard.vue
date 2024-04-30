@@ -10,7 +10,12 @@ const props = defineProps<{
   author?: string
 }>()
 
+const { format } = new Intl.DateTimeFormat('ru-RU', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+})
 
+const contentParagraph = ref<HTMLParagraphElement>()
 const comments = ref()
 const commentIsLoad = ref(false)
 const commentsIsVisible = ref(false)
@@ -67,15 +72,22 @@ async function getComments() {
     </div>
 
     <div v-if="commentsIsVisible && comments">
-      <section>
+      <section class="mt-6 space-y-4 px-6">
+        <h2 class="text-xs font-medium pb-2 uppercase"> Комментарии </h2>
         <article v-for="comment in comments" :key="comments.id">
-          {{ comments }}
+          <address class="text-xs"> Автор: <i>{{ comment.user.name }} </i></address>
+          <p>{{ comment.content }}</p>
+          <span class="text-gray-500 text-[10px]">
+              От 
+              <time datetime="2024-04-30 22:44:10"> {{ format(new Date(comment.created_at)) }} </time>
+          </span>
         </article>
       </section>
     </div>
 
     <div v-if="$page.props.auth?.user" class="-mb-6 -mx-6 mt-6">
       <p
+        ref="contentParagraph"
         contenteditable="plaintext-only"
         @input="addCommentForm.comment = String(($event.target  as HTMLParagraphElement).textContent)"
         class="min-h-20 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
@@ -83,7 +95,12 @@ async function getComments() {
       <kit-button
         :disabled="addCommentForm.comment.trim().length < 1"
         type="button"
-        @click="addCommentForm.post(route('comments.create'))"
+        @click="
+          addCommentForm.post(route('comments.create')),
+          getComments(),
+          addCommentForm.reset(),
+          contentParagraph ? contentParagraph.innerHTML = '' : null
+        "
         variant="outline"
         class="w-full"
       >📨</kit-button>
