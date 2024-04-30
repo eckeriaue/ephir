@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useForm } from '@inertiajs/vue3';
-
+import { useForm } from '@inertiajs/vue3'
+import { ref } from 'vue'
 
 const props = defineProps<{
   id?: string | number
@@ -8,17 +8,20 @@ const props = defineProps<{
   comments_count?: string | number
   created_at?: string
   author?: string
-}>();
+}>()
 
-const postCommentForm = useForm({
-  id: props.id
-})
+
+const comments = ref()
+const commentsIsVisible = ref(false)
 
 const addCommentForm = useForm({
   comment: '',
   post_id: props.id,
 })
-console.info(addCommentForm)
+
+async function getComments() {
+  comments.value = await fetch(route('comments.get-by-post-id', props.id)).then(r => r.json())
+}
 
 </script>
 
@@ -40,12 +43,21 @@ console.info(addCommentForm)
           Автор: <i>{{ props.author }}</i>
       </address>
   
-      <kit-button variant="outline" type="button">
+      <kit-button variant="outline" @click="commentsIsVisible = !commentsIsVisible, getComments()" type="button">
           💬
           <span>{{ comments_count }}</span>
       </kit-button>
     </div>
-    <div class="-mb-6 -mx-6 mt-6">
+
+    <div v-if="commentsIsVisible && comments">
+      <section>
+        <article v-for="comment in comments" :key="comments.id">
+          {{ comments }}
+        </article>
+      </section>
+    </div>
+
+    <div v-if="$page.props.auth?.user" class="-mb-6 -mx-6 mt-6">
       <p
         contenteditable="plaintext-only"
         @input="addCommentForm.comment = String(($event.target  as HTMLParagraphElement).textContent)"

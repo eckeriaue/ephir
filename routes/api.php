@@ -7,6 +7,11 @@ use App\Models\Post;
 
 
 Route::prefix('api')->group(function() {
+
+  Route::get('/comments/by-post-id/{post_id}', function(int $postId) {
+    return Comment::where('post_id', $postId)->get();
+  })->name('comments.get-by-post-id');
+
   Route::middleware('auth:sanctum')->post('/posts/create', function (Request $request) {
       $input = $request->input();
       $post = new Post;
