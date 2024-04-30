@@ -23,6 +23,15 @@ interface Post {
     deleted_at?: string
     created_at: string
     updated_at: string
+    comments_count: number
+    user: {
+        created_at: string
+        email: string
+        email_verified_at?: string
+        id: number 
+        name: string
+        updated_at: string
+    }
 }
 
 const page = usePage()
@@ -33,6 +42,8 @@ const { format } = new Intl.DateTimeFormat('ru-RU', {
 
 const query = computed<URLSearchParams>(() => new URLSearchParams(page.url))
 const offset = computed(() => Number(unref(query).get('offset')) || 0)
+
+console.info(page.props.posts)
 
 </script>
 
@@ -47,7 +58,7 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                     <section v-if="$page.props.posts" class="container max-w-[768px]">
                         <article
                             class="text-gray-700 rounded-md p-6 transition-shadow hover:shadow bg-white mb-4 overflow-hidden shadow-sm sm:rounded-lg"
-                            v-for="{ id, title, content, created_at } in <Post[]>$page.props.posts"
+                            v-for="{ id, title, content, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"
                             :id="`post_id_${id}`"
                         >
@@ -55,7 +66,20 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                                 <h1 v-text="title" class="max-w-[70%] break-words font-medium text-xl" />
                                 <time :value="created_at" class="text-gray-500 text-xs">{{ format(new Date(created_at)) }}</time>
                             </div>
-                            <p class="break-words">{{ content }}</p>
+                            <p class="break-words whitespace-pre-wrap break-all">{{ content }}</p>
+
+                            <footer class="text-gray-800 mt-8 flex items-center justify-between">
+                                <address class="text-xs">
+                                    Автор: <i>{{ user.name }}</i>
+                                </address>
+
+                                <kit-button variant="secondary" type="button">
+                                    💬
+                                    <span>{{ comments_count }}</span>
+                                </kit-button>
+
+                            </footer>
+
                         </article>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">

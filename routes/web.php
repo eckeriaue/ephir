@@ -29,6 +29,8 @@ Route::get('/', function (Request $request) {
         'posts' => Post::orderBy('id', 'desc')
             ->offset($offset)
             ->limit($limit)
+            ->withCount('comments')
+            ->with('user')
             ->get()->map(function(Post $post) {
                 $post->content = $post->shortContent();
                 return $post;
