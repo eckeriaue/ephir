@@ -61,6 +61,7 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             v-for="{ id, title, content, user_id, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"
                             :id="id"
+                            modal
                             :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
                             :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"

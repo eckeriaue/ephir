@@ -12,6 +12,10 @@ Route::prefix('api')->group(function() {
     return Comment::where('post_id', $postId)->with('user')->get();
   })->name('comments.get-by-post-id');
 
+  Route::get('/posts/by-id/{id}', function(int $id) {
+    return Post::find($id);
+  })->name('posts.by-id');
+
   Route::middleware('auth:sanctum')->post('/posts/create', function (Request $request) {
       $input = $request->input();
       $post = new Post;

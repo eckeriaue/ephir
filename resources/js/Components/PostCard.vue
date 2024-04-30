@@ -1,21 +1,27 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import { HTMLAttributes, ref } from 'vue'
+import { cn } from '@/lib/utils'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   id?: string | number
   title?: string
+  class?: HTMLAttributes['class']
   comments_count?: string | number
   created_at?: string
   author?: string
-}>()
+  modal?: boolean
+}>(), {
+  modal: false
+})
 
 const { format } = new Intl.DateTimeFormat('ru-RU', {
-    dateStyle: 'long',
-    timeStyle: 'short',
+  dateStyle: 'long',
+  timeStyle: 'short',
 })
 
 const contentParagraph = ref<HTMLParagraphElement>()
+const details = ref({})
 const comments = ref()
 const commentIsLoad = ref(false)
 const commentsIsVisible = ref(false)
@@ -40,70 +46,96 @@ async function getComments() {
   }
 }
 
+async function getPostDetails() {
+  details.value = await fetch(route('posts.by-id', props.id)).then(r => r.json())
+}
+
 </script>
 
 <template>
   <article
-    class="text-gray-700 rounded-md p-6 transition-shadow hover:shadow bg-white mb-4 overflow-hidden shadow-sm sm:rounded-lg"
+    :class="cn('text-gray-700 relative rounded-md p-6  bg-white mb-4 overflow-hidden transition-shadow hover:shadow shadow-sm sm:rounded-lg', props.class)"
     :id="`post_id_${id}`"
   >
 
   <div class="pb-6 flex items-start justify-between">
-    <h1 v-text="title" class="max-w-[70%] break-words font-medium text-xl" />
+    <h1 v-text="$props.title" class="max-w-[70%] break-words font-medium text-xl" />
     <time :value="created_at" class="text-gray-500 text-xs">{{ props.created_at }}</time>
   </div>
-  <p class="break-words whitespace-pre-wrap break-all"><slot /></p>
 
-  <footer class="text-gray-800 mt-8">
-    <div class="flex items-center justify-between">
-      <address class="text-xs">
-          Автор: <i>{{ props.author }}</i>
-      </address>
-  
-      <kit-button
-        :disabled="commentIsLoad"
-        variant="outline"
-        @click="commentsIsVisible ? commentsIsVisible = false : (commentsIsVisible = true, getComments())"
-        type="button"
+
+  <kit-dialog v-if="$props.modal">
+    <kit-dialog-trigger as-child>
+      <p
+        @click="getPostDetails()"
+        class="break-words hover:text-gray-500 cursor-pointer whitespace-pre-wrap break-all"
       >
-        💬
-        <span>{{ comments_count }}</span>
-      </kit-button>
-    </div>
-
-    <template v-if="commentsIsVisible && comments">
-      <section class="mt-6 space-y-4 px-6">
-        <h2 class="text-xs font-medium pb-2 uppercase"> Комментарии </h2>
-        <article v-for="comment in comments" :key="comments.id">
-          <address class="text-xs"> Автор: <i>{{ comment.user.name }} </i></address>
-          <p>{{ comment.content }}</p>
-          <span class="text-gray-500 text-[10px]">
-              От 
-              <time datetime="2024-04-30 22:44:10"> {{ format(new Date(comment.created_at)) }} </time>
-          </span>
-        </article>
-      </section>
-      <div v-if="$page.props.auth?.user" class="translate-y-6 -mx-6 mt-6  sticky bottom-0">
-        <p
-          ref="contentParagraph"
-          contenteditable="plaintext-only"
-          @input="addCommentForm.comment = String(($event.target  as HTMLParagraphElement).textContent)"
-          class="min-h-20 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
-        />
-        <kit-button
-          :disabled="addCommentForm.comment.trim().length < 1"
-          type="button"
-          @click="
-            addCommentForm.post(route('comments.create')),
-            getComments(),
-            addCommentForm.reset(),
-            contentParagraph ? contentParagraph.innerHTML = '' : null
-          "
-          variant="outline"
-          class="w-full"
-        >📨</kit-button>
+        <slot />
+      </p>
+    </kit-dialog-trigger>
+    <kit-dialog-content>
+      <div class="max-h-[calc(100dvh_-_64px)] overflow-y-auto">
+        <post-card :="{ title, created_at, author, id, comments_count,  }" class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
+          {{ details.content }}
+        </post-card>
       </div>
-    </template>
+    </kit-dialog-content>
+  </kit-dialog>
+
+  <p v-else class="break-words whitespace-pre-wrap break-all">
+    <slot />
+  </p>
+
+    <footer class="text-gray-800 mt-8">
+      <div class="flex items-center justify-between">
+        <address class="text-xs">
+            Автор: <i>{{ props.author }}</i>
+        </address>
+    
+        <kit-button
+          :disabled="commentIsLoad"
+          variant="outline"
+          @click="commentsIsVisible ? commentsIsVisible = false : (commentsIsVisible = true, getComments())"
+          type="button"
+        >
+          💬
+          <span>{{ comments_count }}</span>
+        </kit-button>
+      </div>
+
+      <template v-if="commentsIsVisible && comments">
+        <section class="mt-6 space-y-4 px-6">
+          <h2 class="text-xs font-medium pb-2 uppercase"> Комментарии </h2>
+          <article v-for="comment in comments" :key="comments.id">
+            <address class="text-xs"> Автор: <i>{{ comment.user.name }} </i></address>
+            <p>{{ comment.content }}</p>
+            <span class="text-gray-500 text-[10px]">
+                От 
+                <time datetime="2024-04-30 22:44:10"> {{ format(new Date(comment.created_at)) }} </time>
+            </span>
+          </article>
+        </section>
+        <div v-if="$page.props.auth?.user" class="translate-y-6 -mx-6 mt-6  sticky bottom-0">
+          <p
+            ref="contentParagraph"
+            contenteditable="plaintext-only"
+            @input="addCommentForm.comment = String(($event.target  as HTMLParagraphElement).textContent)"
+            class="min-h-20 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+          />
+          <kit-button
+            :disabled="addCommentForm.comment.trim().length < 1"
+            type="button"
+            @click="
+              addCommentForm.post(route('comments.create')),
+              getComments(),
+              addCommentForm.reset(),
+              contentParagraph ? contentParagraph.innerHTML = '' : null
+            "
+            variant="outline"
+            class="w-full"
+          >📨</kit-button>
+        </div>
+      </template>
     </footer>
   </article>
 </template>
