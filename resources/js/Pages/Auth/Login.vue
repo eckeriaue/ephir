@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -25,14 +26,15 @@ const submit = () => {
 </script>
 
 <template>
-    <div class="h-dvh flex items-center justify-center">
+    <div class="h-dvh flex flex-col items-center justify-center">
         <Head title="Вход" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit" class="container">
+        <ApplicationLogo class="mb-6" />
+        <form @submit.prevent="submit" class="w-[360px]">
             <div>
                 <kit-label for="email" value="Email" />
 

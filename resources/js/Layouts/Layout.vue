@@ -133,7 +133,7 @@ function addPhoto(event: Event) {
                                                 🔑
                                                 Войти
                                             </kit-dropdown-menu-item>
-                                            <kit-dropdown-menu-item :as="Link" :href="logoutForm.post(route('register'))">
+                                            <kit-dropdown-menu-item  :as="Link" :href="route('register')">
                                                 🪪
                                                 Регистрация
                                             </kit-dropdown-menu-item>
