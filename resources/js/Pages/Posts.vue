@@ -16,11 +16,21 @@ import { computed, unref } from 'vue'
 import PostCard from '@/Components/PostCard.vue'
 
 
+interface Photo     {
+    id: number
+    src: string
+    post_id: number
+    deleted_at?: string
+    created_at: string
+    updated_at: string
+}
+
 interface Post {
     id: number
     title: string
     content: string
     user_id: number
+    photos: Photo[] 
     is_published: boolean
     deleted_at?: string
     created_at: string
@@ -56,9 +66,9 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="">
-                    <section v-if="$page.props.posts" class="container max-w-[768px]">
+                    <section v-if="(<Post[]>$page?.props?.posts)?.length > 0" class="container max-w-[768px]">
                         <post-card
-                            v-for="{ id, title, content, user_id, comments_count, created_at, user } in <Post[]>$page.props.posts"
+                            v-for="{ id, title, content, photos, user_id, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"
                             :id="id"
                             modal
@@ -67,6 +77,7 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"
                         > 
                         {{ content }}
+                        <img v-for="img in photos" :key="img.src" :src="img.src" />
                         </post-card>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">

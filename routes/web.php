@@ -21,6 +21,7 @@ Route::get('/', function (Request $request) {
             ->limit($limit)
             ->withCount('comments')
             ->with('user')
+            ->with('photos')
             ->get()->map(function(Post $post) {
                 $post->content = $post->shortContent();
                 return $post;

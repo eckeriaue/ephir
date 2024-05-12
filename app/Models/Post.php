@@ -17,6 +17,10 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function photos() {
+        return $this->hasMany(Photo::class);
+    }
+
     public function shortContent() {
         if(strlen($this->content) > 2000) {
             return mb_strimwidth($this->content, 0, 2000) . '...';
