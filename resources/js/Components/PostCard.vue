@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
-import { HTMLAttributes, ref } from 'vue'
+import { HTMLAttributes, computed, ref, unref } from 'vue'
 import { cn } from '@/lib/utils'
-
-
 
 interface Photo {
     id: number
@@ -51,6 +49,22 @@ const addCommentForm = useForm({
   comment: '',
   post_id: props.id,
 })
+
+const currentSlideIndex = ref(0)
+const carouselTranslateX = computed(() => unref(currentSlideIndex) * 100)
+
+function prevSlide() {
+  if(unref(currentSlideIndex) > 0) {
+    currentSlideIndex.value -= 1
+  }
+}
+
+function nextSlide() {
+  if(unref(currentSlideIndex) < (props.photos.length - 1)) {
+    currentSlideIndex.value += 1
+  }
+}
+
 
 async function getComments() {
   try {
@@ -108,20 +122,19 @@ async function getPostDetails() {
     <slot />
   </p>
   
-  <div class="w-full flex items-center justify-center">
-    <kit-carousel :opts="{ loop: true }" class="relative">
-      <kit-carousel-content>
-        <kit-carousel-item v-for="{ id, src } in props.photos" :key="id">
-          <kit-card>
-            <kit-card-content>
-              <img :src />
-            </kit-card-content>
-          </kit-card>
-        </kit-carousel-item>
-      </kit-carousel-content>
-      <kit-carousel-previous class="left-0" />
-      <kit-carousel-next class="right-0" />
-    </kit-carousel>
+  <div class="w-full mt-6">
+    <div class="max-w-full text-3xl relative">
+      <button type="button" class="z-[1] absolute shadow-xl top-1/2 left-0 -translate-y-1/2" @click="prevSlide">⬅️</button>
+      <div
+        :style="{ translate: `${carouselTranslateX ? `-${carouselTranslateX}%` : 0} 0` }"
+        class="min-w-fit transition-all duration-300 w-full flex">
+        <div class="min-w-full max-w-full flex items-center bg-slate-200" v-for="{ id, src } in props.photos" :key="id">
+          <!-- <div alt="фото поста" :style="{backgroundImage: `url('${src}')`}" class="bg-cover" /> -->
+          <img :src alt="Фото поста" class="w-full" />
+        </div>
+      </div>
+      <button type="button" class=" z-[1] absolute shadow-xl top-1/2 right-0 -translate-y-1/2" @click="nextSlide">➡️</button>
+    </div>
   </div>
 
 

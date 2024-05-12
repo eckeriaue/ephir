@@ -36,7 +36,7 @@ function addPhoto(event: Event) {
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100 sticky top-0">
+            <nav class="bg-white border-b border-gray-100 sticky z-10 top-0">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -72,7 +72,13 @@ function addPhoto(event: Event) {
                                         <kit-dialog-description>Здесь вы можете написать о чем вы думаете </kit-dialog-description>
                                         <form
                                             class="min-w-fit"
-                                            @submit.prevent="createPostForm.post(route('posts.create')), modalCreatePostIsOpen = false"
+                                            @submit.prevent="createPostForm.post(route('posts.create'), {
+                                                onSuccess() {
+                                                    createPostForm.reset('content');
+                                                    createPostForm.reset('photos');
+                                                    createPostForm.reset('title');
+                                                }
+                                            }), modalCreatePostIsOpen = false"
                                         >
                                             <kit-label for="postName"> Название </kit-label>
                                             <kit-input v-model="createPostForm.title" id="postName" class="mt-2" />
