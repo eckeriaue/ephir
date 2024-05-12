@@ -16,7 +16,7 @@ import { computed, unref } from 'vue'
 import PostCard from '@/Components/PostCard.vue'
 
 
-interface Photo     {
+interface Photo {
     id: number
     src: string
     post_id: number
@@ -71,13 +71,13 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             v-for="{ id, title, content, photos, user_id, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"
                             :id="id"
+                            :photos="photos"
                             modal
                             :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
                             :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"
                         > 
                         {{ content }}
-                        <img v-for="img in photos" :key="img.src" :src="img.src" />
                         </post-card>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">

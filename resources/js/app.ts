@@ -29,6 +29,9 @@ createInertiaApp({
             .component('kit-button', defineAsyncComponent(() => import('@/Components/ui/button/Button.vue')))
             .component('kit-label', defineAsyncComponent(() => import('@/Components/ui/label/Label.vue')))
 
+            .component('kit-card', defineAsyncComponent(() => import('@/Components/ui/card/Card.vue')))
+            .component('kit-card-content', defineAsyncComponent(() => import('@/Components/ui/card/CardContent.vue')))
+
             .component('kit-command', defineAsyncComponent(() => import('@/Components/ui/command/Command.vue')))
             .component('kit-command-list', defineAsyncComponent(() => import('@/Components/ui/command/CommandList.vue')))
             .component('kit-command-dialog', defineAsyncComponent(() => import('@/Components/ui/command/CommandDialog.vue')))

@@ -3,9 +3,21 @@ import { useForm } from '@inertiajs/vue3'
 import { HTMLAttributes, ref } from 'vue'
 import { cn } from '@/lib/utils'
 
+
+
+interface Photo {
+    id: number
+    src: string
+    post_id: number
+    deleted_at?: string
+    created_at: string
+    updated_at: string
+}
+
 const props = withDefaults(defineProps<{
   id?: string | number
   title?: string
+  photos: Photo[]
   class?: HTMLAttributes['class']
   comments_count?: string | number
   created_at?: string
@@ -79,21 +91,39 @@ async function getPostDetails() {
         @click="getPostDetails()"
         class="break-words hover:text-gray-500 cursor-pointer whitespace-pre-wrap break-all"
       >
-        <slot />
-      </p>
+      <slot />
+    </p>
     </kit-dialog-trigger>
     <kit-dialog-content>
       <div class="max-h-[calc(100dvh_-_64px)] overflow-y-auto">
-        <post-card :="{ title, created_at, author, id, comments_count,  }" class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
+        <post-card :="{ title, created_at, author, photos, id, comments_count,  }" class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
           {{ details.content }}
         </post-card>
       </div>
     </kit-dialog-content>
   </kit-dialog>
+  
 
   <p v-else class="break-words whitespace-pre-wrap break-all">
     <slot />
   </p>
+  
+  <div class="w-full flex items-center justify-center">
+    <kit-carousel :opts="{ loop: true }" class="relative">
+      <kit-carousel-content>
+        <kit-carousel-item v-for="{ id, src } in props.photos" :key="id">
+          <kit-card>
+            <kit-card-content>
+              <img :src />
+            </kit-card-content>
+          </kit-card>
+        </kit-carousel-item>
+      </kit-carousel-content>
+      <kit-carousel-previous class="left-0" />
+      <kit-carousel-next class="right-0" />
+    </kit-carousel>
+  </div>
+
 
     <footer class="text-gray-800 mt-8">
       <div class="flex items-center justify-between">
