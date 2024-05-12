@@ -1,1 +1,0 @@
-import{a as r,D as t}from"./index-Cj27UBSk.js";import{d as n,o as p,l,w as d,m as c,p as m,u as o}from"./app-CGtHavKy.js";const w=n({__name:"DropdownMenuTrigger",props:{disabled:{type:Boolean},asChild:{type:Boolean},as:{}},setup(e){const s=r(e);return(a,f)=>(p(),l(o(t),m({class:"outline-none"},o(s)),{default:d(()=>[c(a.$slots,"default")]),_:3},16))}});export{w as default};
