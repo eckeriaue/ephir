@@ -122,7 +122,7 @@ async function getPostDetails() {
     <slot />
   </p>
   
-  <div class="w-full mt-6">
+  <div class="w-full mt-6" v-if="props.photos.length > 0">
     <div class="max-w-full text-3xl relative">
       <button type="button" class="z-[1] absolute shadow-xl top-1/2 left-0 -translate-y-1/2" @click="prevSlide">⬅️</button>
       <div
