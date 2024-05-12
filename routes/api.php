@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Comment;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 
 Route::prefix('api')->group(function() {
@@ -18,19 +20,25 @@ Route::prefix('api')->group(function() {
 
   Route::middleware('auth:sanctum')->post('/posts/create', function (Request $request) {
       $input = $request->input();
-      $photos = $request->files->get('photos');
-      if(isset($photos)) {
-        foreach ($photos as $photo) {
-          $filename = 'post_image.'.time().'.png';
-          Storage::disk('local')->put($filename, $photo);
-          asset("storage/$filename");
-        }
-      };
-      $post = new Post;
-      $post->title = $input['title'];
-      $post->content = $input['content'];
-      $post->user_id = $request->user()->id;
+
+      $post = Post::create([
+        'title' => $input['title'],
+        'content' => $input['content'],
+        'user_id' => $request->user()->id,
+      ]);
       $post->save();
+
+      if($photos = $request->file('photos')) {
+        foreach ($photos as $photo) {
+          $timestamp = Carbon::now()->timestamp;
+          $userId = auth()->id();
+          $path = "user-$userId/post-{$post->id}/$timestamp.{$photo->extension()}";
+          Storage::disk('local')->put(
+            $path,
+            $photo->getContent()
+          );
+        };
+      }
       return to_route('posts');
   })->name('posts.create');
 

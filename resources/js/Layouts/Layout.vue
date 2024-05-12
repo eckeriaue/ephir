@@ -82,21 +82,14 @@ function addPhoto(event: Event) {
                                                 <kit-label for="picture" class="mt-2 inline-block"> Добавить фото </kit-label>
                                                 <kit-input id="picture" @change="addPhoto" type="file" />
                                             
-                                                <div class="w-full" v-if="imgs.length > 0">
-                                                    <div class="w-[calc(100%_-_200px)] mx-auto h-64">
-                                                        <kit-carousel>
-                                                            <kit-carousel-previous />
-                                                            <kit-carousel-content>
-                                                            <kit-carousel-item v-for="src in imgs" :key="src">
-                                                                <div
-                                                                    :style="{ backgroundImage: `url('${src}')` }"
-                                                                    class="bg-cover bg-center h-64 w-full"
-                                                                    :alt="src"
-                                                                />
-                                                            </kit-carousel-item>
-                                                            </kit-carousel-content>
-                                                            <kit-carousel-next />
-                                                        </kit-carousel>
+                                                <div class="w-full mt-6" v-if="imgs.length > 0">
+                                                    <div class="grid grid-cols-4 gap-4 min-h-40">
+                                                       <div
+                                                            v-for="(img, i) in imgs"
+                                                            :key="img + i"
+                                                            :style="{backgroundImage: `url('${img}')`}"
+                                                            class="bg-cover w-full rounded aspect-square"
+                                                        />
                                                     </div>
                                                 </div>
 
