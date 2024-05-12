@@ -1,1 +1,0 @@
-import{c as a}from"./utils-C-5SdYIA.js";import{d as o,o as n,c as r,m as c,n as m,u as l}from"./app-ha-CjZQ_.js";const f=o({__name:"CommandShortcut",props:{class:{}},setup(s){const e=s;return(t,p)=>(n(),r("span",{class:m(l(a)("ml-auto text-xs tracking-widest text-muted-foreground",e.class))},[c(t.$slots,"default")],2))}});export{f as default};
