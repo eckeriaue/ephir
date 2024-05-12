@@ -14,6 +14,7 @@ import {
 } from 'radix-vue'
 import { computed, unref } from 'vue'
 import PostCard from '@/Components/PostCard.vue'
+import { parse } from 'marked'
 
 
 interface Photo {
@@ -72,12 +73,12 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             :key="id"
                             :id="id"
                             :photos="photos"
+                            :content="content"
                             modal
                             :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
                             :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"
                         > 
-                        {{ content }}
                         </post-card>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">

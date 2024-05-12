@@ -1,35 +1,11 @@
 <script setup lang="ts">
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link, useForm } from '@inertiajs/vue3';
-import { computed, unref, ref, watchEffect } from 'vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue'
+import { Link, useForm } from '@inertiajs/vue3'
+import { ref } from 'vue'
+import CreatePostModal from '@/Components/CreatePostModal.vue'
 
-const showingNavigationDropdown = ref(false);
-
-const createPostForm = useForm({
-    title: '',
-    content: '',
-    photos: [] as File[]
-})
-
-const imgs = ref<string[]>([])
-
+const showingNavigationDropdown = ref(false)
 const logoutForm = useForm({})
-
-
-
-const modalCreatePostIsOpen = ref(false);
-
-function addPhoto(event: Event) {
-    const target = event.target;
-    if(
-        target &&
-        target instanceof HTMLInputElement &&
-        target.files && 0 in target.files
-    ) {
-        createPostForm.photos.push(target.files[0])
-        imgs.value.push(URL.createObjectURL(target.files[0]))
-    }
-}
 
 </script>
 
@@ -61,52 +37,7 @@ function addPhoto(event: Event) {
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
-                                <kit-dialog v-if="$page.props.auth?.user" v-model:open="modalCreatePostIsOpen">
-                                    <kit-dialog-trigger as-child>
-                                        <kit-button>
-                                            🪶
-                                        </kit-button>
-                                    </kit-dialog-trigger>
-                                    <kit-dialog-content class="overflow-y-scroll max-h-[calc(100dvh_-_64px)]">
-                                        <kit-dialog-title> Создать пост </kit-dialog-title>
-                                        <kit-dialog-description>Здесь вы можете написать о чем вы думаете </kit-dialog-description>
-                                        <form
-                                            class="min-w-fit"
-                                            @submit.prevent="createPostForm.post(route('posts.create'), {
-                                                onSuccess() {
-                                                    createPostForm.reset('content');
-                                                    createPostForm.reset('photos');
-                                                    createPostForm.reset('title');
-                                                }
-                                            }), modalCreatePostIsOpen = false"
-                                        >
-                                            <kit-label for="postName"> Название </kit-label>
-                                            <kit-input v-model="createPostForm.title" id="postName" class="mt-2" />
-                                            <div class="mt-4 max-w-full">
-                                                <kit-label for="postContent"> Содержимое </kit-label>
-                                                <kit-textarea class="mt-2" id="postContent" v-model="createPostForm.content"></kit-textarea>
-                                                <kit-label for="picture" class="mt-2 inline-block"> Добавить фото </kit-label>
-                                                <kit-input id="picture" @change="addPhoto" type="file" />
-                                            
-                                                <div class="w-full mt-6" v-if="imgs.length > 0">
-                                                    <div class="grid grid-cols-4 gap-4 min-h-40">
-                                                       <div
-                                                            v-for="(img, i) in imgs"
-                                                            :key="img + i"
-                                                            :style="{backgroundImage: `url('${img}')`}"
-                                                            class="bg-cover w-full rounded aspect-square"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="gap-x-2 flex justify-end mt-4">
-                                                <kit-button type="button" @click="modalCreatePostIsOpen = false, createPostForm.title = '', createPostForm.content = ''" variant="secondary">Отменить</kit-button>
-                                                <kit-button type="submit" :disabled="createPostForm.title.length < 1 || createPostForm.content.length < 1 || createPostForm.processing">Сохранить</kit-button>
-                                            </div>
-                                        </form>
-                                    </kit-dialog-content>
-                                </kit-dialog>
+                                <create-post-modal />
                                 <kit-dropdown-menu>
                                     <kit-dropdown-trigger>
                                             <kit-button v-if="$page.props.auth.user" variant="ghost" type="button" class="font-medium text-base text-gray-800">

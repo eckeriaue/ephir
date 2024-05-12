@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<{
   comments_count?: string | number
   created_at?: string
   author?: string
+  content?: string
   modal?: boolean
 }>(), {
   modal: false
@@ -85,12 +86,15 @@ async function getPostDetails() {
   details.value = await fetch(route('posts.by-id', props.id)).then(r => r.json())
 }
 
+const modalIsOpen = ref(false)
+
 </script>
 
 <template>
   <article
     :class="cn('text-gray-700 relative rounded-md p-6  bg-white mb-4 overflow-hidden transition-shadow hover:shadow shadow-sm sm:rounded-lg', props.class)"
     :id="`post_id_${id}`"
+    @click.self="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
   >
 
   <div class="pb-6 flex items-start justify-between">
@@ -99,41 +103,43 @@ async function getPostDetails() {
   </div>
 
 
-  <kit-dialog v-if="$props.modal">
+  <kit-dialog v-if="$props.modal" v-model:open="modalIsOpen">
     <kit-dialog-trigger as-child>
-      <p
-        @click="getPostDetails()"
-        class="break-words hover:text-gray-500 cursor-pointer whitespace-pre-wrap break-all"
-      >
-      <slot />
-    </p>
+      
     </kit-dialog-trigger>
     <kit-dialog-content>
       <div class="max-h-[calc(100dvh_-_64px)] overflow-y-auto">
-        <post-card :="{ title, created_at, author, photos, id, comments_count,  }" class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
-          {{ details.content }}
+        <post-card :="{ title, created_at, author, photos, id, comments_count,  }" :content="details.content"  class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
         </post-card>
       </div>
     </kit-dialog-content>
   </kit-dialog>
-  
 
-  <p v-else class="break-words whitespace-pre-wrap break-all">
-    <slot />
-  </p>
+  <div class="break-words whitespace-pre-wrap break-all">
+    <p v-html="props.content" />
+  </div>
   
   <div class="w-full mt-6" v-if="props.photos.length > 0">
-    <div class="max-w-full text-3xl relative">
-      <button type="button" class="z-[1] absolute shadow-xl top-1/2 left-0 -translate-y-1/2" @click="prevSlide">⬅️</button>
+    <div
+      @click="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
+      :class="{
+        'cursor-pointer': props.modal
+      }"
+      class="max-w-full text-6xl relative"
+    >
+      <button type="button" class="z-[1] opacity-80 hover:opacity-100 text-white absolute shadow-xl top-1/2 left-0 -translate-y-1/2" @click.stop="prevSlide">‹</button>
       <div
         :style="{ translate: `${carouselTranslateX ? `-${carouselTranslateX}%` : 0} 0` }"
         class="min-w-fit transition-all duration-300 w-full flex">
-        <div class="min-w-full max-w-full flex items-center bg-slate-200" v-for="{ id, src } in props.photos" :key="id">
-          <!-- <div alt="фото поста" :style="{backgroundImage: `url('${src}')`}" class="bg-cover" /> -->
+        <div
+          class="min-w-full max-w-full flex items-center"
+          v-for="{ id, src } in props.photos"
+          :key="id"
+        >
           <img :src alt="Фото поста" class="w-full" />
         </div>
       </div>
-      <button type="button" class=" z-[1] absolute shadow-xl top-1/2 right-0 -translate-y-1/2" @click="nextSlide">➡️</button>
+      <button type="button" class="z-[1] opacity-80 hover:opacity-100 text-white absolute shadow-xl top-1/2 right-0 -translate-y-1/2" @click.stop="nextSlide">›</button>
     </div>
   </div>
 
