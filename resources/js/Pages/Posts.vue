@@ -64,10 +64,10 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
 
     <Layout>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-4 md:py-12">
+            <div class="max-w-7xl mx-auto px-0 md:px-6 lg:px-8">
                 <div class="">
-                    <section v-if="(<Post[]>$page?.props?.posts)?.length > 0" class="container max-w-[768px]">
+                    <section v-if="(<Post[]>$page?.props?.posts)?.length > 0" class="md:container max-w-full md:max-w-[768px]">
                         <post-card
                             v-for="{ id, title, content, photos, user_id, comments_count, created_at, user } in <Post[]>$page.props.posts"
                             :key="id"

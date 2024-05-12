@@ -92,7 +92,14 @@ const modalIsOpen = ref(false)
 
 <template>
   <article
-    :class="cn('text-gray-700 relative rounded-md p-6  bg-white mb-4 overflow-hidden transition-shadow hover:shadow shadow-sm sm:rounded-lg', props.class)"
+    :class="cn(`
+      text-gray-700 relative rounded-md px-4 md:px-6 py-6
+      bg-white mb-4 overflow-hidden
+      transition-shadow hover:shadow shadow-sm
+      sm:rounded-lg
+      `,
+      props.class
+    )"
     :id="`post_id_${id}`"
     @click.self="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
   >
@@ -119,7 +126,7 @@ const modalIsOpen = ref(false)
     <p v-html="props.content" />
   </div>
   
-  <div class="w-full mt-6" v-if="props.photos.length > 0">
+  <div class="w-full mt-6 -mx-4 md:mx-0" v-if="props.photos.length > 0">
     <div
       @click="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
       :class="{

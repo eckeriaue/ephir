@@ -18,7 +18,10 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "md": { min: "540px" },
+        "lg": { min: "768px" },
+        "xl": { min: "1140px" },
+        "2xl": { min: "1400px" },
       },
     },
     extend: {

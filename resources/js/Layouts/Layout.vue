@@ -119,27 +119,28 @@ const logoutForm = useForm({})
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
-                        <kit-dropdown-menu>
-                            <kit-dropdown-trigger as-child>
-                                <div class="px-4">
-                                    <div class="font-medium text-base text-gray-800">
-                                        {{ $page.props.auth.user?.name }}
-                                    </div>
-                                    <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user?.email }}</div>
-                                </div>
-                            </kit-dropdown-trigger>
-                            <kit-dropdown-content class="w-56">
-                                <kit-command class="mt-3 space-y-1">
-                                    <kit-dropdown-menu-item> Профиль </kit-dropdown-menu-item>
-                                    <kit-dropdown-menu-item> Выйти </kit-dropdown-menu-item>
-                                        <!-- <ResponsiveNavLink :href="route('profile.edit')"> Профиль </ResponsiveNavLink>
-                                        <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                            Log Out
-                                        </ResponsiveNavLink> -->
-                                </kit-command>
-                            </kit-dropdown-content>
-                        </kit-dropdown-menu>
-
+                        <kit-command class="mt-3 space-y-1">
+                            <template v-if="$page.props.auth.user">
+                                <kit-button :as="Link" :href="route('profile.edit')">
+                                    👤
+                                    Профиль
+                                </kit-button>
+                                <kit-button @click="logoutForm.post(route('logout'))">
+                                    🔓
+                                    Выйти
+                                </kit-button>
+                            </template>
+                            <template v-else>
+                                <kit-button :as="Link" :href="route('login')">
+                                    🔑
+                                    Войти
+                                </kit-button>
+                                <kit-button  :as="Link" :href="route('register')">
+                                    🪪
+                                    Регистрация
+                                </kit-button>
+                            </template>
+                        </kit-command>
                     </div>
                 </div>
             </nav>
