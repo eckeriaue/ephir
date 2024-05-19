@@ -109,21 +109,8 @@ const modalIsOpen = ref(false)
     <time :value="created_at" class="text-gray-500 text-xs">{{ props.created_at }}</time>
   </div>
 
-
-  <kit-dialog v-if="$props.modal" v-model:open="modalIsOpen">
-    <kit-dialog-trigger as-child>
-      
-    </kit-dialog-trigger>
-    <kit-dialog-content>
-      <div class="max-h-[calc(100dvh_-_64px)] overflow-y-auto">
-        <post-card :="{ title, created_at, author, photos, id, comments_count,  }" :content="details.content"  class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
-        </post-card>
-      </div>
-    </kit-dialog-content>
-  </kit-dialog>
-
   <div class="break-words whitespace-pre-wrap break-all">
-    <p v-html="props.content" />
+    <slot />
   </div>
   
   <div class="w-full mt-6 -mx-4 md:mx-0" v-if="props.photos.length > 0">

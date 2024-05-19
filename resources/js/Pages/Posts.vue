@@ -28,7 +28,7 @@ interface Photo {
 interface Post {
     id: number
     title: string
-    content: string
+    content: any
     user_id: number
     photos: Photo[] 
     is_published: boolean
@@ -52,6 +52,11 @@ const { format } = new Intl.DateTimeFormat('ru-RU', {
     timeStyle: 'short',
 })
 
+const typeTags = {
+    paragraph: 'p',
+    header: 'h3'
+}
+
 const query = computed<URLSearchParams>(() => new URLSearchParams(page.url))
 const offset = computed(() => Number(unref(query).get('offset')) || 0)
 
@@ -72,12 +77,20 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             :key="id"
                             :id="id"
                             :photos="photos"
-                            :content="content"
                             modal
                             :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
                             :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"
-                        > 
+                        >
+                        <div class="[&_h3]:font-semibold [&_h3]:text-3xl">
+                            <component
+                                v-for="{ id, data, type } in content.blocks"
+                                :key="id"
+                                :is="typeTags[type] || 'div'"
+                            >
+                                {{ data.text }}
+                            </component>
+                        </div>
                         </post-card>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">
