@@ -93,7 +93,7 @@ const modalIsOpen = ref(false)
 <template>
   <article
     :class="cn(`
-      text-gray-700 relative rounded-md px-4 md:px-6 py-6
+      text-gray-700 relative rounded-md px-0 lg:px-4 md:px-6 py-6
       bg-white mb-4 overflow-hidden
       transition-shadow hover:shadow shadow-sm
       sm:rounded-lg
@@ -104,7 +104,7 @@ const modalIsOpen = ref(false)
     @click.self="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
   >
 
-  <div class="pb-6 flex items-start justify-between">
+  <div class="pb-6 flex items-start justify-between px-4 lg:px-0">
     <h1 v-text="$props.title" class="max-w-[70%] break-words font-medium text-xl" />
     <time :value="created_at" class="text-gray-500 text-xs">{{ props.created_at }}</time>
   </div>
@@ -122,11 +122,11 @@ const modalIsOpen = ref(false)
     </kit-dialog-content>
   </kit-dialog>
 
-  <div class="break-words whitespace-pre-wrap break-all">
+  <div class="break-words whitespace-pre-wrap break-all px-4 lg:px-0">
     <p v-html="props.content" />
   </div>
   
-  <div class="w-full mt-6 md:-mx-4 mx-0" v-if="props.photos.length > 0">
+  <div class="w-full mt-6" v-if="props.photos.length > 0">
     <div
       @click="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
       :class="{
@@ -151,7 +151,7 @@ const modalIsOpen = ref(false)
   </div>
 
 
-    <footer class="text-gray-800 mt-8">
+    <footer class="text-gray-800 mt-8 px-4 lg:px-0">
       <div class="flex items-center justify-between">
         <address class="text-xs">
             Автор: <i>{{ props.author }}</i>

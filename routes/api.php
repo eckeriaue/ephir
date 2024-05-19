@@ -32,7 +32,7 @@ Route::prefix('api')->group(function() {
         foreach ($photos as $photo) {
           $timestamp = Carbon::now()->timestamp;
           $userId = auth()->id();
-          $path = "public/user-$userId/post-{$post->id}/$timestamp.{$photo->extension()}";
+          $path = "public/user-$userId/post-{$post->id}/{$photo->hashName()}";
           Photo::create([
             'src' => Storage::url($path),
             'post_id' => $post->id,
