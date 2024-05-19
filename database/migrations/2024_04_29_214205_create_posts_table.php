@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->json('content');
             $table->foreignId('user_id')->constrained();
             $table->boolean('is_published')->default(1);
             $table->softDeletes();

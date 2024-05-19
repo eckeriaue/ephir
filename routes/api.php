@@ -21,11 +21,13 @@ Route::prefix('api')->group(function() {
   Route::middleware('auth:sanctum')->post('/posts/create', function (Request $request) {
       $input = $request->input();
 
+      // dd($input['content']);
       $post = Post::create([
         'title' => $input['title'],
         'content' => $input['content'],
         'user_id' => $request->user()->id,
       ]);
+
       $post->save();
 
       if($photos = $request->file('photos')) {

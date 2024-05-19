@@ -23,6 +23,8 @@
         "@editorjs/editorjs": "^2.29.1",
         "@editorjs/header": "^2.8.1",
         "@editorjs/list": "^1.9.0",
+        "@editorjs/paragraph": "^2.11.4",
+        "@editorjs/raw": "^2.5.0",
         "@iconify/vue": "^4.1.2",
         "@radix-ui/colors": "^3.0.0",
         "@vueuse/core": "^10.9.0",

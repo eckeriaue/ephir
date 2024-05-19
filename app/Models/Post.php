@@ -12,6 +12,10 @@ class Post extends Model
 
     protected $fillable = ['title', 'content', 'user_id'];
 
+    protected $casts = [
+        'content' => 'json',
+    ];
+
     public function likes()
     {
         return $this->hasMany(Like::class);
@@ -22,9 +26,6 @@ class Post extends Model
     }
 
     public function shortContent() {
-        if(strlen($this->content) > 2000) {
-            return mb_strimwidth($this->content, 0, 2000) . '...';
-        }
         return $this->content;
     }
 
