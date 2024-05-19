@@ -82,12 +82,6 @@ async function getComments() {
   }
 }
 
-async function getPostDetails() {
-  details.value = await fetch(route('posts.by-id', props.id)).then(r => r.json())
-}
-
-const modalIsOpen = ref(false)
-
 </script>
 
 <template>
@@ -101,7 +95,6 @@ const modalIsOpen = ref(false)
       props.class
     )"
     :id="`post_id_${id}`"
-    @click.self="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
   >
 
   <div class="pb-6 flex items-start justify-between px-4 lg:px-0">
@@ -110,25 +103,12 @@ const modalIsOpen = ref(false)
   </div>
 
 
-  <kit-dialog v-if="$props.modal" v-model:open="modalIsOpen">
-    <kit-dialog-trigger as-child>
-      
-    </kit-dialog-trigger>
-    <kit-dialog-content>
-      <div class="max-h-[calc(100dvh_-_64px)] overflow-y-auto">
-        <post-card :="{ title, created_at, author, photos, id, comments_count,  }" :content="details.content"  class="shadow-none hover:shadow-none p-0 pr-6 mb-0">
-        </post-card>
-      </div>
-    </kit-dialog-content>
-  </kit-dialog>
-
   <div class="break-words whitespace-pre-wrap break-all px-4 lg:px-0">
     <p v-html="props.content" />
   </div>
   
   <div class="w-full mt-6" v-if="props.photos.length > 0">
     <div
-      @click="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
       :class="{
         'cursor-pointer': props.modal
       }"
