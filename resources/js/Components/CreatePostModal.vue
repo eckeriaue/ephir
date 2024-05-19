@@ -35,7 +35,7 @@ function addPhoto(event: Event) {
           </kit-button>
         </slot>
     </kit-dialog-trigger>
-    <kit-dialog-content class="overflow-y-scroll max-h-[calc(100dvh_-_64px)]">
+    <kit-dialog-content class="overflow-y-scroll max-w-4xl max-h-[calc(100dvh_-_64px)]">
         <kit-dialog-title> Создать пост </kit-dialog-title>
         <kit-dialog-description>Здесь вы можете написать о чем вы думаете </kit-dialog-description>
         <form
@@ -52,7 +52,7 @@ function addPhoto(event: Event) {
             <kit-input v-model="createPostForm.title" id="postName" class="mt-2" />
             <div class="mt-4 max-w-full">
                 <kit-label for="postContent"> Содержимое </kit-label>
-                <markdown-editor v-model="createPostForm.content" />
+                <markdown-editor class="mb-1" v-model="createPostForm.content" />
 
                 <kit-label for="picture" class="mt-2 inline-block"> Добавить фото </kit-label>
                 <kit-input id="picture" @change="addPhoto" type="file" />
