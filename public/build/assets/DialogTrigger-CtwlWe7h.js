@@ -1,0 +1,1 @@
+import{O as s}from"./index--h1d-fE9.js";import{d as r,o as t,q as n,w as p,h as i,K as l,L as c,u as m}from"./app-CP24v6kg.js";const _=r({__name:"DialogTrigger",props:{asChild:{type:Boolean},as:{}},setup(a){const e=a;return(o,u)=>(t(),n(m(s),l(c(e)),{default:p(()=>[i(o.$slots,"default")]),_:3},16))}});export{_ as default};

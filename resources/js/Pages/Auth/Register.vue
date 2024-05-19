@@ -35,6 +35,7 @@ const submit = () => {
                     autofocus
                     autocomplete="name"
                 />
+                {{ form.errors.name }}
 
             </div>
 
@@ -50,6 +51,7 @@ const submit = () => {
                     autocomplete="username"
                 />
 
+                {{ form.errors.email }}
             </div>
 
             <div class="mt-4">
@@ -64,6 +66,8 @@ const submit = () => {
                     autocomplete="new-password"
                 />
 
+                {{ form.errors.password }}
+
             </div>
 
             <div class="mt-4">
@@ -77,6 +81,9 @@ const submit = () => {
                     required
                     autocomplete="new-password"
                 />
+
+                {{ form.errors.password_confirmation }}
+
 
             </div>
 

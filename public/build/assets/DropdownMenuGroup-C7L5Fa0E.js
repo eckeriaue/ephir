@@ -1,1 +1,0 @@
-import{m as s}from"./index-BiaaHhUW.js";import{d as r,o as t,k as n,w as p,x as u,K as l,L as m,u as c}from"./app-BhJDz-12.js";const _=r({__name:"DropdownMenuGroup",props:{asChild:{type:Boolean},as:{}},setup(o){const e=o;return(a,d)=>(t(),n(c(s),l(m(e)),{default:p(()=>[u(a.$slots,"default")]),_:3},16))}});export{_ as default};
