@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PostCard from '@/Components/PostCard.vue'
 import Layout from '@/Layouts/Layout.vue'
 import { Icon } from '@iconify/vue'
 import { Head, Link, usePage } from '@inertiajs/vue3'
@@ -13,8 +14,6 @@ import {
     PaginationRoot
 } from 'radix-vue'
 import { computed, unref } from 'vue'
-import PostCard from '@/Components/PostCard.vue'
-import { parse } from 'marked'
 
 
 interface Photo {
