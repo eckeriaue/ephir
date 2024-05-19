@@ -126,7 +126,7 @@ const modalIsOpen = ref(false)
     <p v-html="props.content" />
   </div>
   
-  <div class="w-full mt-6 -mx-4 md:mx-0" v-if="props.photos.length > 0">
+  <div class="w-full mt-6 md:-mx-4 mx-0" v-if="props.photos.length > 0">
     <div
       @click="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
       :class="{

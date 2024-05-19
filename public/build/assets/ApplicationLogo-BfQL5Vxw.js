@@ -1,1 +1,0 @@
-import{_ as o}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o as t,c as e}from"./app-BUI5Q5Yf.js";const n={},c={class:"text-3xl font-medium",translate:"no"};function s(r,a){return t(),e("span",c," ingbook ")}const m=o(n,[["render",s]]);export{m as A};
