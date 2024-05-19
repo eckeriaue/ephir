@@ -1,10 +1,5 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue';
-import EditorJS from '@editorjs/editorjs';
-
-const editor = new EditorJS({
-  holder: 'target'
-});
 
 
 const [ mark ] = defineModel({
@@ -49,7 +44,6 @@ function addSpace() {
 
 <template>
 <div class="mt-2">
-  <div id="target" />
   <div class="mb-1">
     <kit-dropdown-menu v-model:open="link.isVisible.value">
       <kit-dropdown-trigger as-child>
