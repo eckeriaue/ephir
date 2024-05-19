@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
+import CreatePostModal from '@/Components/CreatePostModal.vue'
 import { Link, useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
-import CreatePostModal from '@/Components/CreatePostModal.vue'
+
+withDefaults(defineProps<{
+    canUpdatePosts?: boolean
+}>(), {
+    canUpdatePosts: false,
+})
 
 const showingNavigationDropdown = ref(false)
 const logoutForm = useForm({})
@@ -26,6 +32,7 @@ const logoutForm = useForm({})
                                 </Link>
                                 <kit-button
                                     :as="Link"
+                                    v-if="$props.canUpdatePosts"
                                     :href="route('posts')"
                                     variant="secondary"
                                     class="size-6 px-0 group"

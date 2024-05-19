@@ -61,7 +61,7 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
 <template>
     <Head title="Посты" />
 
-    <Layout>
+    <Layout can-update-posts>
 
         <div class="py-4 md:py-12">
             <div class="max-w-7xl mx-auto px-0 md:px-6 lg:px-8">
