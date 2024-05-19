@@ -18,6 +18,9 @@ const link = {
   insert() {
     const mask = unref(this.mask) || unref(this.href)
     const href = unref(this.href)
+    if(!mark || !href) {
+      return;
+    }
     this.mask.value = ''
     this.href.value = ''
     this.isVisible.value = false
@@ -50,7 +53,13 @@ function addSpace() {
         <kit-button type="button" variant="outline">🔗</kit-button>
       </kit-dropdown-trigger>
       <kit-dropdown-content>
-        <kit-command as="fieldset" @keypress.enter="link.insert()" class="space-y-1 p-1">
+        <kit-command
+          as="fieldset"
+          tabindex="-1"
+          @keypress.enter="link.insert()"
+          @focusout="link.insert()"
+          class="space-y-1 p-1"
+        >
           <kit-input placeholder="Текст" v-model="link.mask.value" />
           <kit-input required
             placeholder="https://example.com"
