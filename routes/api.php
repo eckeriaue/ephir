@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Comment;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\{Post, Photo};
@@ -30,7 +29,6 @@ Route::prefix('api')->group(function() {
 
       if($photos = $request->file('photos')) {
         foreach ($photos as $photo) {
-          $timestamp = Carbon::now()->timestamp;
           $userId = auth()->id();
           $path = "public/user-$userId/post-{$post->id}/{$photo->hashName()}";
           Photo::create([
