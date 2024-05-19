@@ -121,6 +121,11 @@ const logoutForm = useForm({})
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <kit-command class="mt-3 space-y-1">
                             <template v-if="$page.props.auth.user">
+                                <create-post-modal>
+                                    <kit-button>
+                                        🪶 Создать пост
+                                    </kit-button>
+                                </create-post-modal>
                                 <kit-button :as="Link" :href="route('profile.edit')">
                                     👤
                                     Профиль

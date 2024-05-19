@@ -29,9 +29,11 @@ function addPhoto(event: Event) {
 <template>
   <kit-dialog v-if="$page.props.auth?.user" v-model:open="modalCreatePostIsOpen">
     <kit-dialog-trigger as-child>
-        <kit-button>
+        <slot>
+          <kit-button>
             🪶
-        </kit-button>
+          </kit-button>
+        </slot>
     </kit-dialog-trigger>
     <kit-dialog-content class="overflow-y-scroll max-h-[calc(100dvh_-_64px)]">
         <kit-dialog-title> Создать пост </kit-dialog-title>

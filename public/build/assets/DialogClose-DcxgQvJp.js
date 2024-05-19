@@ -1,1 +1,0 @@
-import{F as s}from"./index-BCfteD2O.js";import{d as r,o as t,l,w as n,x as p,K as c,L as i,u}from"./app-D__JmWOG.js";const _=r({__name:"DialogClose",props:{asChild:{type:Boolean},as:{}},setup(a){const e=a;return(o,d)=>(t(),l(u(s),c(i(e)),{default:n(()=>[p(o.$slots,"default")]),_:3},16))}});export{_ as default};
