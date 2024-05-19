@@ -5,48 +5,82 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header'; 
 import List from '@editorjs/list'; 
 
-const editor = new EditorJS({
-  holder: 'target',
-  tools: { 
-    header: Header,
-    list: List 
-  }, 
-})
 
 const [ mark ] = defineModel({
   default: ''
 })
 
-
-
-const content = ref<HTMLDivElement>()
-
-
-const link = {
-  href: ref(''),
-  mask: ref(''),
-  isVisible: ref(false),
-  insert() {
-    const mask = unref(this.mask) || unref(this.href)
-    const href = unref(this.href)
-    this.mask.value = ''
-    this.href.value = ''
-    this.isVisible.value = false
-    content.value.appendChild(Object.assign(document.createElement('a'), {
-      classList: 'editor-link',
-      textContent: mask,
-      target: '_blank',
-      href,
-    }))
-    mark.value = unref(content).innerHTML
-    addSpace()
-  }
-}
-
-
-function addSpace() {
-  content.value.appendChild( document.createTextNode( '\u00A0' ) )
-}
+const editor = new EditorJS({
+  holder: 'target',
+  tools: { 
+    header: Header,
+    list: List 
+  },
+  i18n: {
+    messages: {
+      ui: {
+        "blockTunes": {
+          "toggler": {
+            "Click to tune": "Нажмите, чтобы настроить",
+            "or drag to move": "или перетащите"
+          },
+        },
+        "inlineToolbar": {
+          "converter": {
+            "Convert to": "Конвертировать в"
+          }
+        },
+        "toolbar": {
+          "toolbox": {
+            "Add": "Добавить"
+          }
+        }
+      },
+      tools: {
+        "warning": { // <-- 'Warning' tool will accept this dictionary section
+          "Title": "Название",
+          "Message": "Сообщение",
+        },
+  
+        "link": {
+          "Add a link": "Вставьте ссылку"
+        },
+        "stub": {
+          'The block can not be displayed correctly.': 'Блок не может быть отображен'
+        }
+      },
+  
+      blockTunes: {
+        "delete": {
+          "Delete": "Удалить"
+        },
+        "moveUp": {
+          "Move up": "Переместить вверх"
+        },
+        "moveDown": {
+          "Move down": "Переместить вниз"
+        }
+      },
+      toolNames: {
+        "Text": "Параграф",
+        "Heading": "Заголовок",
+        "List": "Список",
+        "Warning": "Примечание",
+        "Checklist": "Чеклист",
+        "Quote": "Цитата",
+        "Code": "Код",
+        "Delimiter": "Разделитель",
+        "Raw HTML": "HTML-фрагмент",
+        "Table": "Таблица",
+        "Link": "Ссылка",
+        "Marker": "Маркер",
+        "Bold": "Полужирный",
+        "Italic": "Курсив",
+        "InlineCode": "Моноширинный",
+      },
+    }
+  },
+})
 
 
 
