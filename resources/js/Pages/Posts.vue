@@ -76,7 +76,7 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             modal
                             :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
-                            :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user.name"
+                            :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user?.name"
                         > 
                         </post-card>
 

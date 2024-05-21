@@ -1,1 +1,0 @@
-import{c as t}from"./utils-C-5SdYIA.js";import{d as o,o as r,c as l,h as n,n as c,u as p}from"./app-CP24v6kg.js";const i=o({__name:"DialogHeader",props:{class:{}},setup(e){const s=e;return(a,f)=>(r(),l("div",{class:c(p(t)("flex flex-col gap-y-1.5 text-center sm:text-left",s.class))},[n(a.$slots,"default")],2))}});export{i as default};
