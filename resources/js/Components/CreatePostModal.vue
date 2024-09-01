@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
-import MarkdownEditor from './MarkdownEditor.vue'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const modalCreatePostIsOpen = ref(false)
 const createPostForm = useForm({
@@ -11,6 +12,8 @@ const createPostForm = useForm({
 })
 
 const imgs = ref<string[]>([])
+
+const quillContent = ref()
 
 function addPhoto(event: Event) {
   const target = event.target
@@ -35,43 +38,23 @@ function addPhoto(event: Event) {
           </kit-button>
         </slot>
     </kit-dialog-trigger>
-    <kit-dialog-content class="overflow-y-scroll max-h-[calc(100dvh_-_64px)]">
+    <kit-dialog-content class="overflow-y-scroll">
         <kit-dialog-title> Создать пост </kit-dialog-title>
         <kit-dialog-description>Здесь вы можете написать о чем вы думаете </kit-dialog-description>
-        <form
-            class="min-w-fit"
-            @submit.prevent="createPostForm.post(route('posts.create'), {
-                onSuccess() {
-                    createPostForm.reset('content')
-                    createPostForm.reset('photos')
-                    createPostForm.reset('title')
-                }
-            }), modalCreatePostIsOpen = false"
-        >
-            <kit-label for="postName"> Название </kit-label>
-            <kit-input v-model="createPostForm.title" id="postName" class="mt-2" />
-            <div class="mt-4 max-w-full">
-                <kit-label for="postContent"> Содержимое </kit-label>
-                <markdown-editor v-model="createPostForm.content" />
+        <form class="min-w-fit h-fit min-h-[240px] flex flex-col justify-between">
 
-                <kit-label for="picture" class="mt-2 inline-block"> Добавить фото </kit-label>
-                <kit-input id="picture" @change="addPhoto" type="file" />
-            
-                <div class="w-full mt-6" v-if="imgs.length > 0">
-                    <div class="grid grid-cols-4 gap-4 min-h-40">
-                        <div
-                            v-for="(img, i) in imgs"
-                            :key="img + i"
-                            :style="{backgroundImage: `url('${img}')`}"
-                            class="bg-cover w-full rounded aspect-square"
-                        />
-                    </div>
-                </div>
-
-            </div>
+        <div class="grow [&_.ql-container]:h-full">
+            <quill-editor
+                theme="snow"
+                contentType="html"
+                placeholder="напишите о чем думаете..."
+                v-model:content="quillContent"
+                @update:content="console.info($event)"
+            />
+        </div>
             <div class="gap-x-2 flex justify-end mt-4">
-                <kit-button type="button" @click="modalCreatePostIsOpen = false, createPostForm.title = '', createPostForm.content = ''" variant="secondary">Отменить</kit-button>
-                <kit-button type="submit" :disabled="createPostForm.title.length < 1 || createPostForm.content.length < 1 || createPostForm.processing">Сохранить</kit-button>
+                <kit-button type="button" variant="secondary">Отменить</kit-button>
+                <kit-button type="submit" >Сохранить</kit-button>
             </div>
         </form>
     </kit-dialog-content>
