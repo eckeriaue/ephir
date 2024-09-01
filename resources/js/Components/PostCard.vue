@@ -72,7 +72,7 @@ async function getComments() {
     commentIsLoad.value = true
     comments.value = await fetch(route('comments.get-by-post-id', props.id)).then(r => r.json())
   }
-  
+
   catch(cause) {
     throw new Error('При получении комментариев произошла ошибка', { cause })
   }
@@ -112,7 +112,7 @@ const modalIsOpen = ref(false)
 
   <kit-dialog v-if="$props.modal" v-model:open="modalIsOpen">
     <kit-dialog-trigger as-child>
-      
+
     </kit-dialog-trigger>
     <kit-dialog-content>
       <div class="max-h-[calc(100dvh_-_64px)] overflow-y-auto">
@@ -125,7 +125,7 @@ const modalIsOpen = ref(false)
   <div class="break-words whitespace-pre-wrap break-all px-4 lg:px-0">
     <p v-html="props.content" />
   </div>
-  
+
   <div class="w-full mt-6" v-if="props.photos.length > 0">
     <div
       @click="$props.modal && getPostDetails().then(() => modalIsOpen = true)"
@@ -153,10 +153,12 @@ const modalIsOpen = ref(false)
 
     <footer class="text-gray-800 mt-8 px-4 lg:px-0">
       <div class="flex items-center justify-between">
-        <address class="text-xs">
-            Автор: <i>{{ props.author }}</i>
+        <address class="text-xs flex items-center">
+            Автор:
+            <img :src="$page.props.auth.user.avatar" v-if="$page?.props?.auth?.user?.avatar" class="size-5 mx-1 rounded-full" />
+            <i>{{ props.author }}</i>
         </address>
-    
+
         <kit-button
           :disabled="commentIsLoad"
           variant="outline"
@@ -175,7 +177,7 @@ const modalIsOpen = ref(false)
             <address class="text-xs"> Автор: <i>{{ comment.user.name }} </i></address>
             <p>{{ comment.content }}</p>
             <span class="text-gray-500 text-[10px]">
-                От 
+                От
                 <time datetime="2024-04-30 22:44:10"> {{ format(new Date(comment.created_at)) }} </time>
             </span>
           </article>

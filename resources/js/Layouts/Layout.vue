@@ -58,7 +58,8 @@ const logoutForm = useForm({})
                                 <kit-dropdown-menu>
                                     <kit-dropdown-trigger>
                                             <kit-button v-if="$page.props.auth.user" variant="ghost" type="button" class="font-medium text-base text-gray-800">
-                                                    {{ $page.props.auth.user?.name }}
+                                                {{ $page.props.auth.user?.name }}
+                                                <img :src="$page.props.auth.user.avatar" v-if="$page?.props?.auth?.user?.avatar" class="size-8 block ml-2 rounded-full" />
                                             </kit-button>
                                             <kit-button v-else variant="ghost" type="button" class="font-medium text-base text-gray-800">
                                                 Гость
