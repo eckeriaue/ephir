@@ -4,18 +4,36 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
+
 
 defineProps<{
     mustVerifyEmail?: Boolean;
     status?: String;
 }>();
 
-const user = usePage().props.auth.user;
+const page = usePage()
+
+const user = page.props.auth.user
+
 
 const form = useForm({
+    avatar: null,
     name: user.name,
     email: user.email,
-});
+})
+
+
+const avatar = computed(() => {
+  if (form.avatar) {
+    return URL.createObjectURL(form.avatar)
+  }
+  else if ('avatar' in page.props.auth.user && page.props.auth.user.avatar) {
+    return page.props.auth.user.avatar;
+  }
+  return null
+})
+
 </script>
 
 <template>
@@ -28,7 +46,11 @@ const form = useForm({
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.post(route('profile.update'))" class="mt-6 space-y-6">
+            <div>
+                <img v-if="avatar" :src="avatar" />
+                <input type="file" name="avatar" @input="form.avatar = $event.target.files[0]" />
+            </div>
             <div>
                 <kit-label for="name">Имя</kit-label>
                 <kit-input
