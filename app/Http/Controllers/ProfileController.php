@@ -37,13 +37,10 @@ class ProfileController extends Controller
     {
 
         if ($request->hasFile('avatar')) {
-            $user = User::find(Auth::user()->id);
-            $user->avatar = str_replace(
-                'public',
-                'storage',
+            auth()->user()->avatar = Storage::url(
                 $request->file('avatar')->store("public")
             );
-            $user->save();
+            auth()->user()->save();
         }
 
         $request->user()->fill($request->validated());
