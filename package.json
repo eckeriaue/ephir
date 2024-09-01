@@ -30,6 +30,7 @@
         "embla-carousel-vue": "^8.0.2",
         "lucide-vue-next": "^0.376.0",
         "marked": "^12.0.2",
+        "quill-image-uploader": "^1.3.0",
         "radix-vue": "^1.7.3",
         "tailwind-merge": "^2.3.0",
         "tailwindcss-animate": "^1.0.7"

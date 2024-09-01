@@ -4,6 +4,8 @@ import { ref } from 'vue'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
+import ImageUploader from 'quill-image-uploader';
+
 const modalCreatePostIsOpen = ref(false)
 const createPostForm = useForm({
   title: '',
@@ -14,6 +16,16 @@ const createPostForm = useForm({
 const imgs = ref<string[]>([])
 
 const quillContent = ref()
+
+
+const modules = {
+  name: 'imageUploader',
+  module: ImageUploader,
+  options: {
+    upload: file => {
+    }
+  }
+}
 
 function addPhoto(event: Event) {
   const target = event.target
@@ -45,7 +57,9 @@ function addPhoto(event: Event) {
 
         <div class="grow [&_.ql-container]:h-full">
             <quill-editor
+                toolbar="full"
                 theme="snow"
+                :modules
                 contentType="html"
                 placeholder="напишите о чем думаете..."
                 v-model:content="quillContent"
