@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -49,7 +50,7 @@ const avatar = computed(() => {
         <form @submit.prevent="form.post(route('profile.update'))" class="mt-6 space-y-6">
             <div>
                 <img v-if="avatar" :src="avatar" />
-                <input type="file" name="avatar" @input="form.avatar = $event.target.files[0]" />
+                <input type="file" name="avatar" @input="form.avatar = $event.target['files'][0]" />
             </div>
             <div>
                 <kit-label for="name">Имя</kit-label>

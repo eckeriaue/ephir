@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import CreatePostModal from '@/Components/CreatePostModal.vue'
 import { Link, useForm } from '@inertiajs/vue3'

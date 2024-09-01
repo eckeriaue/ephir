@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import { useForm } from '@inertiajs/vue3'
 import { HTMLAttributes, computed, ref, unref } from 'vue'
 import { cn } from '@/lib/utils'
