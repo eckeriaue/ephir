@@ -30,17 +30,18 @@ interface Post {
     title: string
     content: string
     user_id: number
-    photos: Photo[] 
+    photos: Photo[]
     is_published: boolean
     deleted_at?: string
     created_at: string
     updated_at: string
     comments_count: number
     user: {
+        avatar?: string
         created_at: string
         email: string
         email_verified_at?: string
-        id: number 
+        id: number
         name: string
         updated_at: string
     }
@@ -77,7 +78,8 @@ const offset = computed(() => Number(unref(query).get('offset')) || 0)
                             :="{title, comments_count}"
                             :created_at="format(new Date(created_at))"
                             :author="user_id === $page.props.auth?.user?.id ? 'Вы' : user?.name"
-                        > 
+                            :author-avatar="user?.avatar"
+                        >
                         </post-card>
 
                         <footer class="mt-12 flex items-center justify-center pb-5">

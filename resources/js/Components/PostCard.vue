@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   photos: Photo[]
   class?: HTMLAttributes['class']
   comments_count?: string | number
+  authorAvatar?: string
   created_at?: string
   author?: string
   content?: string
@@ -156,7 +157,7 @@ const modalIsOpen = ref(false)
       <div class="flex items-center justify-between">
         <address class="text-xs flex items-center">
             Автор:
-            <img :src="$page.props.auth.user.avatar" v-if="$page?.props?.auth?.user?.avatar" class="size-5 mx-1 rounded-full" />
+            <img :src="props.authorAvatar" v-if="props.authorAvatar" class="size-5 mx-1 rounded-full" />
             <i>{{ props.author }}</i>
         </address>
 
