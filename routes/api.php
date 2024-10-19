@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\{Post, Photo};
 use Illuminate\Support\Facades\Storage;
+use Buglinjo\LaravelWebp\Facades\Webp;
+
 
 
 Route::prefix('api')->group(function() {
@@ -30,17 +32,13 @@ Route::prefix('api')->group(function() {
 
       if($photos = $request->file('photos')) {
         foreach ($photos as $photo) {
-          $timestamp = Carbon::now()->timestamp;
           $userId = auth()->id();
-          $path = "public/user-$userId/post-{$post->id}/{$photo->hashName()}";
+          $path = "public/user-$userId-post-{$post->id}-{$photo->hashName()}.webp";
+          Webp::make($photo)->save(storage_path("app/" . $path));
           Photo::create([
             'src' => Storage::url($path),
             'post_id' => $post->id,
           ])->save();
-          Storage::disk('local')->put(
-            $path,
-            $photo->getContent()
-          );
         };
       }
       return to_route('posts');
