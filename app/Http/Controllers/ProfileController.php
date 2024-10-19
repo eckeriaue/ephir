@@ -13,6 +13,7 @@ use Inertia\Response;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Buglinjo\LaravelWebp\Facades\Webp;
 
 class ProfileController extends Controller
 {
@@ -37,10 +38,11 @@ class ProfileController extends Controller
     {
 
         if ($request->hasFile('avatar')) {
-            auth()->user()->avatar = Storage::url(
-                $request->file('avatar')->store("public")
-            );
-            auth()->user()->save();
+            $avatar_filename = "public/user-avatar-" . auth()->user()->id . ".webp";
+            if (Webp::make($request->file('avatar'))->save(storage_path("app/" . $avatar_filename))) {
+                auth()->user()->avatar = Storage::url($avatar_filename);
+                auth()->user()->save();
+            }
         }
 
         $request->user()->fill($request->validated());
