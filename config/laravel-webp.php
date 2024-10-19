@@ -9,7 +9,7 @@ return [
     | This is a default quality unless you provide while generation of the WebP
     |
     */
-    'default_quality' => 70,
+    'default_quality' => 25,
 
     /*
     |--------------------------------------------------------------------------
