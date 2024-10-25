@@ -1,4 +1,3 @@
-import chalk from 'chalk'
 import fastify from 'fastify'
 import { env } from 'node:process'
 import { fileURLToPath } from 'node:url'
