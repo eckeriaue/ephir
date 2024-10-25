@@ -16,9 +16,7 @@ app
 .register(import('@fastify/multipart'))
 .register(import('@fastify/view'), {
   root: fileURLToPath(new URL('./public/views', import.meta.url)),
-  engine: {
-    handlebars: handlebars
-  }
+  engine: { handlebars }
 })
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
