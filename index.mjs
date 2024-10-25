@@ -22,7 +22,7 @@ app
   root: fileURLToPath(new URL('./public', import.meta.url)),
 })
 .get('/client', function(req, rep) {
-  return rep.view('index.html', {
+  return rep.view('login.html', {
     lang: 'ru',
   }, {
     layout: './layouts/login.html',

@@ -2,3 +2,8 @@
     font-family: 'Sf Pro Regular';
     src: url("SF-Pro-Display-Regular.otf");
 }
+@font-face {
+    font-family: 'Sf Pro Medium';
+    font-weight: 500;
+    src: url("SF-Pro-Display-Medium.otf");
+}
