@@ -1,34 +1,35 @@
 import fastify from 'fastify'
-import { env } from 'node:process'
-import { fileURLToPath } from 'node:url'
-import handlebars from 'handlebars'
+import { join } from 'path'
+import { env } from 'process'
+import { noop } from 'radashi'
 
-const port = parseInt(env.PORT || '3000')
-const host = env.HOST || '127.0.0.1'
+const isProduction = env.NODE_ENV === 'production'
+const port = env.PORT || 5173
+const base = env.BASE || '/'
 
-const app = fastify({
-  logger: {
-    enabled: true,
-  },
-})
+const templateHtml = isProduction
+  ? await fs.readFile('./dist/client/index.html', 'utf-8')
+  : ''
+const ssrManifest = isProduction
+  ? await fs.readFile('./dist/client/.vite/ssr-manifest.json', 'utf-8')
+  : noop()
 
-app
-.register(import('@fastify/multipart'))
-.register(import('@fastify/view'), {
-  root: fileURLToPath(new URL('./public/views', import.meta.url)),
-  engine: { handlebars }
-})
-.register(import('@fastify/static'), {
-  root: fileURLToPath(new URL('./public', import.meta.url)),
-})
-.get('/client', function(req, rep) {
-  return rep.view('index.html', {
-    lang: 'ru',
-  })
-})
-.register(import('convert-to-webp/converterPlugin.mjs'))
-.listen({ port, host })
-.catch(err => {
-  app.log.error(err)
-  process.exit(1)
-})
+const app = fastify()
+
+let vite
+if (!isProduction) {
+	await fastify.register(import('@fastify/middie'))
+
+	// generate the dev server
+	vite = await createViteServer({
+		server: { middlewareMode: true },
+		appType: 'custom'
+	})
+
+	app.use(vite.middlewares)
+} else {
+	await fastify.register(import('@fastify/static'), {
+		root: join(__dirname, '.vite/client/assets'),
+		prefix: '/assets/',
+	})
+}
