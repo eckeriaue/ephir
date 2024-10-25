@@ -16,7 +16,7 @@ app
 .register(import('@fastify/multipart'))
 .register(import('@fastify/view'), {
   root: fileURLToPath(new URL('./public/views', import.meta.url)),
-  engine: { handlebars }
+  engine: { handlebars },
 })
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
@@ -24,6 +24,8 @@ app
 .get('/client', function(req, rep) {
   return rep.view('index.html', {
     lang: 'ru',
+  }, {
+    layout: './layouts/login.html',
   })
 })
 .register(import('convert-to-webp/converterPlugin.mjs'))
