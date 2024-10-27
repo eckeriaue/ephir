@@ -9,14 +9,15 @@ import { decode, encode } from './lib/base64.mjs'
 */
 export default fp(function authPlugin(app) {
   app
+  .decorateRequest('user', undefined)
   .decorateRequest('isAuth', () => false)
-  .addHook('preHandler', async (req, rep) => {
+  .addHook('preHandler', (req, rep, done) => {
     req.isAuth = () => !!req.cookies.authorization
-    if (req.isAuth() && !req.user) {
+    if (req.isAuth()) {
       req.user = JSON.parse(decode(req.cookies.authorization.replace('Basic ', '')))
     }
+    done()
   })
-
   .post('/signin', function(req, rep) {
     const { rememberMe, login, password } = req.body
   })
@@ -49,7 +50,6 @@ export default fp(function authPlugin(app) {
 
     rep.setCookie('authorization', `Basic ${encode(JSON.stringify(output))}`)
     rep.header('HX-Redirect', '/')
-    // rep.send('<meta http-equiv="refresh" content="0; url=/">')
   })
   .get('/signup', function(req, rep) {
     return rep.view('register.html', undefined, {

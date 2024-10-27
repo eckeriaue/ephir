@@ -27,9 +27,11 @@ app
 })
 .get('/', function(req, rep) {
   if (req.isAuth()) {
-  return rep.view('posts.html', undefined, {
-    layout: './layouts/main.html'
-  })
+    return rep.view('posts.html', {
+      user: req.user
+    }, {
+      layout: './layouts/main.html'
+    })
   } else {
     rep.redirect('/signin')
   }
