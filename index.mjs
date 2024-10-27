@@ -8,11 +8,14 @@ const host = env.HOST || '127.0.0.1'
 
 const app = fastify({
   logger: {
-    enabled: true,
+    enabled: false,
   },
 })
 
+
+
 app
+.register(import('./src/auth.mjs'))
 .register(import('@fastify/multipart'))
 .register(import('@fastify/formbody'))
 .register(import('@fastify/view'), {
@@ -22,25 +25,14 @@ app
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
 })
-
 .get('/', function(req, rep) {
+  if (req.isAuth()) {
   return rep.view('posts.html', undefined, {
     layout: './layouts/main.html'
   })
-})
-
-.post('/login', function(req, rep) {
-  const { rememberMe, login, password } = req.body
-})
-.get('/login', function(req, rep) {
-  return rep.view('login.html', undefined, {
-    layout: './layouts/login.html',
-  })
-})
-.get('/register', function(req, rep) {
-  return rep.view('register.html', undefined, {
-    layout: './layouts/login.html',
-  })
+  } else {
+    rep.redirect('/login')
+  }
 })
 .listen({ port, host })
 .catch(err => {
