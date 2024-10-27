@@ -3,6 +3,7 @@ import { minLength, nonEmpty, object, safeParse, string as vString, pipe, email 
 import { db } from './db.mjs'
 import { users } from './db/tables/schema.mjs'
 import { decode, encode } from './lib/base64.mjs'
+import { readFile } from 'fs/promises'
 
 /**
  * @param {import("fastify").FastifyInstance} app
@@ -13,7 +14,7 @@ export default fp(function authPlugin(app) {
   .decorateRequest('isAuth', () => false)
   .addHook('preHandler', (req, rep, done) => {
     req.isAuth = () => !!req.cookies.authorization
-    if (req.isAuth()) {
+    if (req.isAuth() && !req.user) {
       req.user = JSON.parse(decode(req.cookies.authorization.replace('Basic ', '')))
     }
     done()
@@ -38,14 +39,15 @@ export default fp(function authPlugin(app) {
       req.body,
     )
     if (output.password !== output.repeadPassword) {
-      rep.code(400).send('пароли не совпадают')
+      const registerForm = await rep.viewAsync('register.html', { noMatchPassowrd: true })
+      rep.code(200).send(registerForm)
     }
     output.password = encode(output.password)
     const { repeadPassword: _, ...values } = output
 
-    await db.insert(users).values(values).catch(error => {
+    await db.insert(users).values(values).catch(async error => {
       app.log.error('Ошибка при создании пользователя', error)
-      rep.code(500).send({ message: 'Ошибка при создании пользователя' })
+      rep.code(200).send()
     })
 
     rep.setCookie('authorization', `Basic ${encode(JSON.stringify(output))}`)
