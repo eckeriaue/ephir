@@ -15,9 +15,6 @@ const app = fastify({
 app
 .register(import('@fastify/multipart'))
 .register(import('@fastify/formbody'))
-.register(import('@fastify/jwt'), {
-  secret: env.JWT_SECRET,
-})
 .register(import('@fastify/view'), {
   root: fileURLToPath(new URL('./public/views', import.meta.url)),
   engine: { handlebars },
@@ -25,13 +22,15 @@ app
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
 })
-.post('/api/login', function(req, rep) {
-  const { rememberMe, login, password } = req.body
-  const token = this.jwt.sign({
-    login,
-    password,
+
+.get('/', function(req, rep) {
+  return rep.view('posts.html', undefined, {
+    layout: './layouts/main.html'
   })
-  rep.send(token)
+})
+
+.post('/login', function(req, rep) {
+  const { rememberMe, login, password } = req.body
 })
 .get('/login', function(req, rep) {
   return rep.view('login.html', undefined, {
