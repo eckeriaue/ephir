@@ -39,7 +39,7 @@ export default fp(function authPlugin(app) {
       req.body,
     )
     if (output.password !== output.repeadPassword) {
-      const registerForm = await rep.viewAsync('register.html', { noMatchPassowrd: true })
+      const registerForm = await rep.viewAsync('register.html', { errors: ['Пароли не совпадают'] })
       rep.code(200).send(registerForm)
     }
     output.password = encode(output.password)
