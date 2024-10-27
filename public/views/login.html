@@ -1,25 +1,22 @@
-<div class="h-dvh flex items-center justify-center">
-  <div class="flex flex-col">
-    <span class="text-3xl w-full text-center inline-block font-medium mb-6">ingbook</span>
-    <form class="px-2 space-y-4 w-320px">
-
-      <div class="flex flex-col gap-y-2">
-        <label for="bebra" class="kit-label">Логин</label>
-        <input id="bebra" class="kit-input" placeholder="Введите логин" />
-      </div>
-
-      <div class="flex flex-col gap-y-2">
-        <label for="bebra" class="kit-label">Пароль</label>
-        <input id="bebra" class="kit-input" placeholder="Введите пароль" />
-      </div>
-
-      <div class="mt-8 flex justify-between items-center w-full">
-        <div class="flex items-center gap-x-2">
-          <input id="remember-me" type="checkbox" class="kit-checkbox">
-          <label for="remember-me" class="kit-label">Запомнить меня</label>
-        </div>
-        <button class="kit-button" type="submit">Войти</button>
-      </div>
-    </form>
+<form class="px-2 space-y-4 w-320px">
+  <div class="flex flex-col gap-y-2">
+    <label for="bebra" class="kit-label">Логин</label>
+    <input id="bebra" class="kit-input" placeholder="Введите логин" />
   </div>
-</div>
+
+  <div class="flex flex-col gap-y-2">
+    <label for="bebra" class="kit-label">Пароль</label>
+    <input id="bebra" class="kit-input" placeholder="Введите пароль" />
+  </div>
+
+  <div class="mt-8 w-full">
+    <div class="flex items-center gap-x-2">
+      <input id="remember-me" type="checkbox" class="kit-checkbox">
+      <label for="remember-me" class="kit-label">Запомнить меня</label>
+    </div>
+    <div class="flex flex-col gap-y-2 mt-4">
+      <button class="w-full kit-button" type="submit">Войти</button>
+      <a href="/register" class="h-32px inline-flex items-center justify-center secondary kit-button" type="submit">Зарегестрироваться</a>
+    </div>
+  </div>
+</form>

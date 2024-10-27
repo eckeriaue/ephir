@@ -21,14 +21,16 @@ app
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
 })
-.get('/client', function(req, rep) {
-  return rep.view('login.html', {
-    lang: 'ru',
-  }, {
+.get('/login', function(req, rep) {
+  return rep.view('login.html', undefined, {
     layout: './layouts/login.html',
   })
 })
-.register(import('convert-to-webp/converterPlugin.mjs'))
+.get('/register', function(req, rep) {
+  return rep.view('register.html', undefined, {
+    layout: './layouts/login.html',
+  })
+})
 .listen({ port, host })
 .catch(err => {
   app.log.error(err)
