@@ -1,17 +1,17 @@
-<form class="px-2 space-y-4 w-320px">
+<form class="px-2 space-y-4 w-320px" hx-post="/api/login">
   <div class="flex flex-col gap-y-2">
-    <label for="bebra" class="kit-label">Логин</label>
-    <input id="bebra" class="kit-input" placeholder="Введите логин" />
+    <label for="login" class="kit-label">Логин</label>
+    <input id="login" name="login" class="kit-input" placeholder="Введите логин" />
   </div>
 
   <div class="flex flex-col gap-y-2">
-    <label for="bebra" class="kit-label">Пароль</label>
-    <input id="bebra" class="kit-input" placeholder="Введите пароль" />
+    <label for="password" class="kit-label">Пароль</label>
+    <input id="password" name="password" class="kit-input" placeholder="Введите пароль" />
   </div>
 
   <div class="mt-8 w-full">
     <div class="flex items-center gap-x-2">
-      <input id="remember-me" type="checkbox" class="kit-checkbox">
+      <input id="remember-me" name="rememberMe" type="checkbox" class="kit-checkbox">
       <label for="remember-me" class="kit-label">Запомнить меня</label>
     </div>
     <div class="flex flex-col gap-y-2 mt-4">

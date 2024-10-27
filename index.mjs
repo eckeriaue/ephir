@@ -14,12 +14,24 @@ const app = fastify({
 
 app
 .register(import('@fastify/multipart'))
+.register(import('@fastify/formbody'))
+.register(import('@fastify/jwt'), {
+  secret: env.JWT_SECRET,
+})
 .register(import('@fastify/view'), {
   root: fileURLToPath(new URL('./public/views', import.meta.url)),
   engine: { handlebars },
 })
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
+})
+.post('/api/login', function(req, rep) {
+  const { rememberMe, login, password } = req.body
+  const token = this.jwt.sign({
+    login,
+    password,
+  })
+  rep.send(token)
 })
 .get('/login', function(req, rep) {
   return rep.view('login.html', undefined, {
@@ -33,6 +45,6 @@ app
 })
 .listen({ port, host })
 .catch(err => {
-  app.log.error(err)
+   app.log.error(err)
   process.exit(1)
 })
