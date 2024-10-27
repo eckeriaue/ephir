@@ -5,11 +5,10 @@ import handlebars from 'handlebars'
 
 const port = parseInt(env.PORT || '3000')
 const host = env.HOST || '127.0.0.1'
+const logger = env.LOGGER === 'true'
 
 const app = fastify({
-  logger: {
-    enabled: false,
-  },
+  logger,
 })
 
 
