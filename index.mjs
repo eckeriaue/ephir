@@ -17,6 +17,7 @@ app
 .register(import('./src/auth.mjs'))
 .register(import('@fastify/multipart'))
 .register(import('@fastify/formbody'))
+.register(import('@fastify/cookie'))
 .register(import('@fastify/view'), {
   root: fileURLToPath(new URL('./public/views', import.meta.url)),
   engine: { handlebars },
@@ -30,7 +31,7 @@ app
     layout: './layouts/main.html'
   })
   } else {
-    rep.redirect('/login')
+    rep.redirect('/signin')
   }
 })
 .listen({ port, host })

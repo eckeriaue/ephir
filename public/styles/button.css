@@ -15,6 +15,11 @@ a.kit-button {
   text-align: center;
 }
 
+.kit-button:disabled {
+  opacity: 80;
+  cursor: not-allowed;
+}
+
 .kit-button.secondary {
   color: #fff;
   background-color: #0969da;

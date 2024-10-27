@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.0.1",
     "@fastify/formbody": "^8.0.1",
     "@fastify/multipart": "^9.0.1",
     "@fastify/static": "^8.0.2",
@@ -22,8 +23,7 @@
     "handlebars": "^4.7.8",
     "mysql2": "^3.11.3",
     "radashi": "^12.1.0",
-    "valibot": "^0.42.1",
-    "vue": "^3.5.12"
+    "valibot": "^0.42.1"
   },
   "author": "",
   "license": "ISC",
