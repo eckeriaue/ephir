@@ -4,6 +4,7 @@ import { db } from './db.mjs'
 import { users } from './db/tables/schema.mjs'
 import { decode, encode } from './lib/base64.mjs'
 import { readFile } from 'fs/promises'
+import { and, eq } from 'drizzle-orm'
 
 /**
  * @param {import("fastify").FastifyInstance} app
@@ -19,8 +20,23 @@ export default fp(function authPlugin(app) {
     }
     done()
   })
-  .post('/signin', function(req, rep) {
-    const { rememberMe, login, password } = req.body
+  .post('/signin', async function(req, rep) {
+    let { rememberMe, email, password } = req.body
+    password = encode(password)
+    const [user] = await db.select().from(users).where(
+      eq(users.email, email)
+    )
+    if (!user) {
+      rep.code(200).send(await rep.viewAsync('login.html', {
+        errors: ['Пользователь не найден']
+      }))
+    } else if (user.password !== password) {
+      rep.code(200).send(await rep.viewAsync('login.html', {
+        errors: ['Не верный пароль']
+      }))
+    }
+    rep.setCookie('authorization', `Basic ${encode(JSON.stringify(user))}`)
+    rep.header('HX-Redirect', '/')
   })
   .get('/signin', function(req, rep) {
     return rep.view('login.html', undefined, {

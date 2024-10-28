@@ -8,7 +8,7 @@ const host = env.HOST || '127.0.0.1'
 const logger = env.LOGGER === 'true'
 
 const app = fastify({
-  logger,
+  logger: true,
 })
 
 
