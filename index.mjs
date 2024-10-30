@@ -12,7 +12,6 @@ const app = fastify({
 })
 
 
-
 app
 .register(import('./src/auth.mjs'))
 .register(import('@fastify/multipart'))
@@ -27,8 +26,9 @@ app
 })
 .get('/', function(req, rep) {
   if (req.isAuth()) {
+    console.info(req.user)
     return rep.view('posts.html', {
-      user: req.user
+      user: req.user,
     }, {
       layout: './layouts/main.html'
     })

@@ -68,6 +68,24 @@
    </style>
 </head>
 <body>
+  <header class="flex items-center justify-between px-4 py-2 h-16 top-0 sticky shadow">
+    <span class="text-3xl text-center inline-block font-medium">ingbook</span>
+    {{#if user}}
+      <button class="kit-button flex items-center gap-x-2">
+        <img
+          class="size-6 rounded-full bg-gray-500"
+          {{#if user.avatar}}
+            src="{{ user.avatar }}"
+          {{else}}
+            src="https://robohash.org/{{user.id}}"
+          {{/if}}
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+        </svg>
+      </button>
+    {{/if}}
+  </header>
   {{{ body }}}
 </body>
 </html>

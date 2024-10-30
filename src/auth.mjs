@@ -1,10 +1,9 @@
+import { eq } from 'drizzle-orm'
 import fp from 'fastify-plugin'
-import { minLength, nonEmpty, object, safeParse, string as vString, pipe, email as vEmail, email } from 'valibot'
+import { minLength, nonEmpty, object, pipe, safeParse, email as vEmail, string as vString } from 'valibot'
 import { db } from './db.mjs'
 import { users } from './db/tables/schema.mjs'
 import { decode, encode } from './lib/base64.mjs'
-import { readFile } from 'fs/promises'
-import { and, eq } from 'drizzle-orm'
 
 /**
  * @param {import("fastify").FastifyInstance} app
@@ -16,7 +15,8 @@ export default fp(function authPlugin(app) {
   .addHook('preHandler', (req, rep, done) => {
     req.isAuth = () => !!req.cookies.authorization
     if (req.isAuth() && !req.user) {
-      req.user = JSON.parse(decode(req.cookies.authorization.replace('Basic ', '')))
+      const { email, name, id } = JSON.parse(decode(req.cookies.authorization.replace('Basic ', '')))
+      req.user = { email, name, id }
     }
     done()
   })
@@ -61,10 +61,14 @@ export default fp(function authPlugin(app) {
     output.password = encode(output.password)
     const { repeadPassword: _, ...values } = output
 
-    await db.insert(users).values(values).catch(async error => {
+    const [
+      { insertId: id }
+    ] = await db.insert(users).values(values).catch(async error => {
       app.log.error('Ошибка при создании пользователя', error)
       rep.code(200).send()
     })
+
+    output.id = id
 
     rep.setCookie('authorization', `Basic ${encode(JSON.stringify(output))}`)
     rep.header('HX-Redirect', '/')
