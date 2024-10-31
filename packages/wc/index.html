@@ -11,6 +11,7 @@
       <wc-selectmenu>
         <wc-selectmenu-trigger>
           test me
+          <wc-selectmenu-indicator></wc-selectmenu-indicator>
         </wc-selectmenu-trigger>
       <wc-selectmenu-sheet>
         <div>test me 2</div>
@@ -19,11 +20,12 @@
     </div>
     <script type="module">
       import { defineCustomElement } from 'vue'
-      import { WcSelectmenu,WcSelectmenuTrigger, WcSelectmenuSheet } from '/src/main.js'
+      import { WcSelectmenu,WcSelectmenuTrigger, WcSelectmenuSheet, WcSelectmenuIndicator } from '/src/main.js'
 
       customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
       customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
       customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
+      customElements.define('wc-selectmenu-indicator', defineCustomElement(WcSelectmenuIndicator))
     </script>
   </body>
 </html>
