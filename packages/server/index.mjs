@@ -2,6 +2,7 @@ import fastify from 'fastify'
 import { env } from 'node:process'
 import { fileURLToPath } from 'node:url'
 import handlebars from 'handlebars'
+import { readFile } from 'node:fs/promises'
 
 const port = parseInt(env.PORT || '3000')
 const host = env.HOST || '127.0.0.1'
@@ -13,6 +14,10 @@ const app = fastify({
 
 
 app
+.get('/@ephir/wc', function(req, rep) {
+  rep.header('content-type', 'application/javascript')
+  return readFile('../../node_modules/@ephir/wc/dist/index.js', 'utf-8')
+})
 .register(import('./src/auth.mjs'))
 .register(import('@fastify/multipart'))
 .register(import('@fastify/formbody'))
@@ -26,7 +31,6 @@ app
 })
 .get('/', function(req, rep) {
   if (req.isAuth()) {
-    console.info(req.user)
     return rep.view('posts.html', {
       user: req.user,
     }, {
