@@ -75,17 +75,19 @@
   <script type="importmap">
     {
       "imports": {
-        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
       }
     }
   </script>
   <script type="module">
     import { defineCustomElement } from 'vue'
-    import { WcSelectmenu, WcSelectmenuTrigger, WcSelectmenuSheet, WcSelectmenuIndicator } from '../../wc/main.js'
+    import { WcSelectmenu, WcSelectmenuTrigger, WcLisitem, WcSelectmenuSheet, WcListbox, WcSelectmenuIndicator } from '../../wc/main.js'
     customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
     customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
     customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
     customElements.define('wc-selectmenu-indicator', defineCustomElement(WcSelectmenuIndicator))
+    customElements.define('wc-listbox', defineCustomElement(WcListbox))
+    customElements.define('wc-lisitem', defineCustomElement(WcLisitem))
   </script>
 </head>
 <body>
@@ -109,11 +111,11 @@
       </button>
       </wc-selectmenu-trigger>
     <wc-selectmenu-sheet placements="bottom,top">
-      <div class="flex flex-col">
-        <button class="kit-button">test 1</button>
-        <button class="kit-button">test 2</button>
-        <button class="kit-button">test 3</button>
-      </div>
+      <wc-listbox>
+        <wc-listitem value="bebra">test me</wc-listitem>
+        <wc-listitem value="bebra">test me</wc-listitem>
+        <wc-listitem value="bebra">test me</wc-listitem>
+      </wc-listbox>
     </wc-selectmenu-sheet>
     </wc-selectmenu>
 
