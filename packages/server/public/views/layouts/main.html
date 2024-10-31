@@ -69,17 +69,33 @@
   <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
   <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
   <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.11"></script>
-  <script defer type="module" src="../../wc/main.js"></script>
+  
+    
+  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import { defineCustomElement } from 'vue'
+    import { WcSelectmenu, WcSelectmenuTrigger, WcSelectmenuSheet } from '../../wc/main.js'
+    customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
+    customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
+    customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
+  </script>
 </head>
 <body>
   <header class="flex items-center justify-between px-4 py-2 h-16 top-0 sticky shadow">
     <span class="text-3xl text-center inline-block font-medium">ingbook</span>
     {{#if user}}
-      <button
+    <wc-selectmenu>
+      <wc-selectmenu-trigger>
+        <button
         class="kit-button flex items-center gap-x-2"
-        _="on click
-            toggle .rotate-180 on #arrow-header-button
-          end"
+        _="on click toggle .rotate-180 on #arrow-header-button end"
       >
         <img
           class="size-6 rounded-full bg-gray-500"
@@ -93,6 +109,12 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
         </svg>
       </button>
+      </wc-selectmenu-trigger>
+    <wc-selectmenu-sheet>
+      <div>test me 2</div>
+    </wc-selectmenu-sheet>
+    </wc-selectmenu>
+
     {{/if}}
   </header>
   {{{ body }}}

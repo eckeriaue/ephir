@@ -1,11 +1,3 @@
-
-import { defineCustomElement } from 'vue'
-import WcSelectmenu from './components/WcSelectmenu.ce.vue'
-import WcSelectmenuTrigger from './components/WcSelectmenuTrigger.ce.vue'
-import WcSelectmenuSheet from './components/WcSelectmenuSheet.ce.vue'
-
-
-
-customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
-customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
-customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
+export { default as WcSelectmenu } from './components/WcSelectmenu.ce.vue'
+export { default as WcSelectmenuTrigger } from './components/WcSelectmenuTrigger.ce.vue'
+export { default as WcSelectmenuSheet } from './components/WcSelectmenuSheet.ce.vue'

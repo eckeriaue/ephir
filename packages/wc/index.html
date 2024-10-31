@@ -17,6 +17,13 @@
       </wc-selectmenu-sheet>
       </wc-selectmenu>
     </div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module">
+      import { defineCustomElement } from 'vue'
+      import { WcSelectmenu,WcSelectmenuTrigger, WcSelectmenuSheet } from '/src/main.js'
+
+      customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
+      customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
+      customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
+    </script>
   </body>
 </html>
