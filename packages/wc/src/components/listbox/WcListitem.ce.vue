@@ -16,6 +16,10 @@ const { select } = inject('wc-listbox')
 <style scoped>
 .listitem {
   font-weight: 400;
+  padding: 6px 8px;
+  height: 32px;
+  display: flex;
+  align-items: center;
   font-size: 14px;
   line-height: 143%;
   color: #1f2328;
