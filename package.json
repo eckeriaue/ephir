@@ -2,9 +2,11 @@
   "name": "ephir",
   "version": "1.0.0",
   "main": "index.mjs",
-  "workspaces": ["packages/*"],
-  "scripts": {
-  },
+  "workspaces": [
+    "packages/*",
+    "pacakges/wc"
+  ],
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "description": ""

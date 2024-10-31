@@ -9,7 +9,6 @@
   },
   "author": "",
   "dependencies": {
-    "@ephir/wc": "^1.0.0",
     "@fastify/cookie": "^11.0.1",
     "@fastify/formbody": "^8.0.1",
     "@fastify/multipart": "^9.0.1",

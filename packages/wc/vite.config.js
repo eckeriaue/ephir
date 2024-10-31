@@ -1,16 +1,11 @@
-
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'url'
 import { join } from 'path'
-import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
+  plugins: [vue()],
   build: {
     emptyOutDir: false,
     outDir: '../server/public/wc',
@@ -19,7 +14,8 @@ export default defineConfig({
       fileName: (format, name) => {
         return `${name}.${format === 'es' ? 'js' : 'umd.cjs'}`
       },
-      entry: join(__dirname, './src/index.ts'),
+      entry: join(__dirname, './src/main.js'),
     },
   },
 })
+
