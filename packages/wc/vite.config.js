@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { join } from 'path'
+import { defineConfig } from 'vite'
 
 /** @type {import('vite').Config} */
 export default defineConfig({
@@ -16,12 +16,8 @@ export default defineConfig({
       entry: join(__dirname, './src/main.js'),
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: ['vue'],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
           vue: 'Vue',
         },
