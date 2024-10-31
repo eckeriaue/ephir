@@ -2,12 +2,13 @@
 import { provide, ref } from 'vue'
 
 const isOpen = ref(false)
+const reference = ref()
 
 function toggle() {
   isOpen.value = !isOpen.value
 }
 
-provide(`selectmenu`, { isOpen, toggle })
+provide(`selectmenu`, { isOpen, reference, toggle })
 
 </script>
 
