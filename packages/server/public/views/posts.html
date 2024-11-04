@@ -1,3 +1,13 @@
-<div class="h-dvh">
-test me
+<div class="h-[calc(100dvh_-_80px)]">
+  {{#if posts}}
+    <section>
+      {{#each posts}}
+        <pre>{{this}}</pre>
+      {{/each}}
+    </section>
+    {{else}}
+    <div class="size-full flex items-center justify-center">
+        Постов пока нет
+      </div>
+  {{/if}}
 </div>

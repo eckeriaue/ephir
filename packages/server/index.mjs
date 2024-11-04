@@ -33,6 +33,7 @@ app
     return rep.view('posts.html', {
       user: req.user,
     }, {
+      posts: [],
       layout: './layouts/main.html'
     })
   } else {
