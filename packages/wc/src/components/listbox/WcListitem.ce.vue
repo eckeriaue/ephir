@@ -9,16 +9,18 @@ const { select } = inject('wc-listbox')
 </script>
 
 <template>
-  <button
-    type="button"
+  <div
     @mousedown="select(props.value)"
     class="listitem"
   >
     <slot />
-  </button>
+  </div>
 </template>
 <style scoped>
-.listitem {
+
+::slotted(button), ::slotted(a) {
+  border: none;
+  background: none;
   font-weight: 400;
   padding: 6px 8px;
   height: 32px;
@@ -30,12 +32,16 @@ const { select } = inject('wc-listbox')
   cursor: pointer;
   color: #1f2328;
 }
-.listitem:hover:not(:active), 
-.listitem:focus:not(:active) {
-  color: #1f2328c4;
+
+::slotted(a) {
+  text-decoration: none;
+  color: #1f2328;
 }
-button {
-  background: none;
-  border: none;
+
+::slotted(button:hover:not(:active)), 
+::slotted(button:focus:not(:active)),
+::slotted(a:hover:not(:active)), 
+::slotted(a:focus:not(:active)) {
+  color: #1f2328c4;
 }
 </style>

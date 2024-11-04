@@ -65,9 +65,10 @@
     border-spacing: 0;
   }
   </style>
+  <script src="https://unpkg.com/htmx.org@2.0.3/dist/htmx.js" integrity="sha384-BBDmZzVt6vjz5YbQqZPtFZW82o8QotoM7RUp5xOxV3nSJ8u2pSdtzFAbGKzTlKtg" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.11"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.11"></script> -->
 
   </script>
   <script type="importmap">
@@ -105,7 +106,7 @@
       </button>
       <wc-selectmenu>
         <wc-selectmenu-trigger class="cursor-pointer">
-          <span class="pointer-events-none">
+          <span>
             <button class="kit-button flex items-center gap-x-2" type="button">
               <img
                 alt="Моя аватарка"
@@ -121,17 +122,14 @@
           </span>
         </wc-selectmenu-trigger>
       <wc-selectmenu-sheet placements="bottom,top">
-        <wc-listbox
-          x-data
-          x-on:select="event => {
-            const [type] = event.detail
-            if (type === 'exit') {
-              location.replace('/signin')
-            }
-          }
-          "
-        >
-          <wc-listitem value="exit">Выйти</wc-listitem>
+        <wc-listbox>
+          <wc-listitem>
+            <button
+              type="button"
+              hx-post="/signout"
+              hx-on::after-request="location.reload()"
+              hx-trigger="click">Выйти</button>
+          </wc-listitem>
         </wc-listbox>
       </wc-selectmenu-sheet>
       </wc-selectmenu>
