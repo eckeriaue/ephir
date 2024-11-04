@@ -31,6 +31,9 @@ button:focus {
 }
 
 button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 8px;
   border: none;
   outline: 1px solid #d0d7de;
   border-radius: 6px;

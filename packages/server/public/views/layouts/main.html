@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../styles/input.css">
-  <link rel="stylesheet" href="../styles/button.css">
   <link rel="stylesheet" href="../styles/checkbox.css">
   <link rel="stylesheet" href="../styles/label.css">
   <link rel="stylesheet" href="../fonts/style.css">
@@ -81,34 +79,36 @@
   </script>
   <script type="module">
     import { defineCustomElement } from 'vue'
-    import { WcSelectmenu, WcSelectmenuTrigger, WcLisitem, WcSelectmenuSheet, WcListbox, WcSelectmenuIndicator } from '../../wc/main.js'
+    import { WcSelectmenu, WcSelectmenuTrigger, WcListitem, WcButton, WcSelectmenuSheet, WcListbox, WcSelectmenuIndicator } from '../../wc/main.js'
     customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
     customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
     customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
     customElements.define('wc-selectmenu-indicator', defineCustomElement(WcSelectmenuIndicator))
     customElements.define('wc-listbox', defineCustomElement(WcListbox))
-    customElements.define('wc-lisitem', defineCustomElement(WcLisitem))
+    customElements.define('wc-listitem', defineCustomElement(WcListitem))
+    customElements.define('wc-button', defineCustomElement(WcButton))
   </script>
 </head>
 <body>
-  <header class="flex items-center justify-between px-4 py-2 h-16 top-0 sticky shadow">
+  <header class="flex items-center justify-between px-4 py-2 h-16 top-0 sticky shadow bg-white">
     <span class="text-3xl text-center inline-block font-medium">ingbook</span>
     {{#if user}}
     <wc-selectmenu>
-      <wc-selectmenu-trigger>
-        <button
-        class="kit-button flex items-center gap-x-2"
-      >
-        <img
-          class="size-6 rounded-full bg-gray-500"
-          {{#if user.avatar}}
-            src="{{ user.avatar }}"
-          {{else}}
-            src="https://robohash.org/{{user.id}}"
-          {{/if}}
-        >
-        <wc-selectmenu-indicator></wc-selectmenu-indicator>
-      </button>
+      <wc-selectmenu-trigger class="cursor-pointer">
+        <span class="pointer-events-none">
+          <wc-button>
+            <img
+              alt="Моя аватарка"
+              class="size-6 rounded-full bg-gray-500"
+              {{#if user.avatar}}
+                src="{{ user.avatar }}"
+              {{else}}
+                src="https://robohash.org/{{user.id}}"
+              {{/if}}
+            >
+            <wc-selectmenu-indicator></wc-selectmenu-indicator>
+          </wc-button>
+        </span>
       </wc-selectmenu-trigger>
     <wc-selectmenu-sheet placements="bottom,top">
       <wc-listbox>
