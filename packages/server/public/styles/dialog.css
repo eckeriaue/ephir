@@ -1,0 +1,25 @@
+dialog[open] {
+  animation: show 150ms ease normal;
+}
+
+dialog {
+  border: none;
+  outline: 1px solid #D0D7DE;
+  border-radius: 6px;
+}
+
+/* dialog.hide {
+  animation-direction: reverse;
+  animation: show 150ms ease normal;
+} */
+
+@keyframes show {
+  from {
+    scale: .75;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}

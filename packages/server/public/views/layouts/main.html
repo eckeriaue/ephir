@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../styles/checkbox.css">
   <link rel="stylesheet" href="../styles/label.css">
   <link rel="stylesheet" href="../styles/button.css">
+  <link rel="stylesheet" href="../styles/dialog.css">
   <link rel="stylesheet" href="../fonts/style.css">
     <!-- <script>
     window.__unocss = {
@@ -22,53 +23,9 @@
   * {
     font-family: 'Sf Pro Regular';
   }
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed,
-  figure, figcaption, footer, header, hgroup,
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-  body {
-    line-height: 1;
-  }
-  ol, ul {
-    list-style: none;
-  }
-  blockquote, q {
-    quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
   </style>
   <script src="https://unpkg.com/htmx.org@2.0.3/dist/htmx.js" integrity="sha384-BBDmZzVt6vjz5YbQqZPtFZW82o8QotoM7RUp5xOxV3nSJ8u2pSdtzFAbGKzTlKtg" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.11"></script> -->
 
   </script>
   <script type="importmap">
@@ -94,7 +51,11 @@
     <span class="text-3xl text-center inline-block font-medium">ingbook</span>
     {{#if user}}
     <div class="flex items-center gap-x-2">
-      <button class="kit-button secondary" type="button">
+      <button
+        class="kit-button secondary"
+        _="on click call #createPost's showModal() end"
+        type="button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -104,6 +65,22 @@
           <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
         </svg>
       </button>
+      <dialog id="createPost">
+        <section class="min-w-500px">
+          <div class="flex items-center justify-between">
+            <h2>Создать пост</h2>
+            <button
+              type="button"
+              _="on click call #createPost's close() end"
+              class="bg-transparent border-none cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </section>
+      </dialog>
       <wc-selectmenu>
         <wc-selectmenu-trigger class="cursor-pointer">
           <span>
@@ -126,9 +103,9 @@
           <wc-listitem>
             <button
               type="button"
-              hx-post="/signout"
-              hx-on::after-request="location.reload()"
-              hx-trigger="click">Выйти</button>
+              data-hx-post="/signout"
+              data-hx-on--after-request="location.reload()"
+              data-hx-trigger="click">Выйти</button>
           </wc-listitem>
         </wc-listbox>
       </wc-selectmenu-sheet>
