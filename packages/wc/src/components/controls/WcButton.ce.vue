@@ -35,6 +35,7 @@ button {
   align-items: center;
   column-gap: 8px;
   border: none;
+  width: 100%;
   outline: 1px solid #d0d7de;
   border-radius: 6px;
   padding: 6px 12px;

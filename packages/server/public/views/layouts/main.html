@@ -30,8 +30,8 @@
   dl, dt, dd, ol, ul, li,
   fieldset, form, label, legend,
   table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed, 
-  figure, figcaption, footer, header, hgroup, 
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
     margin: 0;
@@ -41,7 +41,7 @@
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure, 
+  article, aside, details, figcaption, figure,
   footer, header, hgroup, menu, nav, section {
     display: block;
   }
@@ -67,8 +67,8 @@
   <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
   <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
   <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.11"></script>
-  
-    
+  <script src="//unpkg.com/alpinejs" defer></script>
+
   </script>
   <script type="importmap">
     {
@@ -93,31 +93,50 @@
   <header class="flex items-center justify-between px-4 py-2 h-16 top-0 sticky shadow bg-white">
     <span class="text-3xl text-center inline-block font-medium">ingbook</span>
     {{#if user}}
-    <wc-selectmenu>
-      <wc-selectmenu-trigger class="cursor-pointer">
-        <span class="pointer-events-none">
-          <wc-button>
-            <img
-              alt="Моя аватарка"
-              class="size-6 rounded-full bg-gray-500"
-              {{#if user.avatar}}
-                src="{{ user.avatar }}"
-              {{else}}
-                src="https://robohash.org/{{user.id}}"
-              {{/if}}
-            >
-            <wc-selectmenu-indicator></wc-selectmenu-indicator>
-          </wc-button>
-        </span>
-      </wc-selectmenu-trigger>
-    <wc-selectmenu-sheet placements="bottom,top">
-      <wc-listbox>
-        <wc-listitem value="bebra">test me</wc-listitem>
-        <wc-listitem value="bebra">test me</wc-listitem>
-        <wc-listitem value="bebra">test me</wc-listitem>
-      </wc-listbox>
-    </wc-selectmenu-sheet>
-    </wc-selectmenu>
+    <div class="flex items-center gap-x-2">
+      <wc-button appearance="secondary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-4"
+        >
+          <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+        </svg>
+      </wc-button>
+      <wc-selectmenu>
+        <wc-selectmenu-trigger class="cursor-pointer">
+          <span class="pointer-events-none">
+            <wc-button>
+              <img
+                alt="Моя аватарка"
+                class="size-6 rounded-full bg-gray-500"
+                {{#if user.avatar}}
+                  src="{{ user.avatar }}"
+                {{else}}
+                  src="https://robohash.org/{{user.id}}"
+                {{/if}}
+              >
+              <wc-selectmenu-indicator></wc-selectmenu-indicator>
+            </wc-button>
+          </span>
+        </wc-selectmenu-trigger>
+      <wc-selectmenu-sheet placements="bottom,top">
+        <wc-listbox
+          x-data
+          x-on:select="event => {
+            const [type] = event.detail
+            if (type === 'exit') {
+              location.replace('/signin')
+            }
+          }
+          "
+        >
+          <wc-listitem value="exit">Выйти</wc-listitem>
+        </wc-listbox>
+      </wc-selectmenu-sheet>
+      </wc-selectmenu>
+    </div>
 
     {{/if}}
   </header>

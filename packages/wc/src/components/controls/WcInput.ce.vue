@@ -4,6 +4,7 @@
 
 <style scoped>
 input {
+  width: calc(100% - 16px);
   border: none;
   outline: 1px solid #D0D7DE;
   border-radius: 6px;

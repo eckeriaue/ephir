@@ -79,4 +79,10 @@ export default fp(function authPlugin(app) {
     })
   })
 
+  .post('/signout', function(req, rep) {
+    rep.setCookie('authorization', '')
+    rep.header('HX-Redirect', '/signin')
+    rep.redirect('/signin')
+  })
+
 })
