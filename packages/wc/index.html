@@ -8,24 +8,35 @@
   </head>
   <body>
     <div id="app">
-      <wc-selectmenu>
-        <wc-selectmenu-trigger>
-          test me
-          <wc-selectmenu-indicator></wc-selectmenu-indicator>
-        </wc-selectmenu-trigger>
-      <wc-selectmenu-sheet>
-        <div>test me 2</div>
-      </wc-selectmenu-sheet>
-      </wc-selectmenu>
+      <wc-input></wc-input>
+      <wc-button >test me</wc-button>
+      <wc-listbox>
+        <wc-listitem>1</wc-listitem>
+        <wc-listitem>2</wc-listitem>
+      </wc-listbox>
     </div>
+
     <script type="module">
       import { defineCustomElement } from 'vue'
-      import { WcSelectmenu,WcSelectmenuTrigger, WcSelectmenuSheet, WcSelectmenuIndicator } from '/src/main.js'
+      import {
+        WcSelectmenu,
+        WcSelectmenuTrigger,
+        WcSelectmenuSheet,
+        WcSelectmenuIndicator,
+        WcListbox,
+        WcListitem,
+        WcButton,
+        WcInput,
+      } from '/src/main.js'
 
+      customElements.define('wc-input', defineCustomElement(WcInput))
+      customElements.define('wc-button', defineCustomElement(WcButton))
       customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
       customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
       customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
       customElements.define('wc-selectmenu-indicator', defineCustomElement(WcSelectmenuIndicator))
+      customElements.define('wc-listbox', defineCustomElement(WcListbox))
+      customElements.define('wc-listitem', defineCustomElement(WcListitem))
     </script>
   </body>
 </html>
