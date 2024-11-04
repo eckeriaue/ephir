@@ -40,6 +40,13 @@ app
     rep.redirect('/signin')
   }
 })
+.get('/templates/:name', function(req, rep) {
+  return rep.viewAsync(`./templates/${req.params.name}.html`)
+})
+.post('/posts/create', function(req, rep) {
+  console.info(req.body.editor)
+})
+
 .listen({ port, host })
 .catch(err => {
    app.log.error(err)

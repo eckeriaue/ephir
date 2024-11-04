@@ -1,0 +1,44 @@
+
+<div
+  class="fixed inset-0 flex items-center justify-center bg-#00000069 h-dvh w-full"
+  _="on click remove me end"
+  id="createPost"
+>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+  <script async src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+
+  <form
+    _="on click  event.stopPropagation() end"
+    class="bg-white p-4 rounded-6px"
+    style="outline: 1px solid #D0D7DE;"
+    data-hx-post="/posts/create"
+    data-hx-on--before-request="createPost.remove()"
+  >
+    <section class="min-w-500px">
+      <div class="flex items-center justify-between">
+        <h2>Создать пост</h2>
+        <button
+          type="button"
+          _="on click call #createPost's close() end"
+          class="bg-transparent border-none cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+
+      <input id="editorContent" name="editor" type="hidden">
+      <trix-toolbar id="editorToolbar"></trix-toolbar>
+      <trix-editor toolbar="editorToolbar" input="editorContent"></trix-editor>
+
+      <div class="flex items-center justify-end gap-x-2 mt-6">
+        <button class="kit-button" type="reset">Отменить</button>
+        <button class="kit-button secondary" type="submit">Создать</button>
+      </div>
+
+    </section>
+  </form>
+</div>
