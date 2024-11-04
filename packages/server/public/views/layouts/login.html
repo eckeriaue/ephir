@@ -9,6 +9,8 @@
 
   <link rel="stylesheet" href="../styles/checkbox.css">
   <link rel="stylesheet" href="../styles/label.css">
+  <link rel="stylesheet" href="../styles/button.css">
+  <link rel="stylesheet" href="../styles/input.css">
   <link rel="stylesheet" href="../fonts/style.css">
     <!-- <script>
     window.__unocss = {
@@ -67,23 +69,6 @@
     border-spacing: 0;
   }
   </style>
-  
-  <script type="importmap">
-    {
-      "imports": {
-        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
-      }
-    }
-  </script>
-  <script type="module">
-    import { defineCustomElement } from 'vue'
-    import {
-      WcButton,
-      WcInput,
-    } from '../../wc/main.js'
-    customElements.define('wc-input', defineCustomElement(WcInput))
-    customElements.define('wc-button', defineCustomElement(WcButton))
-  </script>
 </head>
 <body>
   <div class="h-dvh flex items-center justify-center">

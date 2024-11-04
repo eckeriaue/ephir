@@ -6,6 +6,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="../styles/checkbox.css">
   <link rel="stylesheet" href="../styles/label.css">
+  <link rel="stylesheet" href="../styles/button.css">
   <link rel="stylesheet" href="../fonts/style.css">
     <!-- <script>
     window.__unocss = {
@@ -67,7 +68,6 @@
   <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
   <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
   <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.11"></script>
-  <script src="//unpkg.com/alpinejs" defer></script>
 
   </script>
   <script type="importmap">
@@ -79,14 +79,13 @@
   </script>
   <script type="module">
     import { defineCustomElement } from 'vue'
-    import { WcSelectmenu, WcSelectmenuTrigger, WcListitem, WcButton, WcSelectmenuSheet, WcListbox, WcSelectmenuIndicator } from '../../wc/main.js'
+    import { WcSelectmenu, WcSelectmenuTrigger, WcListitem, WcSelectmenuSheet, WcListbox, WcSelectmenuIndicator } from '../../wc/main.js'
     customElements.define('wc-selectmenu', defineCustomElement(WcSelectmenu))
     customElements.define('wc-selectmenu-trigger', defineCustomElement(WcSelectmenuTrigger))
     customElements.define('wc-selectmenu-sheet', defineCustomElement(WcSelectmenuSheet))
     customElements.define('wc-selectmenu-indicator', defineCustomElement(WcSelectmenuIndicator))
     customElements.define('wc-listbox', defineCustomElement(WcListbox))
     customElements.define('wc-listitem', defineCustomElement(WcListitem))
-    customElements.define('wc-button', defineCustomElement(WcButton))
   </script>
 </head>
 <body>
@@ -94,7 +93,7 @@
     <span class="text-3xl text-center inline-block font-medium">ingbook</span>
     {{#if user}}
     <div class="flex items-center gap-x-2">
-      <wc-button appearance="secondary">
+      <button class="kit-button secondary" type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -103,11 +102,11 @@
         >
           <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
         </svg>
-      </wc-button>
+      </button>
       <wc-selectmenu>
         <wc-selectmenu-trigger class="cursor-pointer">
           <span class="pointer-events-none">
-            <wc-button>
+            <button class="kit-button flex items-center gap-x-2" type="button">
               <img
                 alt="Моя аватарка"
                 class="size-6 rounded-full bg-gray-500"
@@ -118,7 +117,7 @@
                 {{/if}}
               >
               <wc-selectmenu-indicator></wc-selectmenu-indicator>
-            </wc-button>
+            </button>
           </span>
         </wc-selectmenu-trigger>
       <wc-selectmenu-sheet placements="bottom,top">
