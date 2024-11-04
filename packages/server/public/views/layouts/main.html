@@ -66,20 +66,22 @@
         </svg>
       </button>
       <dialog id="createPost">
-        <section class="min-w-500px">
-          <div class="flex items-center justify-between">
-            <h2>Создать пост</h2>
-            <button
-              type="button"
-              _="on click call #createPost's close() end"
-              class="bg-transparent border-none cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </section>
+        <form>
+          <section class="min-w-500px">
+            <div class="flex items-center justify-between">
+              <h2>Создать пост</h2>
+              <button
+                type="button"
+                _="on click call #createPost's close() end"
+                class="bg-transparent border-none cursor-pointer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </section>
+        </form>
       </dialog>
       <wc-selectmenu>
         <wc-selectmenu-trigger class="cursor-pointer">
