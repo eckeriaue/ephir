@@ -30,18 +30,18 @@ app
 })
 .get('/', function(req, rep) {
   if (req.isAuth()) {
-    return rep.view('posts.html', {
+    return rep.view('posts', {
       user: req.user,
     }, {
       posts: [],
-      layout: './layouts/main.html'
+      layout: './layouts/main'
     })
   } else {
     rep.redirect('/signin')
   }
 })
 .get('/templates/:name', function(req, rep) {
-  return rep.viewAsync(`./templates/${req.params.name}.html`)
+  return rep.viewAsync(`./templates/${req.params.name}`)
 })
 .post('/posts/create', function(req, rep) {
   console.info(req.body.editor)

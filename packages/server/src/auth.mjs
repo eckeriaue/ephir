@@ -27,11 +27,11 @@ export default fp(function authPlugin(app) {
       eq(users.email, email)
     )
     if (!user) {
-      rep.code(200).send(await rep.viewAsync('login.html', {
+      rep.code(200).send(await rep.viewAsync('login', {
         errors: ['Пользователь не найден']
       }))
     } else if (user.password !== password) {
-      rep.code(200).send(await rep.viewAsync('login.html', {
+      rep.code(200).send(await rep.viewAsync('login', {
         errors: ['Не верный пароль']
       }))
     }
@@ -39,8 +39,8 @@ export default fp(function authPlugin(app) {
     rep.header('HX-Redirect', '/')
   })
   .get('/signin', function(req, rep) {
-    return rep.view('login.html', undefined, {
-      layout: './layouts/login.html',
+    return rep.view('login', undefined, {
+      layout: './layouts/login',
     })
   })
 
@@ -55,7 +55,7 @@ export default fp(function authPlugin(app) {
       req.body,
     )
     if (output.password !== output.repeadPassword) {
-      const registerForm = await rep.viewAsync('register.html', { errors: ['Пароли не совпадают'] })
+      const registerForm = await rep.viewAsync('register', { errors: ['Пароли не совпадают'] })
       rep.code(200).send(registerForm)
     }
     output.password = encode(output.password)
@@ -74,8 +74,8 @@ export default fp(function authPlugin(app) {
     rep.header('HX-Redirect', '/')
   })
   .get('/signup', function(req, rep) {
-    return rep.view('register.html', undefined, {
-      layout: './layouts/login.html',
+    return rep.view('register', undefined, {
+      layout: './layouts/login',
     })
   })
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch --env-file=.env index.mjs",
+    "dev": "concurrently \"node --watch --env-file=.env index.mjs\" \"unocss \"./public/views/**/*.hbs\" --out-file \"./public/styles/style.css\" --watch --minify \"",
     "prod": "node --env-file=.env index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,5 +29,11 @@
     "valibot": "^0.42.1"
   },
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@unocss/cli": "^0.64.0",
+    "@unocss/preset-rem-to-px": "^0.64.0",
+    "concurrently": "^9.1.0",
+    "unocss": "^0.64.0"
+  }
 }
