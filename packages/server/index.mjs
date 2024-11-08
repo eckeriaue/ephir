@@ -2,6 +2,9 @@ import fastify from 'fastify'
 import { env } from 'node:process'
 import { fileURLToPath } from 'node:url'
 import handlebars from 'handlebars'
+import { nonEmpty, object, pipe, safeParse, string } from 'valibot'
+import { db } from './src/db.mjs'
+import { images, posts, users } from './src/db/tables/schema.mjs'
 
 const port = parseInt(env.PORT || '3000')
 const host = env.HOST || '127.0.0.1'
@@ -28,7 +31,9 @@ app
 .register(import('@fastify/static'), {
   root: fileURLToPath(new URL('./public', import.meta.url)),
 })
-.get('/', function(req, rep) {
+.get('/', async function(req, rep) {
+
+
   if (req.isAuth()) {
     return rep.view('posts', {
       user: req.user,
@@ -44,7 +49,13 @@ app
   return rep.viewAsync(`./templates/${req.params.name}`)
 })
 .post('/posts/create', function(req, rep) {
-  console.info(req.body.editor)
+  const { output } = safeParse(
+    object({
+      name: pipe(string(), nonEmpty()),
+      editor: pipe(string(), nonEmpty())
+    }),
+    req.body
+  )
 })
 
 .listen({ port, host })
