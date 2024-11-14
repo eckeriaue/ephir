@@ -1,0 +1,5 @@
+@import url('./fonts/style.css');
+* {
+  font-family: 'Sf Pro Regular';
+  letter-spacing: 1px;
+}
