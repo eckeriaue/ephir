@@ -1,13 +1,24 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-BETWqZgd.css",
+    "file": "assets/app-CXRPkm_I.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/fonts/SF-Pro-Display-Medium.otf": {
+    "file": "assets/SF-Pro-Display-Medium-DSttQARu.otf",
+    "src": "resources/css/fonts/SF-Pro-Display-Medium.otf"
+  },
+  "resources/css/fonts/SF-Pro-Display-Regular.otf": {
+    "file": "assets/SF-Pro-Display-Regular-DF_3XEGl.otf",
+    "src": "resources/css/fonts/SF-Pro-Display-Regular.otf"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-BjCBnTiP.js",
+    "file": "assets/app-C3DNqyrk.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "css": [
+      "assets/app-COJaCQlX.css"
+    ]
   }
 }
