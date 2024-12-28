@@ -2,4 +2,11 @@
 * {
   font-family: 'Sf Pro Regular';
   letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input {
+    border: none;
 }
