@@ -14,12 +14,8 @@
     </head>
     <body class="font-sans antialiased h-screen">
         <div class="h-full bg-gray-100 dark:bg-gray-900">
-
-            <main>
-            <div class="hover:(bg-red-400 font-bold) text-center sm:text-left">
-              <div class=":uno: text-32px">test 2</div>
-            </div>
-            </main>
+            <x-nav-header />
+            постов пока нет
         </div>
     </body>
 </html>
