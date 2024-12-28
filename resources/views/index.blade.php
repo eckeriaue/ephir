@@ -17,7 +17,7 @@
 
             <main>
             <div class="hover:(bg-red-400 font-bold) text-center sm:text-left">
-              <div class=":uno: text-32px">test</div>
+              <div class=":uno: text-32px">test 2</div>
             </div>
             </main>
         </div>
