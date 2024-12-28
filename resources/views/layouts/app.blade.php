@@ -10,6 +10,8 @@
         <!-- Fonts -->
 
         <!-- Scripts -->
+        <script defer src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.12"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">

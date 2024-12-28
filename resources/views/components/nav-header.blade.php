@@ -3,7 +3,12 @@
         <x-application-logo />
         <div>
             @auth
-                <span> no guest </span>
+                <x-dropdown>
+                    <x-slot:target>
+                        <span> no guest </span>
+                    </x-slot>
+                    <div> test me</div>
+                </x-dropdown>
             @else
                 <span> guest </span>
             @endauth
