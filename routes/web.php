@@ -2,9 +2,26 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\Post;
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', function (Request $request) {
+    $offset = $request->query('offset', 0);
+    $limit = $request->query('limit', 20);
+    return view('index', (array) literal(
+        posts: Post::orderBy('id', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get(),
+    ));
+});
+
+Route::middleware('auth:sanctum')->prefix('api')->group(function() {
+    Route::prefix('posts')->group(function() {
+        Route::post('create', function (Request $request) {
+            return literal(testme: 42);
+        });
+    });
 });
 
 Route::middleware('auth')->group(function () {
