@@ -21,5 +21,19 @@ export default defineConfig({
       './storage/framework/views/*.php',
       './resources/views/**/*.blade.php',
     ]
+  },
+  animation: {
+      keyframes: {
+        spin: "{0%,100% {transform:rotate(-3deg)} 50% {transform:rotate(30deg)}}",
+      },
+      durations: {
+        spin: "1s",
+      },
+      timingFns: {
+        spin: "ease-in-out",
+      },
+      counts: {
+        spin: "infinite",
+      },
   }
 })

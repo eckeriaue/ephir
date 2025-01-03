@@ -18,8 +18,8 @@ Route::get('/', function (Request $request) {
 
 Route::prefix('templates')->group(function() {
     Route::get('/create-post', function() {
-
-    })->name('posts.create-modal');
+        return view('./components/posts/create-post-modal');
+    })->name('templates.posts.create-modal');
 });
 
 Route::middleware('auth:sanctum')->prefix('api')->group(function() {
