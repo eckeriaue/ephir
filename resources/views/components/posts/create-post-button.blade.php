@@ -14,6 +14,6 @@
 >
     <span class="inline-flex gap-x-2">
         <span> 🪶 </span>
-        <x-loader id="createPost" size="16" />
+        <x-loader id="createPost" class="size-4" />
     </span>
 </x-button>
