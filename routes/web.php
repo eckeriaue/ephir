@@ -16,11 +16,17 @@ Route::get('/', function (Request $request) {
     ));
 });
 
+Route::prefix('templates')->group(function() {
+    Route::get('/create-post', function() {
+
+    })->name('posts.create-modal');
+});
+
 Route::middleware('auth:sanctum')->prefix('api')->group(function() {
     Route::prefix('posts')->group(function() {
         Route::post('create', function (Request $request) {
             return literal(testme: 42);
-        });
+        })->name('posts.create');
     });
 });
 

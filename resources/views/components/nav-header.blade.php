@@ -1,7 +1,8 @@
 <header class="bg-white">
     <div class="h-16 flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <x-application-logo />
-        <div>
+        <nav class="flex items-center gap-x-3">
+            <x-posts.create-post-button />
             <div x-data>
                 <x-button
                     @click="$refs.panel.toggle"
@@ -30,6 +31,6 @@
                     </div>
                 </x-menu>
             </div>
-        </div>
+        </nav>
     </div>
 </header>

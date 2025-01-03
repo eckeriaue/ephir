@@ -6,7 +6,7 @@
         ])
     }}
     @class([
-        'uppercase text-xs inline-flex items-center px-4 py-2',
+        'uppercase text-xs inline-flex items-center px-4 py-2 cursor-pointer disabled:cursor-not-allowed',
         "
             bg-gray-800 dark:bg-gray-200 border
             border-transparent rounded-md font-semibold
