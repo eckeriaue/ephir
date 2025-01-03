@@ -1,3 +1,5 @@
 <x-app-layout>
-    <div> test me </div>
+    <div class="max-w-[510px] mx-auto py-4 md:py-12">
+
+    </div>
 </x-app-layout>
