@@ -4,13 +4,31 @@
         <div>
             @auth
                 <x-dropdown>
-                    <x-slot:target>
-                        <span> no guest </span>
+                    <x-slot:target appearance="secondary">
+                        <span>
+                            {{ auth()->user()->name }}
+                        </span>
                     </x-slot>
-                    <div> test me</div>
+                    <div> test me 2 </div>
                 </x-dropdown>
             @else
-                <span> guest </span>
+            <div x-data>
+                <x-button
+                    @click="$refs.panel.toggle">
+                    Гость
+                </x-button>
+                <x-menu
+                    x-cloak
+                    x-ref="panel"
+                    x-transition=""
+                    x-float.placement.bottom-start.flip.offset=""
+                >
+                    <div class="flex flex-col gap-y-2">
+                        <x-link href="{{ route('register') }}"> Зарегистрироваться </x-link>
+                        <x-link href="{{ route('login') }}"> Войти </x-link>
+                    </div>
+                </x-menu>
+            </div>
             @endauth
         </div>
     </div>

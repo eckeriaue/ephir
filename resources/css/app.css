@@ -10,3 +10,5 @@
 input {
     border: none;
 }
+
+[x-cloak] { display: none !important; }

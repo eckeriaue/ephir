@@ -1,14 +1,11 @@
-@props(['href'])
-
-<a
+<menu
     {{
         $attributes->merge([
-            'href' => $href,
             'class' => "
-                text-#0969DA underline
+                fixed bg-white truncate rounded-md px-4 py-2 shadow list-none
             "
         ])
     }}
 >
     {{ $slot }}
-</a>
+</menu>
