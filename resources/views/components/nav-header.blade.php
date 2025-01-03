@@ -14,7 +14,9 @@
             @else
             <div x-data>
                 <x-button
-                    @click="$refs.panel.toggle">
+                    @click="$refs.panel.toggle"
+                    appearance="secondary"
+                >
                     Гость
                 </x-button>
                 <x-menu

@@ -5,7 +5,10 @@
         $attributes->merge([
             'href' => $href,
             'class' => "
-                text-#0969DA underline
+            font-medium text-black decoration-none
+            underline-offset-2 hover:underline
+            focus:underline focus:outline-none
+            dark:text-white
             "
         ])
     }}
