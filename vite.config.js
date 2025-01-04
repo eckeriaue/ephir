@@ -6,7 +6,12 @@ export default defineConfig({
     plugins: [
         UnoCSS(),
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/js/editor.js',
+                'resources/js/slider.js'
+            ],
             refresh: true,
         }),
     ],

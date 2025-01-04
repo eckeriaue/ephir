@@ -1,7 +1,21 @@
 
 <x-button
         x-data="{
+            get maxFileSize() {
+                return 2048
+            },
             isOpen: false,
+            validateAndSendEvent(event) {
+                const files = Array.from(event.target.files)
+                if (files.some(file => {
+                    return file.size >= this.maxFileSize
+                })) {
+                    const expectedFile = files.find(file => file.size >= this.maxFileSize)
+                    alert(`Разрер файла '${expectedFile.name}' слишком большой. Максимальный размер файла: ${this.maxFileSize} кбайт`)
+                } else {
+                    $dispatch('toolbar:load-images', { files })
+                }
+            }
         }"
         appearance="text"
         x-ref="button"
@@ -13,7 +27,7 @@
         type="file"
         multiple
         x-ref="inputElement"
-        @change="$dispatch('toolbar:load-images', { files: Array.from($event.target.files) })"
+        @change="validateAndSendEvent($event)"
         accept="image/*"
         name="attachmentFiles[]"
         hidden

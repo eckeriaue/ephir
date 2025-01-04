@@ -37,6 +37,7 @@
             css-mode="true"
             space-between="24"
             navigation="true"
+            class="rounded-2xl overflow-hidden"
         >
             @foreach($post->images as $image)
                 <swiper-slide>
