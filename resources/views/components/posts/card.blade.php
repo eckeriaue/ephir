@@ -6,7 +6,7 @@
 
 <article class="bg-white rounded-xl shadow-sm mb-4 p-5">
 
-    <header class="flex gap-x-3 mb-4">
+    <header class="flex gap-x-3">
         <div x-data class="w-8 h-8 flex items-center justify-center  overflow-hidden rounded-full bg-primary">
             <img
                 x-cloak
@@ -24,7 +24,26 @@
         </div>
     </header>
 
-    <div>
+    <div class="my-4">
         {!! $post->content_html !!}
     </div>
+
+
+
+    @if (count($post->images) > 0)
+        <swiper-container
+            slides-per-view="1"
+            speed="500"
+            css-mode="true"
+            space-between="24"
+            navigation="true"
+        >
+            @foreach($post->images as $image)
+                <swiper-slide>
+                    <div class="bg-cover bg-no-repeat bg-center rounded-2xl h-500px" style="background-image: url('{{ $image->src }}')">
+                    </div>
+                </swiper-slide>
+            @endforeach
+        </swiper-container>
+    @endif
 </article>
