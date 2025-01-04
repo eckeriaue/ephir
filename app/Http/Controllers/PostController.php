@@ -5,7 +5,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\{Post,PostImage};
-use Buglinjo\LaravelWebp\Facades\Webp;
 use Illuminate\Support\Facades\Storage;
 
 function jsonToHtml($data)
@@ -122,5 +121,9 @@ class PostController extends Controller
                 ->with('images')
                 ->get(),
         ));
+    }
+
+    public function read($id): View {
+        return view('read-post', ['id' => $id]);
     }
 }

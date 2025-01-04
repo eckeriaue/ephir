@@ -47,4 +47,11 @@
             @endforeach
         </swiper-container>
     @endif
+
+    <div class="mt-4">
+        <x-button.text @click="$clipboard('{{ route('posts.read', ['id' => $post->id]) }}')">
+            <span class="text-16px pr-2 ph ph-share"></span>
+            <span>Поделиться</span>
+        </x-button.text>
+    </div>
 </article>
