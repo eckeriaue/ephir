@@ -1,17 +1,18 @@
 
 <x-button
-        x-data
-        @mouseenter="$refs.previewImage.open"
-        @mouseleave="$refs.previewImage.close"
+        x-data="{ isOpen: false }"
         appearance="text"
+        x-ref="button"
+        @mouseenter="isOpen = true"
+        @mouseleave="isOpen = false"
     >
         <span class="ph ph-images text-18px"></span>
         <span
-            class="fixed "
-            x-cloak
-            x-ref="previewImage"
-            x-transition=""
-            x-float.placement.top.bottom.flip.offset=""
+            x-show="isOpen"
+            x-cloack
+            x-transition
+            x-anchor.bottom.bottom-start.bottom-end.top.top-start.top-end.offset.4="$refs.button"
+            class="bg-white p-1 rounded-md shadow"
         >
             Добавить изображение
         </span>
