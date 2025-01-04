@@ -2,7 +2,7 @@
 <x-button
         x-data="{
             get maxFileSize() {
-                return 2048
+                return 2048000
             },
             isOpen: false,
             validateAndSendEvent(event) {
@@ -11,7 +11,7 @@
                     return file.size >= this.maxFileSize
                 })) {
                     const expectedFile = files.find(file => file.size >= this.maxFileSize)
-                    alert(`Разрер файла '${expectedFile.name}' слишком большой. Максимальный размер файла: ${this.maxFileSize} кбайт`)
+                    alert(`Разрер файла '${expectedFile.name}' слишком большой. Максимальный размер файла: 2048 кбайт`)
                 } else {
                     $dispatch('toolbar:load-images', { files })
                 }
