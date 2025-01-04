@@ -4,7 +4,9 @@
         <x-posts.create-post-button />
 
         @forelse ($posts as $post)
-            <pre>{{$post->images}}</pre>
+            @foreach($post->images as $image)
+                <img src="{{ $image->src }}">
+            @endforeach
             <x-posts.card :user="$post->user" :createdAt="$post->created_at">
                 {!! $post->content_html !!}
             </x-posts.card>

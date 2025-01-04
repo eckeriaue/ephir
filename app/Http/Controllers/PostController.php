@@ -96,10 +96,12 @@ class PostController extends Controller
 
 
         if ($attachmentFiles = $request->file('attachmentFiles')) {
+            $userId = auth()->id();
+            $path = "user-$userId-post-{$post->id}";
             foreach ($attachmentFiles as $attachmentFile) {
                 $postImage = PostImage::create([
                     'post_id' => $post->id,
-                    'src' => Storage::url($attachmentFile->store()),
+                    'src' => Storage::url(Storage::disk('public')->put($path, $attachmentFile)),
                 ])->save();
             }
         }
