@@ -15,6 +15,14 @@ export default defineConfig({
     transformerVariantGroup(),
     transformerCompileClass()
   ],
+  theme: {
+      colors: {
+          primary: `var(--primary, #1B1C25)`,
+          secondary: `var(--secondary, #1F4068)`,
+          accent: `var(--accent, #206A5D)`,
+          surface: `var(--secondary, #EBECF1)`,
+      }
+  },
   content: {
     filesystem: [
       './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
