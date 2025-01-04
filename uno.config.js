@@ -17,10 +17,16 @@ export default defineConfig({
   ],
   theme: {
       colors: {
-          primary: `var(--primary, #1B1C25)`,
-          secondary: `var(--secondary, #1F4068)`,
-          accent: `var(--accent, #206A5D)`,
-          surface: `var(--secondary, #EBECF1)`,
+        surface: `var(--secondary, #F5F7F8)`,
+        accent: `var(--accent, #F4CE14)`,
+        secondary: `var(--secondary, #379777)`,
+        primary: {
+            DEFAULT: `var(--primary, #45474B)`
+        },
+          // primary: `var(--primary, #1B1C25)`,
+          // secondary: `var(--secondary, #1F4068)`,
+          // accent: `var(--accent, #206A5D)`,
+          // surface: `var(--secondary, #EBECF1)`,
       }
   },
   content: {

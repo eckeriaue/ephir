@@ -6,7 +6,7 @@
             <div x-data>
                 <x-button
                     @click="$refs.panel.toggle"
-                    appearance="secondary"
+                    appearance="text"
                 >
                     @auth
                         {{ auth()->user()->name }}
