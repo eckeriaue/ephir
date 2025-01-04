@@ -4,6 +4,8 @@ import EditorJS from '@editorjs/editorjs'
 const holder = document.getElementById('editor')
 const editor = new EditorJS({
     holder,
+    minHeight: 0,
+    autofocus: true,
     /**
      * Tools list
      */
@@ -126,6 +128,3 @@ const editor = new EditorJS({
   });
 
 Reflect.set(holder, '$editor', editor)
-editor.isReady.then(() => {
-    editor.focus()
-})
