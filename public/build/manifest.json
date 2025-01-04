@@ -13,12 +13,12 @@
     "src": "resources/css/fonts/SF-Pro-Display-Regular.otf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-CD2Bi0fs.js",
+    "file": "assets/app-B4lm-QQv.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-Dv_F_7s5.css"
+      "assets/app-iL4ZZyUf.css"
     ]
   }
 }
