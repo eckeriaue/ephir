@@ -16,7 +16,7 @@
         <div class="flex flex-col">
             <span> {{ $user->name }}</span>
             <a href="#" class="text-primary decoration-none hover:underline">
-                <time> {{ (new \Carbon\Carbon($createdAt, new DateTimeZone('Europe/Moscow')))->format('M Y g:i:s')}}</time>
+                <time> {{ (new \Carbon\Carbon($createdAt, new DateTimeZone('Europe/Moscow')))->locale('ru')->diffForHumans() }}</time>
             </a>
         </div>
     </header>
