@@ -22,8 +22,13 @@
         <x-input-label for="postName"> Название </x-input-label>
         <x-text-input id="postName" class="mb-4 mt-1" />
 
-        <div id="editor" class="
-            border-2 border-surface focus-within:border-secondary border-solid mb-4 p-2 rounded-lg"></div>
+        <div id="editor" class="border-2 border-surface focus-within:border-secondary border-solid mb-4 p-2 rounded-lg"></div>
+
+
+        <div>
+            <x-posts.toolbar-add-image />
+        </div>
+
         <div class="flex justify-end gap-x-3">
             <x-button appearance="text" @click="isOpen = false">отменить</x-button>
             <x-button>сохранить</x-button>

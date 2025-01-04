@@ -21,6 +21,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@alpinejs/anchor": "^3.14.8",
         "@alpinejs/focus": "^3.14.8",
         "@awcodes/alpine-floating-ui": "^3.6.3",
         "@editorjs/editorjs": "^2.30.7",
