@@ -27,10 +27,10 @@
                         navigation="true"
                         class="mt-4"
                     >
-                        <template x-for="preview in files.map(file => URL.createObjectURL(file))">
-                            <swiper-slide>
+                        <template x-for="file in files">
+                            <swiper-slide style="position:relative">
                                 <div style="height:160px;width:160px;" class="border border-surface border-solid object-cover overflow-hidden flex items-center justify-center rounded-lg">
-                                    <img :src="preview" loading="lazy" style="pointer-events:none">
+                                    <img :src="URL.createObjectURL(file)" loading="lazy" style="pointer-events:none">
                                     <x-loader class="size-6" />
                                 </div>
                             </swiper-slide>
