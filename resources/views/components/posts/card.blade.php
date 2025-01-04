@@ -17,8 +17,8 @@
             <x-loader size="32" x-ref="spinner" />
         </div>
         <div class="flex flex-col">
-            <span> {{ $user->name }}</span>
-            <a href="#" class="text-primary decoration-none hover:underline">
+            <span class="text-14px"> {{ $user->name }}</span>
+            <a href="#" class="text-primary text-12px decoration-none hover:underline">
                 <time> {{ (new \Carbon\Carbon($createdAt, new DateTimeZone('Europe/Moscow')))->locale('ru')->diffForHumans() }}</time>
             </a>
         </div>

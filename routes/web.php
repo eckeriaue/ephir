@@ -6,17 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
-Route::get('/', function (Request $request) {
-    $offset = $request->query('offset', 0);
-    $limit = $request->query('limit', 20);
-    return view('index', (array) literal(
-        posts: Post::orderBy('id', 'desc')
-            ->offset($offset)
-            ->limit($limit)
-            ->with('user')
-            ->get(),
-    ));
-})->name('index');
+Route::get('/', [PostController::class, 'getAll'])->name('index');
 
 Route::prefix('templates')->group(function() {
    /* Место для того, чтобы отдавать шаблоны htmx */

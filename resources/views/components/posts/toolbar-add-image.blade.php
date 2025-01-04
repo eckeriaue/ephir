@@ -15,7 +15,7 @@
         x-ref="inputElement"
         @change="$dispatch('toolbar:load-images', { files: Array.from($event.target.files) })"
         accept="image/*"
-        name="attachmentFiles"
+        name="attachmentFiles[]"
         hidden
     >
     <span class="ph ph-images text-18px"></span>

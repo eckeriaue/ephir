@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->json('content_json');
-            $table->text('content_html');
-            $table->dropColumn('content');
+        Schema::create('post_images', function (Blueprint $table) {
+            $table->id();
+            $table->string('src');
+            $table->foreignId('post_id')->constrained();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('post_images');
     }
 };

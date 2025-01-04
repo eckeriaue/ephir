@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\{Post,PostImage};
+use Buglinjo\LaravelWebp\Facades\Webp;
+use Illuminate\Support\Facades\Storage;
 
 function jsonToHtml($data)
 {
@@ -91,7 +94,31 @@ class PostController extends Controller
         ]);
         $post->save();
 
-        return redirect()->route('index');
-    }
 
+        if ($attachmentFiles = $request->file('attachmentFiles')) {
+            foreach ($attachmentFiles as $attachmentFile) {
+                $postImage = PostImage::create([
+                    'post_id' => $post->id,
+                    'src' => Storage::url($attachmentFile->store()),
+                ])->save();
+            }
+        }
+
+        return to_route('index');
+    }
+    /**
+     * @return View
+     */
+    public function getAll(Request $request): View {
+        $offset = $request->query('offset', 0);
+        $limit = $request->query('limit', 20);
+        return view('index', (array) literal(
+            posts: Post::orderBy('id', 'desc')
+                ->offset($offset)
+                ->limit($limit)
+                ->with('user')
+                ->with('images')
+                ->get(),
+        ));
+    }
 }

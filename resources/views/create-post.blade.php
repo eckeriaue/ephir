@@ -4,6 +4,7 @@
             x-data="{
                 files: [],
             }"
+            enctype="multipart/form-data"
             @toolbar:load-images="files = [...files, ...$event.detail.files]"
             method="POST"
             action="{{ route('api.posts.create', absolute: false) }}"
