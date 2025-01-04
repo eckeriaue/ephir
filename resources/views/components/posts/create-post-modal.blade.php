@@ -10,10 +10,16 @@
         style="opacity:.4;backdrop-filter: blur(0.01px);"
     ></div>
 
-    <div style="z-index:2;"
+    <form
+        style="z-index:2;"
         id="createPostModalContainer"
         x-transition
+        x-data="{
+            files: [],
+        }"
         x-show="isOpen"
+        @toolbar:load-images="files = $event.detail.files"
+        @reset="isOpen = false"
         class="relative bg-white mt-16 max-w-[510px] mx-auto p-5 rounded-xl
         transition ease-in-out duration-150"
     >
@@ -26,13 +32,18 @@
 
 
         <div>
-            <x-posts.toolbar-add-image />
+            <div>
+                <x-posts.toolbar-add-image />
+            </div>
+            <template x-for="preview in files.map(file => URL.createObjectURL(file))">
+                <img :src="preview" >
+            </template>
         </div>
 
         <div class="flex justify-end gap-x-3">
-            <x-button appearance="text" @click="isOpen = false">отменить</x-button>
-            <x-button>сохранить</x-button>
+            <x-button type="reset" appearance="text">отменить</x-button>
+            <x-button type="submit">сохранить</x-button>
         </div>
-    </div>
+    </form>
     @vite('resources/js/editor.js')
 </div>
