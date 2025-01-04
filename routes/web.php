@@ -20,11 +20,20 @@ Route::prefix('templates')->group(function() {
    /* Место для того, чтобы отдавать шаблоны htmx */
 });
 
-Route::middleware('auth:sanctum')->prefix('api')->group(function() {
+Route::middleware('auth')->group(function() {
+
     Route::prefix('posts')->group(function() {
-        Route::post('create', function (Request $request) {
-            return literal(testme: 42);
+        Route::get('/create', function() {
+                return view('create-post');
         })->name('posts.create');
+    });
+
+    Route::prefix('api')->group(function() {
+        Route::prefix('posts')->group(function() {
+            Route::post('create', function (Request $request) {
+                return literal(testme: 42);
+            })->name('api.posts.create');
+        });
     });
 });
 

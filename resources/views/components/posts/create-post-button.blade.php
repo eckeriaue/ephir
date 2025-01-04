@@ -9,6 +9,8 @@
     <x-button
         style="width:100%"
         appearance="text"
+        as="a"
+        href="{{ route('posts.create') }} "
         @click="isOpen = true"
     >
         <span class="inline-flex gap-x-2">
@@ -16,8 +18,5 @@
             <x-loader id="createPost" class="size-4" />
         </span>
     </x-button>
-    <template x-teleport="body">
-        <x-posts.create-post-modal />
-    </template>
 </div>
 @endauth
