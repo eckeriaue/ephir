@@ -23,6 +23,7 @@
     "dependencies": {
         "@alpinejs/focus": "^3.14.8",
         "@awcodes/alpine-floating-ui": "^3.6.3",
+        "@editorjs/editorjs": "^2.30.7",
         "@unocss/reset": "^0.64.0"
     }
 }

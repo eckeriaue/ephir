@@ -7,6 +7,5 @@
                 <p class="p-5">Постов пока нет</p>
             </div>
         @endforelse
-
     </div>
 </x-app-layout>
