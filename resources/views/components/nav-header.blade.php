@@ -3,16 +3,15 @@
         <x-application-logo />
         <nav class="flex items-center gap-x-3">
             <div x-data>
-                <x-button
+                <x-button.text
                     @click="$refs.panel.toggle"
-                    appearance="text"
                 >
                     @auth
                         {{ auth()->user()->name }}
                     @else
                         Гость
                     @endauth
-                </x-button>
+                </x-button.text>
                 <x-menu
                     x-cloak
                     x-ref="panel"

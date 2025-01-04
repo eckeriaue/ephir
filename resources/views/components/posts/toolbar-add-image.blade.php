@@ -1,5 +1,5 @@
 
-<x-button
+<x-button.text
         x-data="{
             get maxFileSize() {
                 return 2048000
@@ -17,7 +17,6 @@
                 }
             }
         }"
-        appearance="text"
         x-ref="button"
         @mouseenter="isOpen = true"
         @mouseleave="isOpen = false"
@@ -42,4 +41,4 @@
     >
         Добавить изображение
     </span>
-</x-button>
+</x-button.text>

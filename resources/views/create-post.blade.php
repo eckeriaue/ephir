@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex justify-end gap-x-3 sticky z-[3] bottom-0 bg-white p-1">
-                <x-button type="submit">Опубликовать</x-button>
+                <x-button.primary type="submit">Опубликовать</x-button.primary>
             </div>
         </form>
 
