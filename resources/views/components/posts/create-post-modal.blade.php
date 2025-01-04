@@ -1,6 +1,6 @@
 <div
     class="fixed inset-0
-    transition-all"
+    transition-all overflow-scroll"
     x-show="isOpen"
 >
 
@@ -40,7 +40,7 @@
             </template>
         </div>
 
-        <div class="flex justify-end gap-x-3">
+        <div class="flex justify-end gap-x-3 sticky bottom-0 bg-white p-1">
             <x-button type="reset" appearance="text">отменить</x-button>
             <x-button type="submit">сохранить</x-button>
         </div>
