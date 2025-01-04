@@ -7,7 +7,7 @@
     }}
     @class([
         "
-            uppercase text-xs inline-flex items-center decorate-none
+            uppercase text-xs inline-flex items-center decoration-none
             px-4 py-2
             cursor-pointer disabled:cursor-not-allowed
             focus:outline-none rounded-lg

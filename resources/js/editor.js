@@ -4,6 +4,11 @@ import EditorJS from '@editorjs/editorjs'
 const holder = document.getElementById('editor')
 const editor = new EditorJS({
     holder,
+    onChange(event) {
+        event.saver.save().then(output => {
+            document.getElementById('editorOutput').value = JSON.stringify(output)
+        })
+    },
     minHeight: 0,
     autofocus: true,
     /**

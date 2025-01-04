@@ -12,7 +12,7 @@ class Post extends Model
 
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['title', 'content', 'content_html', 'content_json', 'user_id'];
     /**
      * @return BelongsTo<User,Post>
      */

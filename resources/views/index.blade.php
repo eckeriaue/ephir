@@ -4,7 +4,9 @@
         <x-posts.create-post-button />
 
         @forelse ($posts as $post)
-            <pre> {{ $post }} </pre>
+            <x-posts.card :user="$post->user" :createdAt="$post->created_at">
+                {!! $post->content_html !!}
+            </x-posts.card>
         @empty
             <div class="bg-white rounded-xl shadow mb-4 text-center">
                 <p class="p-5">Постов пока нет</p>

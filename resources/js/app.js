@@ -13,7 +13,6 @@ Alpine.plugin(Focus)
 Alpine.plugin(AlpineFloatingUI)
 Alpine.plugin(Anchor)
 
-
 window.Alpine = Alpine
 Alpine.start()
 _hyperscript.browserInit()

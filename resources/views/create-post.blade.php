@@ -5,13 +5,17 @@
                 files: [],
             }"
             @toolbar:load-images="files = [...files, ...$event.detail.files]"
+            method="POST"
+            action="{{ route('api.posts.create', absolute: false) }}"
             class="relative bg-white mt-16 max-w-[510px] mx-auto p-5 rounded-xl"
         >
+            @csrf
             <h1 class="font-bold mb-6 text-primary text-18px">Создать публикацию</h1>
 
             <x-input-label for="postName"> Название </x-input-label>
-            <x-text-input id="postName" class="mb-4 mt-1" />
+            <x-text-input id="postName" name="postName" required class="mb-4 mt-1" />
 
+            <input type="text" hidden id="editorOutput" name="postContent" required>
             <div id="editor" class="border-2 border-surface focus-within:border-secondary border-solid mb-4 p-2 rounded-lg"></div>
 
             <div>

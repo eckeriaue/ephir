@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -12,9 +13,10 @@ Route::get('/', function (Request $request) {
         posts: Post::orderBy('id', 'desc')
             ->offset($offset)
             ->limit($limit)
+            ->with('user')
             ->get(),
     ));
-});
+})->name('index');
 
 Route::prefix('templates')->group(function() {
    /* Место для того, чтобы отдавать шаблоны htmx */
@@ -30,9 +32,7 @@ Route::middleware('auth')->group(function() {
 
     Route::prefix('api')->group(function() {
         Route::prefix('posts')->group(function() {
-            Route::post('create', function (Request $request) {
-                return literal(testme: 42);
-            })->name('api.posts.create');
+            Route::post('create', [PostController::class, 'create'])->name('api.posts.create');
         });
     });
 });

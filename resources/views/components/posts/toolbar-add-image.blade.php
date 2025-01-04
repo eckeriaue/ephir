@@ -2,19 +2,21 @@
 <x-button
         x-data="{
             isOpen: false,
-            inputElement: Object.assign(document.createElement('input'), {
-                type: 'file',
-                multiple: true,
-                onchange: event => {
-                    $dispatch('toolbar:load-images', { files: Array.from(event.target.files) })
-                }
-            })
         }"
         appearance="text"
         x-ref="button"
         @mouseenter="isOpen = true"
         @mouseleave="isOpen = false"
-        @click="inputElement.click()"
+        @click="$refs.inputElement.click()"
+    >
+    <input
+        type="file"
+        multiple
+        x-ref="inputElement"
+        @change="$dispatch('toolbar:load-images', { files: Array.from($event.target.files) })"
+        accept="image/*"
+        name="attachmentFiles"
+        hidden
     >
     <span class="ph ph-images text-18px"></span>
     <span
