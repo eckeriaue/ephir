@@ -12,6 +12,8 @@
         <!-- Scripts -->
         <script defer src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.12"></script>
+        <script defer src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+        @stack('scripts')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">

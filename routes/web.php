@@ -17,9 +17,7 @@ Route::get('/', function (Request $request) {
 });
 
 Route::prefix('templates')->group(function() {
-    Route::get('/create-post', function() {
-        return view('./components/posts/create-post-modal');
-    })->name('templates.posts.create-modal');
+   /* Место для того, чтобы отдавать шаблоны htmx */
 });
 
 Route::middleware('auth:sanctum')->prefix('api')->group(function() {

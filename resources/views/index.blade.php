@@ -1,5 +1,8 @@
 <x-app-layout>
     <div class="max-w-[510px] mx-auto py-4 md:py-12">
+
+        <x-posts.create-post-button />
+
         @forelse ($posts as $post)
             <pre> {{ $post }} </pre>
         @empty
