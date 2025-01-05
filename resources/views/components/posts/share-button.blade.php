@@ -2,10 +2,11 @@
 
 <div {{ $attributes->merge() }} x-data="{ isOpen: false }" @click.outside="isOpen = false">
         <x-button.text @click="isOpen = !isOpen" x-ref="shareButton">
-            <span class="text-16px pr-2 ph ph-share"></span>
+            <span class="text-[16px] pr-2 ph ph-share"></span>
             <span>Поделиться</span>
         </x-button.text>
         <x-menu
+            x-cloak
             x-anchor.offset.4="$refs.shareButton"
             x-show="isOpen"
             @mouseup="isOpen = false"

@@ -46,8 +46,8 @@
                 class="bg-transparent relative w-full cursor-pointer h-full block"
                 @click="$refs.avatarInput.click()"
             >
-                <span class="opacity-0 rounded-full block flex items-center justify-center hover:opacity-50 bg-black absolute top-0 left-0 w-full h-full">
-                    <span class="ph ph-file-arrow-up text-white text-44px"></span>
+                <span class="opacity-0 rounded-full flex items-center justify-center hover:opacity-50 bg-black absolute top-0 left-0 w-full h-full">
+                    <span class="ph ph-file-arrow-up text-white text-[44px]"></span>
                 </span>
                 <x-user.avatar x-ref="avatar" class="w-32 h-32" />
             </button>

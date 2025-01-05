@@ -2,8 +2,9 @@
  * @todo rewrite "AlpineFloatingUI" plugin to "Anchor"
 */
 
-import 'uno.css'
+import 'htmx.org'
 import './bootstrap'
+import _hyperscript from 'hyperscript.org'
 import Alpine from 'alpinejs'
 import Focus from "@alpinejs/focus"
 import AlpineFloatingUI from "@awcodes/alpine-floating-ui"

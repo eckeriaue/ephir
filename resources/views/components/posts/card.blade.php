@@ -7,7 +7,7 @@
         <x-user.avatar :user="$post->user" class="w-8 h-8" />
         <div class="flex flex-col">
             <span class="text-14px"> {{ $post->user->name }}</span>
-            <a href="#" class="text-primary text-12px decoration-none hover:underline">
+            <a href="#" class="text-primary text-[12px] decoration-none hover:underline">
                 <time> {{ (new \Carbon\Carbon($post->created_at, new DateTimeZone('Europe/Moscow')))->locale('ru')->diffForHumans() }}</time>
             </a>
         </div>
@@ -23,14 +23,13 @@
         <swiper-container
             slides-per-view="1"
             speed="500"
-            css-mode="true"
             space-between="24"
             navigation="true"
             class="rounded-2xl overflow-hidden"
         >
             @foreach($post->images as $image)
                 <swiper-slide>
-                    <div class="bg-cover bg-no-repeat bg-center rounded-2xl h-500px" style="background-image: url('{{ $image->src }}')">
+                    <div class="bg-cover bg-no-repeat bg-center rounded-2xl h-[500px]" style="background-image: url('{{ $image->src }}')">
                     </div>
                 </swiper-slide>
             @endforeach
