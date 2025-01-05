@@ -1,3 +1,7 @@
+@php
+    $makeAvatarPlaceholder = fn() => "https://robohash.org/{$post->user->id}";
+@endphp
+
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -18,6 +22,10 @@
         @method('patch')
 
         <div>
+            <x-user.avatar class="w-32 h-32" />
+        </div>
+
+        <div>
             <x-input-label for="name" :value="__('Имя')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -33,9 +41,9 @@
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <x-button.primary form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                             {{ __('Click here to re-send the verification email.') }}
-                        </button>
+                        </x-button.primary>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
@@ -48,7 +56,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Сохранить') }}</x-primary-button>
+            <x-button.primary>{{ __('Сохранить') }}</x-button.primary>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -57,7 +65,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Сохранено.') }}</p>
             @endif
         </div>
     </form>
