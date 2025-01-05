@@ -1,41 +1,35 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\Post;
 
 
+Route::middleware('auth')->group(function() {
 
-Route::get('/', function (Request $request) {
-    $offset = $request->query('offset', 0);
-    $limit = $request->query('limit', 20);
-    return Inertia::render('Posts', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'totalPosts' => Post::count(),
-        'posts' => Post::orderBy('id', 'desc')
-            ->offset($offset)
-            ->limit($limit)
-            ->withCount('comments')
-            ->with('user')
-            ->with('photos')
-            ->get()->map(function(Post $post) {
-                $post->content = $post->shortContent();
-                return $post;
-            }),
-    ]);
-})->name('posts');
+    Route::prefix('posts')->group(function() {
+        Route::get('/create', fn() => view('create-post'))->name('posts.create');
+    });
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('api')->group(function() {
+        Route::controller(PostController::class)->prefix('posts')->group(function() {
+            Route::post('create', 'create')->name('api.posts.create');
+        });
+    });
 });
 
-require __DIR__.'/api.php';
+Route::controller(PostController::class)->group(function() {
+    Route::get('/', 'getAll')->name('index');
+    Route::get('/posts/{id}', 'read')->where('id', '[0-9]+')->name('posts.read');
+});
+
+Route::middleware('auth')
+    ->controller(ProfileController::class)
+    ->prefix('profile')
+    ->group(function() {
+    Route::get('/me', 'edit')->name('profile.edit');
+    Route::patch('/me', 'update')->name('profile.update');
+    Route::delete('/me', 'destroy')->name('profile.destroy');
+});
+
 require __DIR__.'/auth.php';

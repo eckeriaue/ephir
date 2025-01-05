@@ -10,19 +10,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Inertia\Inertia;
-use Inertia\Response;
-use Illuminate\Validation\Rule;
-
+use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      */
-    public function create(): Response
+    public function create(): View
     {
-        return Inertia::render('Auth/Register');
+        return view('auth.register');
     }
 
     /**
@@ -33,9 +30,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            Rule::unique('email')
-            ->where(fn($query) => $query->whereNull('deleted_at')) . 'required|string|lowercase|email|max:255',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -49,6 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('posts', absolute: false));
+        return redirect(route('index', absolute: false));
     }
 }
