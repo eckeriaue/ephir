@@ -27,6 +27,10 @@ class SettingsController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $request->validate((array)literal(
+            avatar: 'size:2048000',
+            email: 'required|string|max:255'
+        ));
         if ($request->hasFile('avatar')) {
             $path = 'avatars/user-'.$request->user()->id;
             $request->user()->avatar = Storage::url(Storage::disk('public')->put($path, $request->file('avatar')));
