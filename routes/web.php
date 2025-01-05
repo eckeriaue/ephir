@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,7 +24,7 @@ Route::controller(PostController::class)->group(function() {
 });
 
 Route::middleware('auth')
-    ->controller(ProfileController::class)
+    ->controller(SettingsController::class)
     ->prefix('settings')
     ->group(function() {
     Route::get('/me', 'edit')->name('settings.edit');
