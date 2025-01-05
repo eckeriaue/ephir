@@ -1,32 +1,7 @@
-let onCopy = () => {}
-
-const copy = (target, mimeType = undefined) => {
-    if (typeof target === 'function') {
-        target = target()
-    }
-
-    if (typeof target === 'object') {
-        target = JSON.stringify(target)
-    }
-
-    if (mimeType !== undefined) {
-        return window.navigator.clipboard.write([
-            new ClipboardItem({
-                [mimeType]: new Blob([target], {
-                    type: mimeType,
-                })
-            })
-        ])
-            .then(onCopy)
-    }
-
-    return window.navigator.clipboard.writeText(target)
-        .then(onCopy)
-}
 
 function Clipboard(Alpine) {
     Alpine.magic('clipboard', () => {
-        return copy
+        return subject => navigator.clipboard.writeText(subject)
     })
 }
 
