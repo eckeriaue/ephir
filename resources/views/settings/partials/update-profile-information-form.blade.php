@@ -20,7 +20,7 @@
     <form
         method="post"
         enctype="multipart/form-data"
-        action="{{ route('profile.update') }}"
+        action="{{ route('settings.update') }}"
         class="mt-6 space-y-6"
     >
         @csrf

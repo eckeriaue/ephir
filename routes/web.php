@@ -25,11 +25,11 @@ Route::controller(PostController::class)->group(function() {
 
 Route::middleware('auth')
     ->controller(ProfileController::class)
-    ->prefix('profile')
+    ->prefix('settings')
     ->group(function() {
-    Route::get('/me', 'edit')->name('profile.edit');
-    Route::patch('/me', 'update')->name('profile.update');
-    Route::delete('/me', 'destroy')->name('profile.destroy');
+    Route::get('/me', 'edit')->name('settings.edit');
+    Route::patch('/me', 'update')->name('settings.update');
+    Route::delete('/me', 'destroy')->name('settings.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -25,7 +25,7 @@
                 >
                     <div class="flex flex-col gap-y-2">
                         @auth
-                            <x-button.text as="a" href="{{ route('profile.edit') }}"> Профиль </x-button.text>
+                            <x-button.text as="a" href="{{ route('settings.edit') }}"> Профиль </x-button.text>
                             <x-button.text as="a" href="{{ route('logout') }}"> Выйти </x-button.text>
                         @else
                             <x-button.text as="a" href="{{ route('register') }}"> Зарегистрироваться </x-button.text>
