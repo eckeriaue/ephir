@@ -17,12 +17,47 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form
+        method="post"
+        enctype="multipart/form-data"
+        action="{{ route('profile.update') }}"
+        class="mt-6 space-y-6"
+    >
         @csrf
         @method('patch')
 
-        <div>
-            <x-user.avatar class="w-32 h-32" />
+        <div
+            class="w-32 h-32"
+            x-data="{
+                get maxFileSize() {
+                    return 2048000
+                },
+                loadAvatar(file) {
+                    if (file.size < this.maxFileSize) {
+                        $refs.avatar.querySelector('img').src = URL.createObjectURL(file)
+                    } else {
+                        alert('Файл слишком большой')
+                    }
+                }
+            }"
+        >
+            <button
+                type="button"
+                class="bg-transparent relative w-full cursor-pointer h-full block"
+                @click="$refs.avatarInput.click()"
+            >
+                <span class="opacity-0 rounded-full block flex items-center justify-center hover:opacity-50 bg-black absolute top-0 left-0 w-full h-full">
+                    <span class="ph ph-file-arrow-up text-white text-44px"></span>
+                </span>
+                <x-user.avatar x-ref="avatar" class="w-32 h-32" />
+            </button>
+            <input
+                hidden
+                type="file"
+                x-ref="avatarInput"
+                name="avatar"
+                @change="loadAvatar($event.target.files[0])"
+            >
         </div>
 
         <div>
@@ -56,7 +91,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-button.primary>{{ __('Сохранить') }}</x-button.primary>
+            <x-button.primary type="submit">{{ __('Сохранить') }}</x-button.primary>
 
             @if (session('status') === 'profile-updated')
                 <p

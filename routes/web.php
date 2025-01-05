@@ -20,13 +20,16 @@ Route::middleware('auth')->group(function() {
 
 Route::controller(PostController::class)->group(function() {
     Route::get('/', 'getAll')->name('index');
-    Route::get('/posts/{id}', 'read')->name('posts.read');
+    Route::get('/posts/{id}', 'read')->where('id', '[0-9]+')->name('posts.read');
 });
 
-Route::middleware('auth')->controller(ProfileController::class)->group(function() {
-    Route::get('/profile', 'edit')->name('profile.edit');
-    Route::patch('/profile', 'update')->name('profile.update');
-    Route::delete('/profile', 'destroy')->name('profile.destroy');
+Route::middleware('auth')
+    ->controller(ProfileController::class)
+    ->prefix('profile')
+    ->group(function() {
+    Route::get('/me', 'edit')->name('profile.edit');
+    Route::patch('/me', 'update')->name('profile.update');
+    Route::delete('/me', 'destroy')->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
