@@ -6,7 +6,7 @@
 <{{$as}}
     {{ $attributes->merge() }}
 >
-<div
+<span
     class="w-full h-full flex items-center justify-center  overflow-hidden rounded-full bg-primary">
     <img
         class="block w-full h-full"
@@ -14,5 +14,5 @@
         src="{{$user->avatar ? $user->avatar : $makeAvatarPlaceholder()}}"
     >
         <x-loader size="100%" id="loader"  />
-    </div>
+    </span>
 </{{$as}}>

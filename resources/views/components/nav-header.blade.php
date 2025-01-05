@@ -11,7 +11,7 @@
                             <span>
                                 {{ auth()->user()->name }}
                             </span>
-                            <x-user.avatar class="w-8 h-8" as="span" />
+                            <x-user.avatar class="w-5 h-5" as="span" />
                         </span>
                     @else
                         Гость
