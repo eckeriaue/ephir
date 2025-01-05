@@ -1,16 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+import twColors from 'tailwindcss/colors'
 export default {
     theme: {
 
         colors: {
             white: 'white',
             black: 'black',
+            transparent: 'transparent',
+            current: 'currentColor',
+            inherit: 'inherit',
+
             surface: `var(--secondary, #F5F7F8)`,
             accent: `var(--accent, #F4CE14)`,
             secondary: `var(--secondary, #379777)`,
             primary: {
                 DEFAULT: `var(--primary, #45474B)`
             },
+
+            red: twColors.red,
             // primary: `var(--primary, #1B1C25)`,
             // secondary: `var(--secondary, #1F4068)`,
             // accent: `var(--accent, #206A5D)`,
