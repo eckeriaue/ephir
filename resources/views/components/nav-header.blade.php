@@ -25,11 +25,11 @@
                 >
                     <div class="flex flex-col gap-y-2">
                         @auth
-                            <x-link href="{{ route('profile.edit') }}"> Профиль </x-link>
-                            <x-link href="{{ route('logout') }}"> Выйти </x-link>
+                            <x-button.text as="a" href="{{ route('profile.edit') }}"> Профиль </x-button.text>
+                            <x-button.text as="a" href="{{ route('logout') }}"> Выйти </x-button.text>
                         @else
-                            <x-link href="{{ route('register') }}"> Зарегистрироваться </x-link>
-                            <x-link href="{{ route('login') }}"> Войти </x-link>
+                            <x-button.text as="a" href="{{ route('register') }}"> Зарегистрироваться </x-button.text>
+                            <x-button.text as="a" href="{{ route('login') }}"> Войти </x-button.text>
                         @endauth
                     </div>
                 </x-menu>
