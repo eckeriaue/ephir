@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SharePostEvent;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\{Post,Profile};
 
 class ProfileController extends Controller
 {
+    /**
+     * @return void
+     */
+    public function share(int $postId): void {
+        event(new SharePostEvent(Post::find($postId)));
+    }
     /**
      * Display a listing of the resource.
      * @return View
@@ -16,7 +23,7 @@ class ProfileController extends Controller
     {
         return view('profile', (array) literal(
             profile: Profile::find($profileId),
-        ));
+    ));
     }
 
     /**

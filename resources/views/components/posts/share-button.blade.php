@@ -11,7 +11,7 @@
             x-show="isOpen"
             @mouseup="isOpen = false"
         >
-            <x-button.text>Опубликовать у себя</x-button.text>
+            <x-button.text data-hx-patch="{{ route('api.profile.share-post', ['postId' => $post->id]) }}">Опубликовать у себя</x-button.text>
             <x-button.text
                 type="button"
                 data-post-href="{{ route('posts.read', ['id' => $post->id]) }}"

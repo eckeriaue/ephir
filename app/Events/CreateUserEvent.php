@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Post;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,17 +10,18 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CreatePostEvent
+class CreateUserEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $post;
+    public $user;
     /**
      * Create a new event instance.
+     * @param App\Models\User $user
      */
-    public function __construct(Post $post)
+    public function __construct($user)
     {
-        $this->post = $post;
+        $this->user = $user;
         //
     }
 
@@ -33,7 +33,7 @@ class CreatePostEvent
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('create-post'),
+            new PrivateChannel('create-user'),
         ];
     }
 }

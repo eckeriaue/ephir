@@ -44,9 +44,9 @@
                 {{ __('Уже есть аккаунт?') }}
             </x-link>
 
-            <x-primary-button class="ms-4">
+            <x-button.primary type="submit" class="ms-4">
                 {{ __('Зарегестрироваться') }}
-            </x-primary-button>
+            </x-button.primary>
         </div>
     </form>
 </x-guest-layout>
