@@ -16,7 +16,7 @@
             <x-input-label for="postName"> Название </x-input-label>
             <x-text-input id="postName" name="postName" required class="mb-4 mt-1" />
 
-            <input type="text" hidden id="editorOutput" name="postContent" required>
+            <input type="text" hidden id="editorOutput" name="postContent">
             <div id="editor" class="border-2 border-surface focus-within:border-secondary border-solid mb-4 p-2 rounded-lg"></div>
 
             <div>
