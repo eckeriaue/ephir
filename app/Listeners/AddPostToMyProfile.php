@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\CreatePostEvent;
 use App\Models\Profile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
