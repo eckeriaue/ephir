@@ -48,7 +48,7 @@
             </div>
         </form>
 
-        @vite('resources/js/editor.js')
+        @vite('resources/js/editor/index.js')
         @vite('resources/js/slider.js')
 
 </x-app-layout>
