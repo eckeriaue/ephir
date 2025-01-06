@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Models\{Post,PostImage};
 
 class ProfileController extends Controller
 {
@@ -12,7 +13,7 @@ class ProfileController extends Controller
      */
     public function index(int $userId)
     {
-        return view('profile', ['userId' => $userId]);
+        return view('profile', ['userId' => $userId, 'posts' => Post::all()]);
         //
     }
 
