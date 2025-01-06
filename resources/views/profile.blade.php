@@ -2,8 +2,8 @@
     <div class="flex max-w-7xl py-12 gap-x-3 mx-auto">
         <div class="bg-white rounded-xl w-1/4 shadow-sm h-fit sticky top-12 mb-4 p-5">
             <x-user.avatar :user="$profile->user" />
-            <ul>
-                <li> <span class="text-2xl"> {{ $profile->user->name }} </span> </li>
+            <ul class="mt-4">
+                <li class="text-center text-2xl"> {{ $profile->user->name }} </li>
             </ul>
         </div>
         <div class="flex flex-col grow max-w-[75%]">
