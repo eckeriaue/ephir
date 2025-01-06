@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use App\Models\{Post,User};
+use App\Models\{Post,Profile};
 
 class ProfileController extends Controller
 {
@@ -13,10 +12,10 @@ class ProfileController extends Controller
      * Display a listing of the resource.
      * @return View
      */
-    public function index(int $userId): View
+    public function index(int $profileId): View
     {
         return view('profile', (array) literal(
-            user: User::find($userId),
+            profile: Profile::find($profileId),
             posts: Post::all(),
         ));
     }

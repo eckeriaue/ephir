@@ -1,13 +1,13 @@
 <x-app-layout>
     <div class="flex max-w-7xl py-12 gap-x-3 mx-auto">
         <div class="bg-white rounded-xl w-1/4 shadow-sm h-fit sticky top-12 mb-4 p-5">
-            <x-user.avatar :$user />
+            <x-user.avatar :user="$profile->user" />
             <ul>
-                <li> <span class="text-2xl"> {{ $user->name }} </span> </li>
+                <li> <span class="text-2xl"> {{ $profile->user->name }} </span> </li>
             </ul>
         </div>
         <div class="flex flex-col grow max-w-[75%]">
-            @forelse ($posts as $post)
+            @forelse ($profile->posts as $post)
                 <x-posts.card :$post />
             @empty
                 <div class="bg-white rounded-xl shadow mb-4 text-center">
