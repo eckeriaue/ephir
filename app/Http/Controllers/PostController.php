@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Events\CreatePostEvent;
+use App\Events\SharePostEvent;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -106,7 +106,7 @@ class PostController extends Controller
             }
         }
 
-        event(new CreatePostEvent($post));
+        event(new SharePostEvent($post));
 
         return to_route('index');
     }

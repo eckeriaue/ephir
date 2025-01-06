@@ -17,6 +17,6 @@ class Profile extends Model
     }
 
     public function posts() {
-        return $this->belongsToMany(Post::class, 'profile_posts');
+        return $this->belongsToMany(Post::class, 'profile_posts')->orderBy('created_at', 'desc');
     }
 }
