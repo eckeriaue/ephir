@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
+use App\Events\CreatePostEvent;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -105,6 +105,8 @@ class PostController extends Controller
                 ])->save();
             }
         }
+
+        event(new CreatePostEvent($post));
 
         return to_route('index');
     }
