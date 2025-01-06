@@ -38,3 +38,6 @@
 
     <x-posts.share-button class="mt-4" :$post />
 </article>
+@pushOnce('scripts')
+    @vite('resources/js/slider.js')
+@endPushOnce
