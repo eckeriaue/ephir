@@ -25,13 +25,16 @@
             x-data
             data-hx-post="{{ route('comments.store', ['postId' => $post->id]) }}"
             data-hx-target="#{{ $commentsListId }}"
-            data-hx-swap="afterend"
+            data-hx-swap="beforeend"
+            hx-disabled-elt="#submit-{{ $commentsListId }}"
             data-script="
                 on htmx:beforeRequest
                     add .pointer-events-none to #editor-{{ $commentsListId }}
+                    add .cursor-not-allowed to #editor-{{ $commentsListId }}
                 on htmx:afterRequest
                 add .animate-close-y to #editor-{{ $commentsListId }} then
                 remove .pointer-events-none from #editor-{{ $commentsListId }} then
+                remove .cursor-not-allowed from #editor-{{ $commentsListId }} then
                 call #editor-{{ $commentsListId }}.$editor.clear() then
                 if #placeholder-{{ $commentsListId }}
                     add .animate-close-y to #placeholder-{{ $commentsListId }}
@@ -51,7 +54,7 @@
                 "
             ></div>
             <div class="flex mt-1 justify-end">
-                <x-button.primary type="submit">Отправить</x-button.primary>
+                <x-button.primary id="submit-{{ $commentsListId }}" type="submit">Отправить</x-button.primary>
             </div>
         </form>
         @endauth

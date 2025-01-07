@@ -13,6 +13,7 @@
             focus:outline-none rounded-lg
             focus:ring-2 focus:ring-secondary focus:ring-offset-2
             bg-primary border
+            disabled:opacity-80
             border-transparent font-semibold
             text-white dark:text-gray-800
             tracking-widest hover:bg-primary
