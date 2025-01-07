@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\SharePostEvent;
-use Illuminate\Support\Facades\DB;
+use App\Models\Profile;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -22,10 +22,6 @@ class PublishPostInProfile
      */
     public function handle(SharePostEvent $event): void
     {
-        DB::table('profile_posts')->insert([
-            'profile_id' => $event->post->user->profile->id,
-            'post_id' => $event->post->id
-        ]);
-        //
+        Profile::publish($event->post);
     }
 }
