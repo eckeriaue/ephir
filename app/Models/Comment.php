@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
+    protected $fillable = ['post_id', 'content_json', 'content_html'];
     /**
      * @return BelongsTo<Post,Comment>
      */

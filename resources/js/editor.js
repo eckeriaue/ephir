@@ -24,6 +24,7 @@ export default function Editor(Alpine) {
                 })
             },
         })
+        Reflect.set(holder, '$editor', editor)
         cleanup(() => {
             editor.destroy()
         })
