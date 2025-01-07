@@ -29,7 +29,7 @@ class CommentController extends Controller
         $content = $request->get('comment');
         $comment = new Comment;
         $comment->post_id = $post->id;
-        $comment->user_id = $request->user()->id;
+        $comment->user_id = auth()->user()->id;
         $comment->content_json = json_encode($content);
         $comment->content_html = json_to_html($content);
         $comment->save();
