@@ -3,7 +3,7 @@
 <article class="bg-white rounded-xl shadow-sm mb-4 p-5">
 
     <header>
-        <x-user.preview.post :$post />
+        <x-user.preview :user="$post->user" :created_at="$post->created_at" />
     </header>
 
     <div class="my-4">
