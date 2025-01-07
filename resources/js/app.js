@@ -7,12 +7,10 @@ import './bootstrap'
 import _hyperscript from 'hyperscript.org'
 import Alpine from 'alpinejs'
 import Focus from "@alpinejs/focus"
-import AlpineFloatingUI from "@awcodes/alpine-floating-ui"
 import Anchor from '@alpinejs/anchor'
 import Clipboard from './clipboard'
 
 Alpine.plugin(Focus)
-Alpine.plugin(AlpineFloatingUI)
 Alpine.plugin(Anchor)
 Alpine.plugin(Clipboard)
 
