@@ -39,14 +39,16 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-link href="{{ route('login') }}">
+        <div class="flex items-center justify-end gap-x-2 mt-4">
+            <x-link href="{{ route('login') }}" class="text-primary">
                 {{ __('Уже есть аккаунт?') }}
             </x-link>
 
-            <x-button.primary type="submit" class="ms-4">
-                {{ __('Зарегестрироваться') }}
-            </x-button.primary>
+            <div class="ms-4">
+                <x-button.primary type="submit">
+                    {{ __('Зарегестрироваться') }}
+                </x-button.primary>
+            </div>
         </div>
     </form>
 </x-guest-layout>
