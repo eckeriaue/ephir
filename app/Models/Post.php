@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Post extends Model
 {
 
@@ -27,6 +28,12 @@ class Post extends Model
      */
     public function images(): HasMany {
         return $this->hasMany(PostImage::class);
+    }
+    /**
+     * @return HasMany<Comment,Post>
+     */
+    public function comments(): HasMany {
+        return $this->hasMany(Comment::class);
     }
     /**
      * @return BelongsToMany<Post,Post>

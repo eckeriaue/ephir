@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\{Post,PostImage};
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 function jsonToHtml($data)
@@ -114,16 +115,12 @@ class PostController extends Controller
      * @return View
      */
     public function getAll(Request $request): View {
-        $offset = $request->query('offset', 0);
-        $limit = $request->query('limit', 20);
-        return view('index', (array) literal(
-            posts: Post::orderBy('id', 'desc')
-                ->offset($offset)
-                ->limit($limit)
+        return view('index', [
+            'posts' => Post::orderBy('created_at', 'desc')
                 ->with('user')
-                ->with('images')
-                ->get(),
-        ));
+                ->with('comments')
+                ->paginate(20)
+        ]);
     }
 
     public function read($id): View {

@@ -11,6 +11,8 @@
             </div>
         @endforelse
 
+        <x-pagination :paginator="$posts" />
+
         @vite('resources/js/slider.js')
     </div>
 </x-app-layout>

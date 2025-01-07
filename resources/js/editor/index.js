@@ -1,7 +1,7 @@
 import { i18n } from './i18n'
 import EditorJS from '@editorjs/editorjs'
 
-const holder = document.getEl0ementById('editor')
+const holder = document.getElementById('editor')
 const editor = new EditorJS({
     holder,
     onChange(event) {

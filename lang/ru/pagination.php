@@ -15,5 +15,8 @@ return [
 
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
-
+    'of' => 'из',
+    'Showing' => 'Показано',
+    'to' => '-',
+    'results' => 'результатов'
 ];
