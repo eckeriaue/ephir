@@ -15,8 +15,6 @@
             if the next <span#loader />
                 remove the next <span#loader/>
             end
-            on error
-            set my src to {{$makeAvatarPlaceholder()}}
         "
         loading="lazy"
         src="{{ $user->avatar ?: $makeAvatarPlaceholder() }}"
