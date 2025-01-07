@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function() {
 });
 
 Route::controller(PostController::class)->group(function() {
-    Route::get('/', 'getAll')->name('index');
+    Route::get('/', 'show')->name('index');
     Route::get('/posts/{id}', 'read')->where('id', '[0-9]+')->name('posts.read');
 });
 
@@ -34,3 +34,4 @@ Route::middleware('auth')
 
 require __DIR__.'/auth.php';
 require __DIR__.'/profile.php';
+require __DIR__.'/hx.php';

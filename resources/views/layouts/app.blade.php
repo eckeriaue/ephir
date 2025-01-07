@@ -14,7 +14,8 @@
         <!-- Fonts -->
         <script defer src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
         @stack('scripts')
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite('resources/js/app.js')
+        @vite('resources/css/app.css')
     </head>
     <body class="font-sans antialiased"
         data-hx-headers='{&quot;X-CSRF-TOKEN&quot;: &quot;{{ csrf_token() }}&quot;}'

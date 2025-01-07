@@ -45,7 +45,15 @@ $createdAt = (new Carbon($post->created_at, new DateTimeZone('Europe/Moscow')))-
     </div>
     @endif
 
-    <x-posts.share-button class="mt-4" :$post />
+    @php
+        $commentId = "comments-wrapper-{$post->id}";
+    @endphp
+    <div class="mt-4 flex justify-between">
+        <x-posts.comment-button :$commentId :$post />
+        <x-posts.share-button :$post />
+    </div>
+    <div id="{{ $commentId }}" style="height:0"></div>
+
 </article>
 @pushOnce('scripts')
     @vite('resources/js/slider.js')

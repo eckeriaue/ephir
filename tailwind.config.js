@@ -2,7 +2,6 @@
 import twColors from 'tailwindcss/colors'
 export default {
     theme: {
-
         colors: {
             white: 'white',
             black: 'black',
@@ -23,7 +22,38 @@ export default {
             // accent: `var(--accent, #206A5D)`,
             // surface: `var(--secondary, #EBECF1)`,
         },
-        extend: {}
+        extend: {
+            animation: {
+              'open-y': 'open-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both',
+              'close-y': 'close-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both',
+            },
+            keyframes: {
+                'open-y': {
+                    from: {
+                        gridTemplateRows: '0fr',
+                        display: 'grid',
+                        overflow: 'hidden',
+                    },
+                    to: {
+                        gridTemplateRows: '1fr',
+                        display: 'grid',
+                        overflow: 'hidden',
+                    }
+                },
+                'close-y': {
+                    from: {
+                        gridTemplateRows: '1fr',
+                        display: 'grid',
+                        overflow: 'hidden',
+                    },
+                    to: {
+                        gridTemplateRows: '0fr',
+                        display: 'grid',
+                        overflow: 'hidden',
+                    }
+                },
+            }
+        }
     },
     content: [
       './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',

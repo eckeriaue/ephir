@@ -6,7 +6,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\{Post,PostImage};
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 function jsonToHtml($data)
@@ -114,7 +113,7 @@ class PostController extends Controller
     /**
      * @return View
      */
-    public function getAll(Request $request): View {
+    public function show(Request $request): View {
         return view('index', [
             'posts' => Post::orderBy('created_at', 'desc')
                 ->with('user')
@@ -123,7 +122,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function read($id): View {
+    public function read(int $id): View {
         return view('read-post', ['id' => $id]);
     }
 }
