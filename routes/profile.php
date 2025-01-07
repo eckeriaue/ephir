@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
 Route::prefix('profile')->controller(ProfileController::class)->group(function() {
-    Route::get('{profileId}', 'index')->where('userId', '[0-9]+')->name('profile');
+    Route::get('{id}', 'index')->where('userId', '[0-9]+')->name('profile');
 });
 
 Route::middleware('auth')->prefix('api/v1')->group(function() {

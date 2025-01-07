@@ -1,4 +1,4 @@
-<header class="bg-white">
+<header class="sticky top-0 z-10 bg-white">
     <div class="h-16 flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <x-application-logo />
         <nav class="flex items-center gap-x-3">
@@ -26,7 +26,7 @@
                     <div class="flex flex-col gap-y-2">
                         @auth
                             <x-button.text as="a" href="{{ route('settings.edit') }}"> Настройки </x-button.text>
-                            <x-button.text as="a" href="{{ route('profile', ['profileId' => auth()->user()->profile->id]) }}"> Профиль </x-button.text>
+                            <x-button.text as="a" href="{{ route('profile', ['id' => auth()->user()->profile->id]) }}"> Профиль </x-button.text>
                             <x-button.text as="a" href="{{ route('logout') }}"> Выйти </x-button.text>
                         @else
                             <x-button.text as="a" href="{{ route('register') }}"> Зарегистрироваться </x-button.text>

@@ -21,10 +21,10 @@ class ProfileController extends Controller
      * Display a listing of the resource.
      * @return View
      */
-    public function index(int $profileId): View
+    public function index(int $id): View
     {
         return view('profile', (array) literal(
-            profile: Profile::find($profileId),
+            profile: Profile::find($id),
     ));
     }
 
