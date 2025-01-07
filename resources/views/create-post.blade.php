@@ -8,7 +8,7 @@
             @toolbar:load-images="files = [...files, ...$event.detail.files]"
             method="POST"
             action="{{ route('api.posts.create', absolute: false) }}"
-            class="relative bg-white mt-16 max-w-[510px] mx-auto p-5 rounded-xl"
+            class="relative bg-white isolate mt-16 max-w-[510px] mx-auto p-5 rounded-xl"
         >
             @csrf
             <h1 class="font-bold mb-6 text-primary text-18px">Создать публикацию</h1>
@@ -29,7 +29,7 @@
                 x-ref="slider"
                 space-between="24"
                 navigation="true"
-                class="mt-4"
+                class="mt-4 -z-10"
             >
                 <template x-for="file in files">
                     <swiper-slide style="position:relative">
