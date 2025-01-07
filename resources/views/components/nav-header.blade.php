@@ -1,10 +1,11 @@
-<header class="sticky top-0 z-10 bg-white">
+<header class="sticky top-0 z-10 shadow bg-white">
     <div class="h-16 flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <x-application-logo />
         <nav class="flex items-center gap-x-3">
-            <div x-data>
+            <div x-data="{ isUserDetailOpen: false }" @click.outside="isUserDetailOpen = false">
                 <x-button.text
-                    @click="$refs.panel.toggle"
+                    x-ref="userDetail"
+                    @click="isUserDetailOpen = !isUserDetailOpen"
                 >
                     @auth
                         <span class="flex items-center gap-x-2">
@@ -19,9 +20,8 @@
                 </x-button.text>
                 <x-menu
                     x-cloak
-                    x-ref="panel"
-                    x-transition=""
-                    x-float.placement.bottom-start.flip.offset=""
+                    x-show="isUserDetailOpen"
+                    x-anchor.offset.4="$refs.userDetail"
                 >
                     <div class="flex flex-col gap-y-2">
                         @auth
