@@ -13,6 +13,7 @@
         <link rel="manifest" href="/site.webmanifest">
         <!-- Fonts -->
         <script defer src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
         @stack('scripts')
         @vite('resources/js/app.js')
         @vite('resources/css/app.css')

@@ -1,4 +1,3 @@
-import 'htmx.org'
 import './bootstrap'
 import _hyperscript from 'hyperscript.org'
 import Alpine from 'alpinejs'
