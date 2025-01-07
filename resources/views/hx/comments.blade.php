@@ -11,7 +11,7 @@
 >
     <div class="min-h-0">
 
-        <div id="{{ $commentsListId }}">
+        <div id="{{ $commentsListId }}" class="space-y-4">
             @forelse ($post->comments as $comment)
                 <x-posts.comment :$comment :$post />
             @empty
