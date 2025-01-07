@@ -1,7 +1,3 @@
-/**
- * @todo rewrite "AlpineFloatingUI" plugin to "Anchor"
-*/
-
 import 'htmx.org'
 import './bootstrap'
 import _hyperscript from 'hyperscript.org'
