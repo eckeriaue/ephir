@@ -16,7 +16,9 @@
         @stack('scripts')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased"
+        data-hx-headers='{&quot;X-CSRF-TOKEN&quot;: &quot;{{ csrf_token() }}&quot;}'
+    >
         <div class="min-h-screen bg-surface">
 
             <x-nav-header />

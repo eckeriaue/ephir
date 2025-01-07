@@ -6,14 +6,16 @@ use App\Events\SharePostEvent;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\{Post,Profile};
+use Illuminate\Http\Response;
 
 class ProfileController extends Controller
 {
     /**
-     * @return void
+     * @return Response
      */
-    public function share(int $postId): void {
+    public function share(int $postId): Response {
         event(new SharePostEvent(Post::find($postId)));
+        return response(status: 200, content: view('hx.toast', ['slot' => 'Опубликовано на вашей странице']));
     }
     /**
      * Display a listing of the resource.

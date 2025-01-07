@@ -6,7 +6,7 @@
     <header class="flex gap-x-3">
         <x-user.avatar :user="$post->user" class="w-8 h-8" />
         <div class="flex flex-col">
-            <span class="text-14px"> {{ $post->user->name }}</span>
+            <span class="text-[14px]"> {{ $post->user->name }}</span>
             <a href="#" class="text-primary text-[12px] decoration-none hover:underline">
                 <time> {{ (new \Carbon\Carbon($post->created_at, new DateTimeZone('Europe/Moscow')))->locale('ru')->diffForHumans() }}</time>
             </a>
