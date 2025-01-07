@@ -33,7 +33,7 @@ class Post extends Model
      * @return HasMany<Comment,Post>
      */
     public function comments(): HasMany {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->orderBy('created_at');
     }
     /**
      * @return BelongsToMany<Post,Post>

@@ -15,8 +15,8 @@
             @forelse ($post->comments as $comment)
                 <x-posts.comment :$comment :$post />
             @empty
-                <div>
-                    <p id="placeholder-{{ $commentsListId }}" class="text-primary text-[12px]">Комментариев пока нет.</p>
+                <div id="placeholder-{{ $commentsListId }}">
+                    <p class="text-primary text-[12px] min-h-0">Комментариев пока нет.</p>
                 </div>
             @endforelse
         </div>
@@ -25,14 +25,18 @@
             x-data
             data-hx-post="{{ route('comments.store', ['postId' => $post->id]) }}"
             data-hx-target="#{{ $commentsListId }}"
-            data-hx-swap="afterbegin"
+            data-hx-swap="afterend"
             data-script="
                 on htmx:beforeRequest
                     add .pointer-events-none to #editor-{{ $commentsListId }}
                 on htmx:afterRequest
                 add .animate-close-y to #editor-{{ $commentsListId }} then
                 remove .pointer-events-none from #editor-{{ $commentsListId }} then
-                call #editor-{{ $commentsListId }}.$editor.clear()
+                call #editor-{{ $commentsListId }}.$editor.clear() then
+                if #placeholder-{{ $commentsListId }}
+                    add .animate-close-y to #placeholder-{{ $commentsListId }}
+                end
+            end
             "
         >
             <input x-ref="comment" required name="comment" type="hidden">

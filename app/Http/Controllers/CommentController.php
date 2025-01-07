@@ -36,7 +36,6 @@ class CommentController extends Controller
         return view('components.posts.comment', [
             'comment' => $comment,
             'post' => $post,
-            'class' => 'animate-open-y',
         ]);
     }
 
