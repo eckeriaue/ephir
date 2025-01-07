@@ -28,7 +28,7 @@ class SettingsController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->validate((array)literal(
-            avatar: 'size:2048000',
+            avatar: 'max:2048000',
             email: 'required|string|max:255'
         ));
         if ($request->hasFile('avatar')) {
