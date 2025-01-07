@@ -20,12 +20,13 @@
 
 
     @if (count($post->images) > 0)
+    <div class="isolate">
         <swiper-container
             slides-per-view="1"
             speed="500"
             space-between="24"
             navigation="true"
-            class="rounded-2xl overflow-hidden"
+            class="rounded-2xl -z-10 relative overflow-hidden"
         >
             @foreach($post->images as $image)
                 <swiper-slide>
@@ -34,6 +35,7 @@
                 </swiper-slide>
             @endforeach
         </swiper-container>
+    </div>
     @endif
 
     <x-posts.share-button class="mt-4" :$post />
