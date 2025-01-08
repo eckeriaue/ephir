@@ -1,8 +1,13 @@
+@props(['activeClass' => '', 'nonActiveClass' => '', 'class' => ''])
 
 <button
     type="button"
     @click="toggleBold()"
-    :class="{ 'bg-primary text-surface' : isActive('bold', updatedAt) }"
+    :class="{
+        '{{ $activeClass }}': isActive('bold', updatedAt),
+        '{{ $nonActiveClass }}': !isActive('bold', updatedAt),
+    }"
+    class="{{ $class }}"
 >
     <span class="ph ph-text-b"></span>
 </button>
