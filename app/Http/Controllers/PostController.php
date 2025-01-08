@@ -7,7 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\{Post,PostImage};
 use Illuminate\Support\Facades\Storage;
-use function EditorHelpers\json_to_html;
 
 class PostController extends Controller
 {
@@ -20,8 +19,7 @@ class PostController extends Controller
         $postContent = $request->get('postContent');
         $post = Post::create([
             'title' => $postName,
-            'content_json' => json_encode($postContent),
-            'content_html' => json_to_html($postContent),
+            'content_html' => $postContent,
             'user_id' => $request->user()->id,
         ]);
         $post->save();

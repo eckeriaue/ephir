@@ -22,6 +22,9 @@
             [&_.tiptap]:outline-secondary
             [&_.tiptap]:outline-outline
 
+            [&_.tiptap_a]:underline
+            [&_.tiptap_a]:text-secondary
+            [&_.tiptap_h1]:text-[24px]
             [&_.tiptap]:min-h-[100px]
 
             [&_.tiptap]:focus-within:border-secondary

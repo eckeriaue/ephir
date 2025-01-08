@@ -31,32 +31,33 @@ export default function EditorPlugin(Alpine) {
             },
             updatedAt: Date.now(), // force Alpine to rerender on selection change
             init() {
-            const _this = this
+                const _this = this
 
-            editor = new Editor({
-                element: this.$refs.root,
-                extensions: [
-                    Link.configure({
-                      openOnClick: false,
-                      linkOnPaste: true,
-                      autolink: true,
-                      shouldAutoLink: (url) => url.startsWith('https://') || url.startsWith('http://'),
-                      defaultProtocol: 'https',
-                    }),
-                    StarterKit
-                ],
-                content,
-                onCreate({ editor }) {
-                  _this.updatedAt = Date.now()
-                },
-                onUpdate({ editor }) {
-                    _this.$refs.output.value = editor.getHTML()
-                  _this.updatedAt = Date.now()
-                },
-                onSelectionUpdate({ editor }) {
-                  _this.updatedAt = Date.now()
-                },
-            })
+                editor = new Editor({
+                    element: this.$refs.root,
+                    extensions: [
+                        Link.configure({
+                        openOnClick: false,
+                        linkOnPaste: true,
+                        autolink: true,
+                        shouldAutoLink: (url) => url.startsWith('https://') || url.startsWith('http://'),
+                        defaultProtocol: 'https',
+                        }),
+                        StarterKit
+                    ],
+                    content,
+                    onCreate({ editor }) {
+                    _this.updatedAt = Date.now()
+                    },
+                    onUpdate({ editor }) {
+                        _this.$refs.output.value = editor.getHTML()
+                    _this.updatedAt = Date.now()
+                    },
+                    onSelectionUpdate({ editor }) {
+                    _this.updatedAt = Date.now()
+                    },
+                })
+                this.$refs.root.$editor = editor
             },
             isLoaded() {
                 return editor

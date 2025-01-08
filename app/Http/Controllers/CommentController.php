@@ -7,7 +7,6 @@ use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use function EditorHelpers\json_to_html;
 
 class CommentController extends Controller
 {
@@ -37,8 +36,7 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->post_id = $post->id;
         $comment->user_id = auth()->user()->id;
-        $comment->content_json = json_encode($content);
-        $comment->content_html = json_to_html($content);
+        $comment->content_html = $content;
         $comment->save();
         return response(
             status: 200,

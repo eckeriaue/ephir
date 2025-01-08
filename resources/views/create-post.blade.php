@@ -19,9 +19,8 @@
             <div>
                 <x-posts.toolbar-add-image />
             </div>
-            <x-editor class="mt-2 mb-4" />
-            <!-- <input type="text" hidden id="editorOutput" name="postContent">
-            <div id="editor" class="border-2 border-surface focus-within:border-secondary border-solid mt-2 mb-4 p-2 rounded-lg"></div> -->
+
+            <x-editor class="mt-2 mb-4" name="postContent" />
 
             <swiper-container
                 slides-per-view="3"
