@@ -20,7 +20,7 @@
                 <x-posts.toolbar-add-image />
             </div>
 
-            <x-editor class="mt-2 mb-4" name="postContent" />
+            <x-posts.editor class="mt-2 mb-4" name="postContent" />
 
             <swiper-container
                 slides-per-view="3"

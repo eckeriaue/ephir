@@ -42,36 +42,20 @@
                     end
             "
         >
-            <div
-                x-data="editor()"
-                tabindex="0"
+            <x-editor
+                name="comment"
                 class="
                     rounded-xl bg-surface my-2
                     transition ease-in-out duration-150
                     focus-within:ring-2 focus-within:ring-secondary focus-within:ring-offset-2
                 "
             >
-                <template x-if="isLoaded()">
-                    <div
-                        class="
-                            flex items-center
-                            *:w-8
-                            *:h-8
-                            *:rounded-lg
-                            *:flex
-                            *:items-center
-                            *:text-primary
-                            *:font-bold
-                            *:justify-center
-                        "
-                    >
-                        <x-editor.bold-button non-active-class="opacity-40"  />
-                        <x-editor.italic-button non-active-class="opacity-40" />
-                        <x-editor.link-button non-active-class="opacity-40" />
-                    </div>
-                </template>
-                <div
-                    x-ref="root"
+                <x-editor.toolbar>
+                    <x-editor.bold-button non-active-class="opacity-40"  />
+                    <x-editor.italic-button non-active-class="opacity-40" />
+                    <x-editor.link-button non-active-class="opacity-40" />
+                </x-editor.toolbar>
+                <x-editor.root
                     id="editor-{{ $commentsListId }}"
                     class="
                         [&_.tiptap_a]:underline
@@ -80,9 +64,8 @@
                         [&_.tiptap]:rounded-inherit
                         [&_.tiptap]:outline-none
                     "
-                ></div>
-                <input x-ref="output" name="comment" type="hidden">
-            </div>
+                />
+            </x-editor>
             <div class="flex mt-1 justify-end">
                 <x-button.primary id="submit-{{ $commentsListId }}" type="submit">Отправить</x-button.primary>
             </div>

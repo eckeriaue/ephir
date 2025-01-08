@@ -6,10 +6,9 @@
         <x-user.preview :user="$post->user" :created_at="$post->created_at" />
     </header>
 
-    <div class="my-4">
+    <div class="my-4 [&_a]:underline [&_a]:text-secondary [&_h1]:text-[24px]">
         {!! $post->content_html !!}
     </div>
-
 
 
     @if (count($post->images) > 0)
