@@ -11,11 +11,11 @@
         <span class="text-[16px] pr-2 ph ph-chat-circle-dots"></span>
         <span class="inline-flex items-center gap-x-1">
             <span> Комментарии </span>
-            @if(count($post->comments) > 0)
-                <span class="bg-surface p-1 rounded-full text-primary text-[12px]">
-                    {{ $post->comments()->count() }}
-                </span>
-            @endif
+            <span
+                class="bg-surface p-1 rounded-full text-primary text-[12px] {{ count($post->comments) > 0 ?: 'hidden' }}"
+            >
+                {{ $post->comments()->count() }}
+            </span>
         </span>
     </x-button.text>
 </div>
