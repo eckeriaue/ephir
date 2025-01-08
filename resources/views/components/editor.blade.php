@@ -2,11 +2,21 @@
 
 <div x-data="editor()" {{ $attributes->merge() }}>
     <template x-if="isLoaded()">
-        <div class="flex items-center">
-            <x-editor.heading-button />
-            <x-editor.bold-button />
-            <x-editor.italic-button />
-            <x-editor.link-button />
+        <div
+            class="
+                flex items-center
+                *:w-8
+                *:h-8
+                *:rounded-lg
+                *:flex
+                *:items-center
+                *:justify-center
+            "
+        >
+            <x-editor.heading-button active-class="bg-primary text-surface" />
+            <x-editor.bold-button active-class="bg-primary text-surface" />
+            <x-editor.italic-button active-class="bg-primary text-surface" />
+            <x-editor.link-button active-class="bg-primary text-surface" />
         </div>
     </template>
 

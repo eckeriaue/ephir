@@ -52,10 +52,22 @@
                 "
             >
                 <template x-if="isLoaded()">
-                    <div class="flex items-center">
-                        <x-editor.bold-button />
-                        <x-editor.italic-button />
-                        <x-editor.link-button />
+                    <div
+                        class="
+                            flex items-center
+                            *:w-8
+                            *:h-8
+                            *:rounded-lg
+                            *:flex
+                            *:items-center
+                            *:text-primary
+                            *:font-bold
+                            *:justify-center
+                        "
+                    >
+                        <x-editor.bold-button non-active-class="opacity-40"  />
+                        <x-editor.italic-button non-active-class="opacity-40" />
+                        <x-editor.link-button non-active-class="opacity-40" />
                     </div>
                 </template>
                 <div
