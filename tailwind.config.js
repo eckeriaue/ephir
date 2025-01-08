@@ -23,6 +23,7 @@ export default {
             // surface: `var(--secondary, #EBECF1)`,
         },
         extend: {
+            borderRadius: {inherit: 'inherit'},
             animation: {
               'open-y': 'open-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both',
               'close-y': 'close-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both',

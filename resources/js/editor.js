@@ -1,32 +1,84 @@
-import { i18n } from './editor/i18n'
-import EditorJS from '@editorjs/editorjs'
+import { Editor } from '@tiptap/core'
+import StarterKit from '@tiptap/starter-kit'
+import Link from '@tiptap/extension-link'
 
-function config(holder, input) {
-    const config = {
-        holder,
-        i18n,
-        minHeight: 0,
-    }
-    if (holder.dataset.placeholder) {
-        Reflect.set(config, 'placeholder', holder.dataset.placeholder)
-    }
-    return config
-}
+export default function EditorPlugin(Alpine) {
+    Alpine.data('editor', (content) => {
+        let editor // Alpine's reactive engine automatically wraps component properties in proxy objects. If you attempt to use a proxied editor instance to apply a transaction, it will cause a "Range Error: Applying a mismatched transaction", so be sure to unwrap it using Alpine.raw(), or simply avoid storing your editor as a component property, as shown in this example.
 
-export default function Editor(Alpine) {
-    Alpine.directive('editor', (holder, { expression }, { evaluate, cleanup }) => {
-        const input = evaluate(expression)
-        const editor = new EditorJS({
-            ...config(holder),
-            onChange(event) {
-                event.saver.save().then(output => {
-                    input.value = JSON.stringify(output)
-                })
+        return {
+            setLink() {
+                const previousUrl = editor.getAttributes('link').href
+                const url = window.prompt('URL', previousUrl)
+                if (url === null) {
+                  return
+                }
+                if (url === '') {
+                    editor
+                        .chain()
+                        .focus()
+                        .extendMarkRange('link')
+                        .unsetLink()
+                        .run()
+                    return
+                 }
+                editor
+                  .chain()
+                  .focus()
+                  .extendMarkRange('link')
+                  .setLink({ href: url })
+                  .run()
             },
-        })
-        Reflect.set(holder, '$editor', editor)
-        cleanup(() => {
-            editor.destroy()
-        })
+            updatedAt: Date.now(), // force Alpine to rerender on selection change
+            init() {
+            const _this = this
+
+            editor = new Editor({
+                element: this.$refs.root,
+                extensions: [
+                    Link.configure({
+                      openOnClick: false,
+                      linkOnPaste: true,
+                      autolink: true,
+                      shouldAutoLink: (url) => url.startsWith('https://') || url.startsWith('http://'),
+                      defaultProtocol: 'https',
+                    }),
+                    StarterKit
+                ],
+                content,
+                onCreate({ editor }) {
+                  _this.updatedAt = Date.now()
+                },
+                onUpdate({ editor }) {
+                    _this.$refs.output.value = editor.getHTML()
+                  _this.updatedAt = Date.now()
+                },
+                onSelectionUpdate({ editor }) {
+                  _this.updatedAt = Date.now()
+                },
+            })
+            },
+            isLoaded() {
+                return editor
+            },
+            isActive(type, opts = {}) {
+                return editor.isActive(type, opts)
+            },
+            toggleHeading(opts) {
+                this.updatedAt = Date.now()
+                editor.chain().toggleHeading(opts).focus().run()
+            },
+            toggleBold() {
+                this.updatedAt = Date.now()
+                editor.chain().focus().toggleBold().run()
+            },
+            toggleItalic() {
+                this.updatedAt = Date.now()
+                editor.chain().toggleItalic().focus().run()
+            },
+            toggleLink() {
+                this.setLink()
+            }
+        }
     })
 }

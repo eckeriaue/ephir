@@ -1,24 +1,33 @@
+@props(['name' => ''])
 
-<div x-data="editor()">
+<div x-data="editor()" {{ $attributes->merge() }}>
     <template x-if="isLoaded()">
-        <div class="menu">
-            <button type="button"
-                @click="toggleHeading({ level: 1 })"
-                :class="{ 'is-active': isActive('heading', { level: 1 }, updatedAt) }"
-            >
-                H1
-            </button>
-            <button type="button" @click="toggleBold()" :class="{ 'is-active' : isActive('bold', updatedAt) }">
-                Bold
-            </button>
-            <button type="button" @click="toggleItalic()" :class="{ 'is-active' : isActive('italic', updatedAt) }">
-                Italic
-            </button>
-            <button type="button" @click="setLink()" :class="{ 'is-active' : isActive('link', updatedAt) }">
-                link
-            </button>
+        <div class="flex items-center">
+            <x-editor.heading-button />
+            <x-editor.bold-button />
+            <x-editor.italic-button />
+            <x-editor.link-button />
         </div>
     </template>
 
-    <div x-ref="root"></div>
+    <div
+        tabindex="0"
+        x-ref="root"
+        class="
+            [&_.tiptap]:border-2
+            [&_.tiptap]:border-surface
+            [&_.tiptap]:border-outline
+
+            [&_.tiptap]:outline-2
+            [&_.tiptap]:outline-secondary
+            [&_.tiptap]:outline-outline
+
+            [&_.tiptap]:min-h-[100px]
+
+            [&_.tiptap]:focus-within:border-secondary
+            [&_.tiptap]:border-solid
+             [&_.tiptap]:p-2 [&_.tiptap]:rounded-lg
+        "
+    ></div>
+    <input x-ref="output" name="{{ $name }}" type="hidden">
 </div>
