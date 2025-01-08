@@ -1,5 +1,6 @@
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
+import Placeholder from '@tiptap/extension-placeholder'
 import Link from '@tiptap/extension-link'
 
 export default function EditorPlugin(Alpine) {
@@ -36,12 +37,15 @@ export default function EditorPlugin(Alpine) {
                 editor = new Editor({
                     element: this.$refs.root,
                     extensions: [
+                        Placeholder.configure({
+                            placeholder: this.$refs.root.dataset.placeholder,
+                        }),
                         Link.configure({
-                        openOnClick: false,
-                        linkOnPaste: true,
-                        autolink: true,
-                        shouldAutoLink: (url) => url.startsWith('https://') || url.startsWith('http://'),
-                        defaultProtocol: 'https',
+                            openOnClick: false,
+                            linkOnPaste: true,
+                            autolink: true,
+                            shouldAutoLink: (url) => url.startsWith('https://') || url.startsWith('http://'),
+                            defaultProtocol: 'https',
                         }),
                         StarterKit
                     ],

@@ -57,9 +57,11 @@
                 </x-editor.toolbar>
                 <x-editor.root
                     id="editor-{{ $commentsListId }}"
+                    placeholder="Напишите свой комментарий тут..."
                     class="
                         [&_.tiptap_a]:underline
                         [&_.tiptap_a]:text-secondary
+                        [&_.is-editor-empty]:opacity-40
                         [&_.tiptap]:p-2
                         [&_.tiptap]:rounded-inherit
                         [&_.tiptap]:outline-none
