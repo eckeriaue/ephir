@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use function EditorHelpers\json_to_html;
 
 class CommentController extends Controller
@@ -23,8 +24,14 @@ class CommentController extends Controller
      * Store a newly created resource in storage.
      * @return View
      */
-    public function store(Request $request, int $postId): View
+    public function store(Request $request, int $postId): Response
     {
+        if (!$request->get('comment')) {
+            return response(
+                status: 400,
+                content: 'Содержимое поста не может быть путсым',
+            );
+        }
         $post = Post::find($postId);
         $content = $request->get('comment');
         $comment = new Comment;
@@ -33,10 +40,13 @@ class CommentController extends Controller
         $comment->content_json = json_encode($content);
         $comment->content_html = json_to_html($content);
         $comment->save();
-        return view('components.posts.comment', [
-            'comment' => $comment,
-            'post' => $post,
-        ]);
+        return response(
+            status: 200,
+            content: view('components.posts.comment', [
+                'comment' => $comment,
+                'post' => $post,
+            ])
+        );
     }
 
     /**

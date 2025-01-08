@@ -31,15 +31,16 @@
                 on htmx:beforeRequest
                     add .pointer-events-none to #editor-{{ $commentsListId }}
                     add .cursor-not-allowed to #editor-{{ $commentsListId }}
-                on htmx:afterRequest
-                add .animate-close-y to #editor-{{ $commentsListId }} then
-                remove .pointer-events-none from #editor-{{ $commentsListId }} then
-                remove .cursor-not-allowed from #editor-{{ $commentsListId }} then
-                call #editor-{{ $commentsListId }}.$editor.clear() then
-                if #placeholder-{{ $commentsListId }}
-                    add .animate-close-y to #placeholder-{{ $commentsListId }}
                 end
-            end
+                on htmx:afterRequest
+                    add .animate-close-y to #editor-{{ $commentsListId }} then
+                    remove .pointer-events-none from #editor-{{ $commentsListId }} then
+                    remove .cursor-not-allowed from #editor-{{ $commentsListId }} then
+                    call #editor-{{ $commentsListId }}.$editor.clear() then
+                    if #placeholder-{{ $commentsListId }}
+                        add .animate-close-y to #placeholder-{{ $commentsListId }}
+                    end
+                end
             "
         >
             <input x-ref="comment" required name="comment" type="hidden">

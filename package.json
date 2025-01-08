@@ -6,7 +6,7 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "alpinejs": "^3.4.2",
+        "alpinejs": "^3.14.8",
         "autoprefixer": "^10.4.20",
         "concurrently": "^9.0.1",
         "hyperscript.org": "^0.9.13",
@@ -19,6 +19,10 @@
         "@alpinejs/anchor": "^3.14.8",
         "@alpinejs/focus": "^3.14.8",
         "@editorjs/editorjs": "^2.30.7",
+        "@tiptap/core": "^2.11.0",
+        "@tiptap/extension-link": "^2.11.0",
+        "@tiptap/pm": "^2.11.0",
+        "@tiptap/starter-kit": "^2.11.0",
         "swiper": "^11.2.0"
     }
 }
