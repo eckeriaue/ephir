@@ -2,7 +2,8 @@
     {{
         $attributes->merge([
             'class' => "
-                fixed bg-white flex flex-col truncate rounded-md p-2 shadow list-none
+                fixed bg-white rounded-lg p-1 shadow list-none
+                flex flex-col
             "
         ])
     }}

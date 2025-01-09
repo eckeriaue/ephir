@@ -21,11 +21,18 @@
                     x-show="isUserDetailOpen"
                     x-anchor.offset.4="$refs.userDetail"
                 >
-                    <div class="flex flex-col gap-y-2">
-                            <x-button.text as="a" href="{{ route('settings.edit') }}"> Настройки </x-button.text>
-                            <x-button.text as="a" href="{{ route('profile', ['id' => auth()->user()->profile->id]) }}"> Профиль </x-button.text>
-                            <x-button.text as="a" href="{{ route('logout') }}"> Выйти </x-button.text>
-                    </div>
+                    <x-menu.item as="a" href="{{ route('settings.edit') }}">
+                        <span class="ph ph-gear"></span>
+                        <span> Настройки </span>
+                    </x-menu.item>
+                    <x-menu.item as="a" href="{{ route('profile', ['id' => auth()->user()->profile->id]) }}">
+                        <span class="ph ph-user-circle"></span>
+                        <span> Профиль </span>
+                    </x-menu.item>
+                    <x-menu.item as="a" href="{{ route('logout') }}">
+                        <span class="ph ph-sign-out"></span>
+                        <span> Выйти </span>
+                    </x-menu.item>
                 </x-menu>
                 @else
                 <div class="flex items-center gap-x-2">

@@ -16,7 +16,7 @@ export default {
                 DEFAULT: `var(--primary, #45474B)`
             },
 
-            red: twColors.red,
+            ...twColors,
             // primary: `var(--primary, #1B1C25)`,
             // secondary: `var(--secondary, #1F4068)`,
             // accent: `var(--accent, #206A5D)`,

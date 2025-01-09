@@ -15,7 +15,7 @@
             bg-primary border
             disabled:opacity-80
             border-transparent font-semibold
-            text-white dark:text-gray-800
+            text-white
             tracking-widest hover:bg-primary
             focus:bg-primary
             active:bg-primary
