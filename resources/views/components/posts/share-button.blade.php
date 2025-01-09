@@ -12,15 +12,15 @@
             @mouseup="isOpen = false"
         >
             @auth
-                <x-button.text
+                <x-menu.item
                     data-hx-patch="{{ route('api.profile.share-post', ['postId' => $post->id]) }}"
                     data-hx-target="body"
                     data-hx-swap="beforeend"
                 >
                     Опубликовать у себя
-                </x-button.text>
+                </x-menu.item>
             @endauth
-            <x-button.text
+            <x-menu.item
                 type="button"
                 data-post-href="{{ route('posts.read', ['id' => $post->id]) }}"
                 @click="$clipboard($event.target.dataset.postHref).then(() => {
@@ -28,6 +28,6 @@
                 })"
             >
                 Копировать ссылку
-            </x-button.text>
+            </x-menu.item>
         </x-menu>
     </div>
