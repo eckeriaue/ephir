@@ -13,7 +13,8 @@ export default {
             accent: `var(--accent, #F4CE14)`,
             secondary: `var(--secondary, #379777)`,
             primary: {
-                DEFAULT: `var(--primary, #45474B)`
+                DEFAULT: twColors.zinc['700'],
+                ...twColors.zinc
             },
 
             ...twColors,

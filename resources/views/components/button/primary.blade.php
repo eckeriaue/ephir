@@ -17,8 +17,8 @@
             border-transparent font-semibold
             text-white
             tracking-widest hover:bg-primary
-            focus:bg-primary
-            active:bg-primary
+            focus:bg-zinc-600
+            active:bg-zinc-600
             transition ease-in-out duration-150
         ",
     ])
