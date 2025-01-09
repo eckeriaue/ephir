@@ -39,8 +39,6 @@
                 </x-link>
             @endif
 
-            <x-link href="{{ route('register') }}">Зарегестрироваться</x-link>
-
             <div  class="ms-3">
                 <x-button.primary type="submit">
                     {{ __('Войти') }}

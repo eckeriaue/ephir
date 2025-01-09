@@ -9,7 +9,10 @@ export default {
             current: 'currentColor',
             inherit: 'inherit',
 
-            surface: `var(--secondary, #F5F7F8)`,
+            surface: {
+                DEFAULT: twColors.neutral['50'],
+                ...twColors.neutral
+            },
             accent: `var(--accent, #F4CE14)`,
             secondary: `var(--secondary, #379777)`,
             primary: {
