@@ -22,9 +22,8 @@ class CreateProfileForUser
      */
     public function handle(CreateUserEvent $event): void
     {
-        $profile = Profile::create([
+        Profile::create([
             'user_id' => $event->user->id,
         ]);
-
     }
 }
