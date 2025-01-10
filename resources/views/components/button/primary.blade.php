@@ -12,7 +12,7 @@
             cursor-pointer disabled:cursor-not-allowed
             focus:outline-none rounded-lg
             focus:ring-2 focus:ring-secondary focus:ring-offset-2
-            bg-primary border
+            bg-primary border dark:bg-surface
             disabled:opacity-80
             border-transparent font-semibold
             text-white

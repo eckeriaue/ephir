@@ -1,29 +1,38 @@
-@import url('./fonts/style.css');
+@import url("./fonts/style.css");
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 /* @import url('virtual:uno.css'); */
 * {
-  font-family: 'Sf Pro Regular';
-  letter-spacing: 1px;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
+    font-family: "Sf Pro Regular";
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
 }
 
 input {
     border: none;
 }
 
-
 p.is-editor-empty:first-child::before {
-  color: var(--gray-4);
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
+    color: var(--gray-4);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
 }
 
-[x-cloak] { display: none !important; }
+[x-cloak] {
+    display: none !important;
+}
+
+[data-theme="light"] {
+    --primary: red;
+    --surface: purple;
+}
+[data-theme="dark"] {
+    --primary: blue;
+}

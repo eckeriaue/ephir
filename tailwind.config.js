@@ -1,23 +1,25 @@
 /** @type {import('tailwindcss').Config} */
-import twColors from 'tailwindcss/colors'
+
+import twColors from "tailwindcss/colors";
 export default {
+    darkMode: ["selector", '[data-theme="dark"]'],
     theme: {
         colors: {
-            white: 'white',
-            black: 'black',
-            transparent: 'transparent',
-            current: 'currentColor',
-            inherit: 'inherit',
+            white: "white",
+            black: "black",
+            transparent: "transparent",
+            current: "currentColor",
+            inherit: "inherit",
 
             surface: {
-                DEFAULT: twColors.neutral['50'],
-                ...twColors.neutral
+                DEFAULT: `var(--surface, ${twColors.neutral["50"]})`,
+                ...twColors.neutral,
             },
             accent: `var(--accent, #F4CE14)`,
             secondary: `var(--secondary, #379777)`,
             primary: {
-                DEFAULT: twColors.zinc['700'],
-                ...twColors.zinc
+                DEFAULT: `var(--primary, ${twColors.zinc["700"]})`,
+                ...twColors.zinc,
             },
 
             ...twColors,
@@ -27,44 +29,44 @@ export default {
             // surface: `var(--secondary, #EBECF1)`,
         },
         extend: {
-            borderRadius: {inherit: 'inherit'},
+            borderRadius: { inherit: "inherit" },
             animation: {
-              'open-y': 'open-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both',
-              'close-y': 'close-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both',
+                "open-y": "open-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both",
+                "close-y": "close-y 300ms cubic-bezier(0.4, 0, 0.2, 1) 1 both",
             },
             keyframes: {
-                'open-y': {
+                "open-y": {
                     from: {
-                        gridTemplateRows: '0fr',
-                        display: 'grid',
-                        overflow: 'hidden',
+                        gridTemplateRows: "0fr",
+                        display: "grid",
+                        overflow: "hidden",
                     },
                     to: {
-                        gridTemplateRows: '1fr',
-                        display: 'grid',
-                        overflow: 'hidden',
-                    }
+                        gridTemplateRows: "1fr",
+                        display: "grid",
+                        overflow: "hidden",
+                    },
                 },
-                'close-y': {
+                "close-y": {
                     from: {
-                        gridTemplateRows: '1fr',
-                        display: 'grid',
-                        overflow: 'hidden',
+                        gridTemplateRows: "1fr",
+                        display: "grid",
+                        overflow: "hidden",
                     },
                     to: {
-                        gridTemplateRows: '0fr',
-                        display: 'grid',
-                        overflow: 'hidden',
-                    }
+                        gridTemplateRows: "0fr",
+                        display: "grid",
+                        overflow: "hidden",
+                    },
                 },
-            }
-        }
+            },
+        },
     },
     content: [
-      './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-      './storage/framework/views/*.php',
-      "./resources/**/*.blade.php",
-      "./resources/**/*.js",
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
     ],
-  plugins: [],
-}
+    plugins: [],
+};
