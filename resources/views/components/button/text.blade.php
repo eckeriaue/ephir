@@ -12,7 +12,7 @@
             cursor-pointer disabled:cursor-not-allowed
             focus:outline-none rounded-lg
             focus:ring-2 focus:ring-secondary focus:ring-offset-2
-            bg-white border border-surface
+            bg-white border border-surface-200
             font-semibold
             tracking-widest shadow-sm
             focus:outline-none focus:ring-2

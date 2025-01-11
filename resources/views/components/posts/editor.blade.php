@@ -9,7 +9,7 @@
     <x-editor.root
         class="
             [&_.tiptap]:border-2
-            [&_.tiptap]:border-surface
+            [&_.tiptap]:border-surface-200
             [&_.tiptap]:border-outline
 
             [&_.tiptap]:outline-2
