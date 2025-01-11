@@ -2,7 +2,8 @@
 
 <{{ $as }}
     {{ $attributes->merge() }}
-    @tw("
+    {{
+    $attributes->tw("
     cursor-pointer px-3
         rounded-inherit
         h-9 gap-x-2
@@ -10,6 +11,7 @@
         flex items-center hover:bg-gray-100
         text-zinc-500 hover:text-zinc-900 text-[16px]
     ")
+    }}
 >
     {{ $slot }}
 </{{ $as }}>
