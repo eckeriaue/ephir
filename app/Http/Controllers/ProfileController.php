@@ -25,7 +25,7 @@ class ProfileController extends Controller
     {
         return view('profile', (array) literal(
             profile: Profile::find($id),
-    ));
+        ));
     }
 
     /**

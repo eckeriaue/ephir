@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Intervention\Image\Laravel\Facades\Image;
+
 
 class SettingsController extends Controller
 {
@@ -32,8 +34,10 @@ class SettingsController extends Controller
             email: 'required|string|max:255'
         ));
         if ($request->hasFile('avatar')) {
-            $path = 'avatars/user-'.$request->user()->id;
-            $request->user()->avatar = Storage::url(Storage::disk('public')->put($path, $request->file('avatar')));
+            $path = 'avatars/user-'.$request->user()->id . '/';
+            $file = $request->file('avatar');
+            $webpFile = Image::read($file)->toWebp(90)->save(public_path('avatars/' .'test.webp'));
+            // $request->user()->avatar = Storage::url(Storage::disk('public')->put($path, );
         }
         $request->user()->fill($request->validated());
 
