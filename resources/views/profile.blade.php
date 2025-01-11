@@ -6,7 +6,7 @@
                 <li class="text-center text-2xl"> {{ $profile->user->name }} </li>
             </ul>
         </div>
-        <div class="flex flex-col grow max-w-[75%]">
+        <div class="max-w-[510px] mx-auto flex flex-col grow">
             @forelse ($profile->posts as $post)
                 <x-posts.card :$post />
             @empty
