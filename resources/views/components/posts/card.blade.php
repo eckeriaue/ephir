@@ -41,6 +41,5 @@
 
 </article>
 @pushOnce('scripts')
-    <link rel="modulepreload" href="{{ asset('resources/js/slider.js') }}">
-    <script defer src="{{ asset('resources/js/slider.js') }}"></script>
+    @vite('resources/js/slider.js')
 @endPushOnce
