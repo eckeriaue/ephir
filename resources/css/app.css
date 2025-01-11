@@ -28,11 +28,3 @@ p.is-editor-empty:first-child::before {
 [x-cloak] {
     display: none !important;
 }
-
-[data-theme="light"] {
-    --primary: red;
-    --surface: purple;
-}
-[data-theme="dark"] {
-    --primary: blue;
-}
