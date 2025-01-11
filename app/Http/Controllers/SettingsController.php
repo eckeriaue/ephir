@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Intervention\Image\Laravel\Facades\Image;
+use Str;
 
 
 class SettingsController extends Controller
@@ -34,10 +35,16 @@ class SettingsController extends Controller
             email: 'required|string|max:255'
         ));
         if ($request->hasFile('avatar')) {
-            $path = 'avatars/user-'.$request->user()->id . '/';
             $file = $request->file('avatar');
-            $webpFile = Image::read($file)->toWebp(90)->save(public_path('avatars/' .'test.webp'));
-            // $request->user()->avatar = Storage::url(Storage::disk('public')->put($path, );
+            $filename = $file->getClientOriginalName() . Str::random(length: 10) . '.webp';
+            $path = 'avatars/user-'.$request->user()->id . '/' . $filename;
+            $isSaved = Storage::disk('public')->put(
+                $path, 
+                Image::read($file)->toWebp(90)->toFilePointer()
+            );
+            if ($isSaved) {
+                $request->user()->avatar = Storage::url($path);
+            }
         }
         $request->user()->fill($request->validated());
 
