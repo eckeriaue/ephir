@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\{Post,PostImage};
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
+use Str;
 
 class PostController extends Controller
 {
@@ -27,11 +29,16 @@ class PostController extends Controller
 
         if ($attachmentFiles = $request->file('attachmentFiles')) {
             $userId = auth()->id();
-            $path = "user-$userId-post-{$post->id}";
             foreach ($attachmentFiles as $attachmentFile) {
-                $postImage = PostImage::create([
+                $filename = $attachmentFile->getClientOriginalName() . Str::random(length: 10) . '.webp';
+                $path = "posts/user-$userId-post-{$request->user()->id}/$filename";
+                Storage::disk('public')->put(
+                    $path,
+                    Image::read($attachmentFile)->toWebp(90)->toFilePointer(),
+                );
+                PostImage::create([
                     'post_id' => $post->id,
-                    'src' => Storage::url(Storage::disk('public')->put($path, $attachmentFile)),
+                    'src' => Storage::url($path),
                 ])->save();
             }
         }

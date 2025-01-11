@@ -37,7 +37,7 @@ class SettingsController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $filename = $file->getClientOriginalName() . Str::random(length: 10) . '.webp';
-            $path = 'avatars/user-'.$request->user()->id . '/' . $filename;
+            $path = "avatars/user-{$request->user()->id}/$filename";
             $isSaved = Storage::disk('public')->put(
                 $path, 
                 Image::read($file)->toWebp(90)->toFilePointer()
