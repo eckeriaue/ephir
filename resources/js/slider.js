@@ -1,2 +1,1 @@
-import { register } from 'swiper/element/bundle'
-register()
+import('swiper/element/bundle').then(m => m.register())
