@@ -30,10 +30,14 @@
                             type="button"
                             data-hx-trigger="click"
                             data-hx-target="body"
-                            data-hx-get="{{ route('hx.image-preview') }}"
+                            data-hx-get="{{
+                                route('hx.image-preview', (array) literal(imageId: $image->id))
+                            }}"
                             data-hx-swap="afterbegin"
+                            class="cursor-pointer"
                         >
                             <img
+                                id="imageId{{$image->id}}"
                                 src="{{ $image->src }}"
                                 class="object-cover min-w-full"
                             >
