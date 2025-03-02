@@ -25,9 +25,7 @@ end
     init
       remove .opacity-0 from me then
       remove .scale-0 from #imageWrapperId{{$pid}} then
-      js
-        document.getElementById('{{$pid}}').focus()
-      end
+      call me.focus()
     end
     on keyup
       if (event.key == 'Escape') then
