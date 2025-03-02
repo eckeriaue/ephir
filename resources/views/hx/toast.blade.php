@@ -7,7 +7,7 @@
         remove me
     "
     style="opacity:0"
-    class="z-10 fixed bottom-4 text-[14px] truncate right-4 p-4 bg-white rounded-xl shadow-sm"
+    class="z-10 fixed bottom-4 text-[14px] truncate right-4 p-4 bg-white rounded-xl shadow-xs"
 >
     {{ $slot }}
 </output>

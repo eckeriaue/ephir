@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-10 shadow bg-white">
+<header class="sticky top-0 z-10 shadow-sm bg-white">
     <div class="h-16 flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <x-application-logo />
         <nav class="flex items-center gap-x-3">

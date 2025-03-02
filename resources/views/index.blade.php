@@ -6,7 +6,7 @@
         @forelse ($posts as $post)
             <x-posts.card :$post />
         @empty
-            <div class="bg-white rounded-xl shadow mb-4 text-center">
+            <div class="bg-white rounded-xl shadow-sm mb-4 text-center">
                 <p class="p-5">Постов пока нет</p>
             </div>
         @endforelse

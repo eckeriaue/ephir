@@ -21,7 +21,7 @@
             [&_.tiptap_h1]:text-[24px]
             [&_.tiptap]:min-h-[100px]
 
-            [&_.tiptap]:focus-within:border-secondary
+            focus-within:[&_.tiptap]:border-secondary
             [&_.tiptap]:border-solid
              [&_.tiptap]:p-2 [&_.tiptap]:rounded-lg
         "

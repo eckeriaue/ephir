@@ -1,6 +1,6 @@
 @props(['post'])
 
-<article class="bg-white rounded-xl shadow-sm mb-4 p-5">
+<article class="bg-white rounded-xl shadow-xs mb-4 p-5">
 
     <header>
         <x-user.preview :user="$post->user" :created_at="$post->created_at" />

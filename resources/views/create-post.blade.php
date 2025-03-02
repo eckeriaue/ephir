@@ -41,7 +41,7 @@
                 </template>
             </swiper-container>
 
-            <div class="flex justify-end gap-x-3 sticky z-[3] bottom-0 bg-white p-1">
+            <div class="flex justify-end gap-x-3 sticky z-3 bottom-0 bg-white p-1">
                 <x-button.primary type="submit">Опубликовать</x-button.primary>
             </div>
         </form>

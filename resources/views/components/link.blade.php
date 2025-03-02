@@ -7,7 +7,7 @@
             'class' => "
             font-medium text-primary decoration-none
             underline-offset-2 hover:underline
-            focus:underline focus:outline-none
+            focus:underline focus:outline-hidden
             "
         ])
     }}

@@ -64,7 +64,7 @@
                         [&_.is-editor-empty]:opacity-40
                         [&_.tiptap]:p-2
                         [&_.tiptap]:rounded-inherit
-                        [&_.tiptap]:outline-none
+                        [&_.tiptap]:outline-hidden
                     "
                 />
             </x-editor>
