@@ -22,7 +22,11 @@
         >
             @foreach($post->images as $image)
                 <swiper-slide>
-                    <div class="bg-cover bg-no-repeat bg-center rounded-2xl h-[500px]" style="background-image: url('{{ $image->src }}')">
+                    <div class="overflow-hidden flex items-center justify-center" style="max-height:718px;">
+                        <img
+                            src="{{ $image->src }}"
+                            class="object-cover min-w-fit min-h-fit"
+                        >
                     </div>
                 </swiper-slide>
             @endforeach
