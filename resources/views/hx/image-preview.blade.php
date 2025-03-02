@@ -18,12 +18,24 @@ end
 
 <div
   id="{{$pid}}"
+  tabindex="-1"
   data-from="imageId{{$image->id}}"
   class="isolate fixed inset-0 z-11 h-dvh w-full opacity-0 transition-opacity"
-  data-script="
+  _="
     init
       remove .opacity-0 from me then
       remove .scale-0 from #imageWrapperId{{$pid}} then
+      js
+        document.getElementById('{{$pid}}').focus()
+      end
+    end
+    on keyup
+      if (event.key == 'Escape') then
+        add .scale-0 to #imageWrapperId{{$pid}} then
+        add .opacity-0 to #{{$pid}} then
+        wait 150ms then
+        remove #{{$pid}}
+      end
     end
   "
 >
