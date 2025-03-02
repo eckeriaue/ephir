@@ -33,7 +33,7 @@ end
     class="ph-bold ph-x fixed right-2 top-2 shadow-sm cursor-pointer z-13 p-2 bg-white rounded"
     data-script="install RemoveImagePreview"></button>
 
-    <div class="z-12 fixed inset-0 overflow-auto h-dvh">
+    <div class="z-12 fixed inset-0 overflow-auto h-dvh flex items-center justify-center">
       <div
         class="scale-0 transition-transform duration-300"
         id="imageWrapperId{{$pid}}"
