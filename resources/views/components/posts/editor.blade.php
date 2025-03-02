@@ -10,11 +10,7 @@
         class="
             [&_.tiptap]:border-2
             [&_.tiptap]:border-surface-200
-            [&_.tiptap]:border-outline
 
-            [&_.tiptap]:outline-2
-            [&_.tiptap]:outline-secondary
-            [&_.tiptap]:outline-outline
 
             [&_.tiptap_a]:underline
             [&_.tiptap_a]:text-secondary
