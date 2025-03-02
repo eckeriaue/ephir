@@ -3,9 +3,23 @@
 @import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source "../views";
+@source "../views/**/**/**/**";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+
+input {
+  border: none;
+}
+
+p.is-editor-empty:first-child::before {
+  color: var(--color-gray-4);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
 
 @theme {
   --color-*: initial;
@@ -417,28 +431,6 @@
   }
 }
 
-/* @import url('virtual:uno.css'); */
-* {
-    font-family: "Sf Pro Regular";
-    letter-spacing: 1px;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: none;
-}
-
-input {
-    border: none;
-}
-
-p.is-editor-empty:first-child::before {
-    color: var(--gray-4);
-    content: attr(data-placeholder);
-    float: left;
-    height: 0;
-    pointer-events: none;
-}
-
 [x-cloak] {
-    display: none !important;
+  display: none !important;
 }
