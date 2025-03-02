@@ -1,8 +1,9 @@
 @import url('./fonts/style.css') layer(base);
 
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source "../views";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
