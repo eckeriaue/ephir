@@ -33,13 +33,18 @@
                     add .pointer-events-none to #editor-{{ $commentsListId }}
                     add .cursor-not-allowed to #editor-{{ $commentsListId }}
                 on htmx:afterRequest
-                    add .animate-close-y to #editor-{{ $commentsListId }} then
-                    remove .pointer-events-none from #editor-{{ $commentsListId }} then
-                    remove .cursor-not-allowed from #editor-{{ $commentsListId }} then
-                    call #editor-{{ $commentsListId }}.$editor.commands.clearContent() then
-                    if #placeholder-{{ $commentsListId }}
-                        add .animate-close-y to #placeholder-{{ $commentsListId }}
+                    if event.detail.xhr === 500 then
+                        {{-- todo: handle error --}}
+                    else
+                        add .animate-close-y to #editor-{{ $commentsListId }} then
+                        remove .pointer-events-none from #editor-{{ $commentsListId }} then
+                        remove .cursor-not-allowed from #editor-{{ $commentsListId }} then
+                        call #editor-{{ $commentsListId }}.$editor.commands.clearContent(true) then
+                        if #placeholder-{{ $commentsListId }}
+                            add .animate-close-y to #placeholder-{{ $commentsListId }}
+                        end
                     end
+                end
             "
         >
             <x-editor

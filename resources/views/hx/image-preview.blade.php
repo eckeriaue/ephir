@@ -21,7 +21,7 @@ end
   tabindex="-1"
   data-from="imageId{{$image->id}}"
   class="isolate fixed inset-0 z-11 h-dvh w-full opacity-0 transition-opacity"
-  _="
+  data-script="
     init
       remove .opacity-0 from me then
       remove .scale-0 from #imageWrapperId{{$pid}} then

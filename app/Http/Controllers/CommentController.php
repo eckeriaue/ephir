@@ -25,7 +25,7 @@ class CommentController extends Controller
      */
     public function store(Request $request, int $postId): Response
     {
-        if (!$request->get('comment')) {
+        if ($request->get('comment') === '') {
             return response(
                 status: 400,
                 content: 'Содержимое поста не может быть путсым',
