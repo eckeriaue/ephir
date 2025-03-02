@@ -26,10 +26,18 @@
                         class="overflow-hidden flex items-center justify-center"
                         style="height:420px;"
                     >
-                        <img
-                            src="{{ $image->src }}"
-                            class="object-cover min-w-full"
+                        <button
+                            type="button"
+                            data-hx-trigger="click"
+                            data-hx-target="body"
+                            data-hx-get="{{ route('hx.image-preview') }}"
+                            data-hx-swap="afterbegin"
                         >
+                            <img
+                                src="{{ $image->src }}"
+                                class="object-cover min-w-full"
+                            >
+                        </button>
                     </div>
                 </swiper-slide>
             @endforeach
