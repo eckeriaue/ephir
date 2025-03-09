@@ -60,6 +60,6 @@ class PostController extends Controller
     }
 
     public function read(int $id): View {
-        return view('read-post', ['id' => $id]);
+        return view('read-post', ['post' => Post::with('user')->with('comments')->find($id) ]);
     }
 }
